@@ -2,13 +2,17 @@ package com.sg.garderie.dao;
 
 import com.sg.garderie.model.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.*;
 import java.util.List;
 
+@Repository
 public class AdminDaoImpl implements AdminDao {
 
     @Autowired
@@ -64,12 +68,14 @@ public class AdminDaoImpl implements AdminDao {
 
 
     @Override
+    @Transactional
     public boolean deleteAdminById(int id) {
         final String sql = "DELETE FROM admin WHERE id = ?;";
         return jdbcTemplate.update(sql, id) > 0;
     }
 
     @Override
+    @Transactional
     public boolean updateAdminInfo(Admin admin) {
         final String sql = "UPDATE admin SET "
                 + "name = ?, "

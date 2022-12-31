@@ -20,7 +20,7 @@ public class AdminController {
     GarderieService service;
 
     //Creating a new admin
-    @PostMapping("/")
+    @PostMapping("/admin")
     @ResponseStatus(HttpStatus.CREATED)
     public Admin create(@RequestBody Admin admin){
         return service.addAdmin(admin);
