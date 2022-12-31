@@ -31,7 +31,7 @@ CREATE TABLE `Inscription` (
 
 CREATE TABLE `Class` (
   `ID` INT NOT NULL AUTO_INCREMENT,
-  `ClassName` varchar(20) not null,
+  `Name` varchar(20) not null,
   `OpenDate` datetime not null,
   PRIMARY KEY (`ID`)
 );
@@ -41,9 +41,9 @@ CREATE TABLE `ChildRoster` (
   `ClassId` int,
   `FirstName` varchar(20) not null,
   `LastName` varchar(20) not null,
-  `InscripId` int,
+  `InscriptId` int,
   PRIMARY KEY (`ID`),
-  FOREIGN KEY (`InscripId`) REFERENCES `Inscription`(`ID`),
+  FOREIGN KEY (`InscriptId`) REFERENCES `Inscription`(`ID`),
   FOREIGN KEY (`ClassId`) REFERENCES `Class`(`ID`)
 );
 
