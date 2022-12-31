@@ -1,6 +1,5 @@
 package com.sg.garderie.controller;
 
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,6 +55,7 @@ public class GarderieController {
             FileCopyUtils.copy(inputStream, response.getOutputStream());
         }
     }
+
 
 
 }
