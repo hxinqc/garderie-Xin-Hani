@@ -6,6 +6,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +17,7 @@ public class ClassEntityDaoImpl implements ClassEntityDao {
     @Autowired
     JdbcTemplate jdbc;
     @Override
+    @Transactional
     public ClassEntity addClass(ClassEntity classEntity) {
         final String INSERT_CLASS = "INSERT INTO class(name, openDate) "
                 + "VALUES(?,?)";

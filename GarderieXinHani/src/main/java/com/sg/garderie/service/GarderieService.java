@@ -49,4 +49,11 @@ public interface GarderieService {
     void editClass(ClassEntity classEntity);
     void deleteClassById(int id);
 
+    ChildRoster addChildRoster(ChildRoster childRoster);
+    ChildRoster getChildRosterById(int id);
+    List<ChildRoster> getChildRosterByClassId(int id);
+    List<ChildRoster> getAllChildRosters();
+    void editChildRoster(ChildRoster childRoster);
+    void deleteChildRosterById(int id);
+
 }

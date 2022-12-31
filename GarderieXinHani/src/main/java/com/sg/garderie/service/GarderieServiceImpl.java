@@ -33,6 +33,9 @@ public class GarderieServiceImpl implements GarderieService {
     @Autowired
     private ClassEntityDao classEntityDao;
 
+    @Autowired
+    private ChildRosterDao childRosterDao;
+
     @Value("${file.path}")
     private String FILE_BASE_PATH;
 
@@ -199,5 +202,35 @@ public class GarderieServiceImpl implements GarderieService {
     @Override
     public void deleteClassById(int id) {
         classEntityDao.deleteClassById(id);
+    }
+
+    @Override
+    public ChildRoster addChildRoster(ChildRoster childRoster) {
+        return childRosterDao.addChildRoster(childRoster);
+    }
+
+    @Override
+    public ChildRoster getChildRosterById(int id) {
+        return childRosterDao.getChildRosterById(id);
+    }
+
+    @Override
+    public List<ChildRoster> getChildRosterByClassId(int id) {
+        return childRosterDao.getChildRostersByClassId(id);
+    }
+
+    @Override
+    public List<ChildRoster> getAllChildRosters() {
+        return childRosterDao.getAllChildRosters();
+    }
+
+    @Override
+    public void editChildRoster(ChildRoster childRoster) {
+        childRosterDao.editChildRoster(childRoster);
+    }
+
+    @Override
+    public void deleteChildRosterById(int id) {
+        childRosterDao.deleteChildRosterById(id);
     }
 }
