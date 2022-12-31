@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+@Repository
 public class InscriptionDaoImpl implements InscriptionDao {
     @Autowired
     JdbcTemplate jdbc;
@@ -25,7 +27,7 @@ public class InscriptionDaoImpl implements InscriptionDao {
         jdbc.update(INSERT_INSCRIPTION,
                 inscription.getFirstName(), inscription.getLastName(), inscription.getPhone(),
                 inscription.getAddress(), inscription.getInscriptionDate(), inscription.getOpenPlace(),
-                inscription.getStatus());
+                inscription.getStatus().name());
 
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         inscription.setId(newId);
@@ -46,7 +48,7 @@ public class InscriptionDaoImpl implements InscriptionDao {
     public List<Inscription> getInscriptionByStatus(INSCRIPTION_STATUS status) {
         try {
             final String SELECT_INSCRIPTION_BY_ID = "SELECT * FROM inscription WHERE status = ?";
-            return jdbc.query(SELECT_INSCRIPTION_BY_ID, new InscriptionMapper(), status);
+            return jdbc.query(SELECT_INSCRIPTION_BY_ID, new InscriptionMapper(), status.name());
         } catch (DataAccessException ex) {
             return null;
         }
@@ -64,12 +66,12 @@ public class InscriptionDaoImpl implements InscriptionDao {
 
     @Override
     public void editInscription(Inscription inscription) {
-        final String UPDATE_INSCRIPTION = "UPDATE inscription SET FirstName=?, LastName=?, Phone=? "
+        final String UPDATE_INSCRIPTION = "UPDATE inscription SET FirstName=?, LastName=?, Phone=?, "
                 + "Address=?, InscriptionDate=?, OpenPlace=?, Status=? WHERE id=?";
         jdbc.update(UPDATE_INSCRIPTION,
                 inscription.getFirstName(), inscription.getLastName(), inscription.getPhone(),
                 inscription.getAddress(), inscription.getInscriptionDate(), inscription.getOpenPlace(),
-                inscription.getStatus(), inscription.getId());
+                inscription.getStatus().name(), inscription.getId());
     }
 
     public static final class InscriptionMapper implements RowMapper<Inscription> {
