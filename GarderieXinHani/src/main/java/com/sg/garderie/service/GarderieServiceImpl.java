@@ -1,11 +1,7 @@
 package com.sg.garderie.service;
 
-import com.sg.garderie.dao.InscriptionDao;
-import com.sg.garderie.dao.NewsDao;
-import com.sg.garderie.dao.NewsException;
-import com.sg.garderie.model.INSCRIPTION_STATUS;
-import com.sg.garderie.model.Inscription;
-import com.sg.garderie.model.News;
+import com.sg.garderie.dao.*;
+import com.sg.garderie.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,11 +14,6 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
-
-import com.sg.garderie.dao.AdminDao;
-import com.sg.garderie.dao.TeacherDao;
-import com.sg.garderie.model.Admin;
-import com.sg.garderie.model.Teacher;
 
 @Service
 public class GarderieServiceImpl implements GarderieService {
@@ -38,6 +29,9 @@ public class GarderieServiceImpl implements GarderieService {
 
     @Autowired
     private TeacherDao teacherDao;
+
+    @Autowired
+    private ClassEntityDao classEntityDao;
 
     @Value("${file.path}")
     private String FILE_BASE_PATH;
@@ -182,5 +176,28 @@ public class GarderieServiceImpl implements GarderieService {
         return teacherDao.updateTeacherInfo(teacher);
     }
 
+    @Override
+    public ClassEntity addClass(ClassEntity classEntity) {
+        return classEntityDao.addClass(classEntity);
+    }
 
+    @Override
+    public ClassEntity getClassById(int id) {
+        return classEntityDao.getClassById(id);
+    }
+
+    @Override
+    public List<ClassEntity> getAllClasses() {
+        return classEntityDao.getAllClasses();
+    }
+
+    @Override
+    public void editClass(ClassEntity classEntity) {
+        classEntityDao.editClass(classEntity);
+    }
+
+    @Override
+    public void deleteClassById(int id) {
+        classEntityDao.deleteClassById(id);
+    }
 }

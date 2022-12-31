@@ -1,11 +1,7 @@
 package com.sg.garderie.service;
 
 import com.sg.garderie.dao.NewsException;
-import com.sg.garderie.model.INSCRIPTION_STATUS;
-import com.sg.garderie.model.Inscription;
-import com.sg.garderie.model.News;
-import com.sg.garderie.model.Admin;
-import com.sg.garderie.model.Teacher;
+import com.sg.garderie.model.*;
 
 import java.util.List;
 import java.io.IOException;
@@ -46,5 +42,11 @@ public interface GarderieService {
     boolean deleteTeacherById(int id);
 
     boolean updateTeacherInfo(Teacher teacher);
+
+    ClassEntity addClass(ClassEntity classEntity);
+    ClassEntity getClassById(int id);
+    List<ClassEntity> getAllClasses();
+    void editClass(ClassEntity classEntity);
+    void deleteClassById(int id);
 
 }
