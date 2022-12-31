@@ -44,7 +44,7 @@ public class AdminController {
     }
 
     //Updating one admin
-    @PutMapping("/{id}")
+    @PutMapping("/admin/{id}")
     public ResponseEntity update(@PathVariable int id, @RequestBody Admin admin) {
         ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
         if (id != admin.getID()) {
@@ -58,7 +58,7 @@ public class AdminController {
 
 
     //Deleting one admin Info
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/{id}")
     public ResponseEntity delete(@PathVariable int id) {
         if (service.deleteAdminById(id)) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);

@@ -1,7 +1,6 @@
 package com.sg.garderie.controller;
 
 
-import com.sg.garderie.model.Admin;
 import com.sg.garderie.model.Teacher;
 import com.sg.garderie.service.GarderieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +26,9 @@ public class TeacherController {
 
 
     //Retrieving all teachers
-    @GetMapping("/admin")
-    public List<Admin> allAdmins() {
-        return service.getAllAdmins();
+    @GetMapping("/teacher")
+    public List<Teacher> allTeachers() {
+        return service.getAllTeachers();
     }
 
 
@@ -45,7 +44,7 @@ public class TeacherController {
 
 
     //Updating one teacher
-    @PutMapping("/{id}")
+    @PutMapping("/teacher/{id}")
     public ResponseEntity update(@PathVariable int id, @RequestBody Teacher teacher) {
         ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
         if (id != teacher.getID()) {
@@ -59,7 +58,7 @@ public class TeacherController {
 
 
     //Deleting one teacher Info
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/teacher/{id}")
     public ResponseEntity delete(@PathVariable int id) {
         if (service.deleteTeacherById(id)) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
