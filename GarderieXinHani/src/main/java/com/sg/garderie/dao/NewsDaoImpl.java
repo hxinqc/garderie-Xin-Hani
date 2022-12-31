@@ -6,6 +6,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +21,7 @@ public class NewsDaoImpl implements NewsDao {
     JdbcTemplate jdbc;
 
     @Override
+    @Transactional
     public News addNews(News news) {
         LocalDate ld = news.getIssueDate();
         if (ld == null) {

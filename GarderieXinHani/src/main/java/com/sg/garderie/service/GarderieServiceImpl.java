@@ -1,7 +1,10 @@
 package com.sg.garderie.service;
 
+import com.sg.garderie.dao.InscriptionDao;
 import com.sg.garderie.dao.NewsDao;
 import com.sg.garderie.dao.NewsException;
+import com.sg.garderie.model.INSCRIPTION_STATUS;
+import com.sg.garderie.model.Inscription;
 import com.sg.garderie.model.News;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +26,9 @@ public class GarderieServiceImpl implements GarderieService {
 
     @Autowired
     NewsDao newsDao;
+
+    @Autowired
+    InscriptionDao inscriptionDao;
 
     @Value( "${file.path}" )
     private String FILE_BASE_PATH;
@@ -87,5 +93,31 @@ public class GarderieServiceImpl implements GarderieService {
             file.delete();
         }
         newsDao.deleteNewsById(id);
+    }
+
+    @Override
+    public Inscription addInscription(Inscription inscription) {
+        inscription.setStatus(INSCRIPTION_STATUS.INITIATE);
+        return inscriptionDao.addInscription(inscription);
+    }
+
+    @Override
+    public Inscription getInscriptionById(int id) {
+        return inscriptionDao.getInscriptionById(id);
+    }
+
+    @Override
+    public List<Inscription> getInscriptionByStatus(INSCRIPTION_STATUS status) {
+        return inscriptionDao.getInscriptionByStatus(status);
+    }
+
+    @Override
+    public List<Inscription> getAllInscription() {
+        return inscriptionDao.getAllInscription();
+    }
+
+    @Override
+    public void editInscription(Inscription inscription) {
+        inscriptionDao.editInscription(inscription);
     }
 }
