@@ -1,17 +1,21 @@
-package com.sg.garderie.service;
+package com.sg.garderie.dao;
 
 import com.sg.garderie.model.Admin;
 
 import java.util.List;
 
-public interface GarderieService {
-    Admin addAdmin(Admin admin);
+public interface AdminDao {
 
-    List<Admin> getAllAdmins();
+    Admin add(Admin admin);
+
+    List<Admin> getAll();
 
     Admin findAdminById(int id);
 
     boolean deleteAdminById(int id);
 
     boolean updateAdminInfo(Admin admin);
+
+
+
 }
