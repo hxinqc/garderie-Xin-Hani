@@ -28,7 +28,7 @@ public class ChildRosterController {
     }
 
     @GetMapping("/roster/class/{id}")
-    public ChildRoster getRosterByClassId(@PathVariable int id){
+    public List<ChildRoster> getRosterByClassId(@PathVariable int id){
         return service.getChildRosterByClassId(id);
     }
 
