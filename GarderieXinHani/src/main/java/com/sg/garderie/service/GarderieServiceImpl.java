@@ -36,6 +36,9 @@ public class GarderieServiceImpl implements GarderieService {
     @Autowired
     private ChildRosterDao childRosterDao;
 
+    @Autowired
+    private FoodDao foodDao;
+
     @Value("${file.path}")
     private String FILE_BASE_PATH;
 
@@ -232,5 +235,36 @@ public class GarderieServiceImpl implements GarderieService {
     @Override
     public void deleteChildRosterById(int id) {
         childRosterDao.deleteChildRosterById(id);
+    }
+
+    // business logic for food
+    @Override
+    public Food addFood(Food food) {
+        return foodDao.add(food);
+    }
+
+    @Override
+    public List<Food> getAllFoods() {
+        return foodDao.getAll();
+    }
+
+    @Override
+    public Food findFoodById(int id) {
+        return foodDao.findFoodById(id);
+    }
+
+
+    @Override
+    public List<Food> getAllFoodsByDateClassId(int classId, LocalDate date){
+        return foodDao.getAllFoodsByDateClassId(classId,date);
+    }
+
+    @Override
+    public boolean deleteFoodById(int id){
+        return foodDao.deleteFoodById(id);
+    }
+
+    public boolean updateFoodInfo(Food food){
+        return foodDao.updateFoodInfo(food);
     }
 }

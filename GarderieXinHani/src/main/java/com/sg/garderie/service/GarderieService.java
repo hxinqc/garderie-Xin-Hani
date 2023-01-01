@@ -56,4 +56,16 @@ public interface GarderieService {
     void editChildRoster(ChildRoster childRoster);
     void deleteChildRosterById(int id);
 
+    Food addFood(Food food);
+
+    List<Food> getAllFoods();
+
+    Food findFoodById(int id);
+
+    List<Food> getAllFoodsByDateClassId(int classId, LocalDate date);
+
+    boolean deleteFoodById(int id);
+
+    boolean updateFoodInfo(Food food);
+
 }
