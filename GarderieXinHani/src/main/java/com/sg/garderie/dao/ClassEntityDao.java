@@ -10,4 +10,5 @@ public interface ClassEntityDao {
     List<ClassEntity> getAllClasses();
     void editClass(ClassEntity classEntity);
     void deleteClassById(int id);
+
 }

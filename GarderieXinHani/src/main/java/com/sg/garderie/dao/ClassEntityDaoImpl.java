@@ -65,7 +65,6 @@ public class ClassEntityDaoImpl implements ClassEntityDao {
     }
 
     public static final class ClassMapper implements RowMapper<ClassEntity> {
-
         @Override
         public ClassEntity mapRow(ResultSet rs, int index) throws SQLException {
             ClassEntity classEntity = new ClassEntity();

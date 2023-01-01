@@ -36,6 +36,12 @@ public class GarderieServiceImpl implements GarderieService {
     @Autowired
     private ChildRosterDao childRosterDao;
 
+    @Autowired
+    private ActivitiesDao activitiesDao;
+
+    @Autowired
+    private ClassActivitiesDao classActivitiesDao;
+
     @Value("${file.path}")
     private String FILE_BASE_PATH;
 
@@ -52,7 +58,9 @@ public class GarderieServiceImpl implements GarderieService {
         UUID uuid = UUID.randomUUID();
         Path path = Paths.get(FILE_BASE_PATH + uuid + fileType);
         Files.write(path, bytes);
-        return path.toString();
+        String filePath = path.toString();
+        filePath = filePath.replaceAll("\\\\", "/");
+        return filePath;
     }
 
     @Override
@@ -232,5 +240,77 @@ public class GarderieServiceImpl implements GarderieService {
     @Override
     public void deleteChildRosterById(int id) {
         childRosterDao.deleteChildRosterById(id);
+    }
+
+    @Override
+    public Activities addActivities(Activities activities) throws ActivitiesException {
+        activitiesDao.addActivities(activities);
+        activities.setPicPath("****");
+        return activities;
+    }
+
+    @Override
+    public Activities getActivitiesById(int id) throws ActivitiesException {
+        Activities activities = activitiesDao.getActivitiesById(id);
+        if (activities == null) throw new ActivitiesException("No such activities.");
+        String fileName = activities.getPicPath().replaceFirst(FILE_BASE_PATH, "");
+        activities.setPicPath("/download/" + fileName);
+        return activities;
+    }
+
+    @Override
+    public List<Activities> getActivitiesByDate(LocalDate issueDate) {
+        List<Activities> list = activitiesDao.getActivitiesByDate(issueDate);
+        list.stream().forEach(activities -> activities.setPicPath("/download/" +
+                activities.getPicPath().replaceFirst(FILE_BASE_PATH, "")));
+        return list;
+    }
+
+    @Override
+    public List<Activities> getAllActivities() {
+        List<Activities> list = activitiesDao.getAllActivities();
+        list.stream().forEach(activities -> activities.setPicPath("/download/" +
+                activities.getPicPath().replaceFirst(FILE_BASE_PATH, "")));
+        return list;
+    }
+
+    @Override
+    public void editActivities(Activities activities) throws ActivitiesException {
+        Activities retrieveActivities = getActivitiesById(activities.getId());
+        File file = new File(retrieveActivities.getPicPath());
+        if (file.exists()) {
+            file.delete();
+        }
+        activitiesDao.editActivities(activities);
+    }
+
+    @Override
+    public void deleteActivitiesById(int id) throws ActivitiesException {
+        Activities retrieveActivities = getActivitiesById(id);
+        File file = new File(retrieveActivities.getPicPath());
+        if (file.exists()) {
+            file.delete();
+        }
+        activitiesDao.deleteActivitiesById(id);
+    }
+
+    @Override
+    public void addClassActivities(int classId, int[] activitiesIds) {
+        classActivitiesDao.addClassActivities(classId, activitiesIds);
+    }
+
+    @Override
+    public List<ClassActivities> getClassActivitiesByClassId(int classId) {
+        return classActivitiesDao.getClassActivitiesByClassId(classId);
+    }
+
+    @Override
+    public List<ClassActivities> getAllClassesActivities() {
+        return classActivitiesDao.getAllClassesActivities();
+    }
+
+    @Override
+    public void deleteClassActivitiesByClassId(int classId) {
+        classActivitiesDao.deleteClassActivitiesByClassId(classId);
     }
 }
