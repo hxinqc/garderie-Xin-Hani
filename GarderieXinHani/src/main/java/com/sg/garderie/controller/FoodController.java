@@ -1,13 +1,19 @@
 package com.sg.garderie.controller;
 
+import com.sg.garderie.dao.FoodsException;
 import com.sg.garderie.model.Food;
+import com.sg.garderie.model.News;
 import com.sg.garderie.service.GarderieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -20,8 +26,20 @@ public class FoodController {
     //Creating a new food
     @PostMapping("/food")
     @ResponseStatus(HttpStatus.CREATED)
-    public Food create(@RequestBody Food food){
-        return service.addFood(food);
+    public Food create(@RequestParam("fileName") MultipartFile multipartFile, HttpServletRequest request) throws IOException {
+        Food food = new Food();
+        food.setName(request.getParameter("name"));
+        String offerDate = request.getParameter("offerDate");
+        food.setOfferDate(LocalDate.parse(offerDate, DateTimeFormatter.ISO_LOCAL_DATE));
+        food.setDescription(request.getParameter("description"));
+        String fileName = multipartFile.getOriginalFilename();
+        byte[] bytes = multipartFile.getBytes();
+        String filePath = service.saveFile(fileName, bytes);
+        food.setPicPath(filePath);
+
+        service.addFood(food);
+
+        return food;
     }
 
 
@@ -42,7 +60,7 @@ public class FoodController {
     }
 
     //  Retrieving foods by classID and date
-    @GetMapping("/food/{id}")
+    @GetMapping("/food/{id}{date}")
     public List<Food> allFoodsByDateClassId(@PathVariable int id, @PathVariable LocalDate date) {
        return  service.getAllFoodsByDateClassId(id,date);
 
@@ -51,7 +69,7 @@ public class FoodController {
 
     //Updating one food
     @PutMapping("/food/{id}")
-    public ResponseEntity update(@PathVariable int id, @RequestBody Food food) {
+    public ResponseEntity update(@PathVariable int id, @RequestBody Food food) throws FoodsException {
         ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
         if (id != food.getID()) {
             response = new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
@@ -65,7 +83,7 @@ public class FoodController {
 
     //Deleting one food Info
     @DeleteMapping("/food/{id}")
-    public ResponseEntity delete(@PathVariable int id) {
+    public ResponseEntity delete(@PathVariable int id) throws FoodsException {
         if (service.deleteFoodById(id)) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }

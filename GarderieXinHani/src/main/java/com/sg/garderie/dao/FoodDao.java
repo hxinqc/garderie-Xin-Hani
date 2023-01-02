@@ -10,7 +10,7 @@ public interface FoodDao {
 
     Food add(Food food);
 
-    List<Food> getAll();
+    List<Food> getAllFood();
 
     List<Food> getAllFoodsByDateClassId(int classId, LocalDate date);
 

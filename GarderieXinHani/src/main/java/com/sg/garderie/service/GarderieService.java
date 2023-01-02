@@ -1,5 +1,6 @@
 package com.sg.garderie.service;
 
+import com.sg.garderie.dao.FoodsException;
 import com.sg.garderie.dao.NewsException;
 import com.sg.garderie.model.*;
 
@@ -64,8 +65,8 @@ public interface GarderieService {
 
     List<Food> getAllFoodsByDateClassId(int classId, LocalDate date);
 
-    boolean deleteFoodById(int id);
+    boolean deleteFoodById(int id) throws FoodsException;
 
-    boolean updateFoodInfo(Food food);
+    boolean updateFoodInfo(Food food) throws FoodsException;
 
 }

@@ -8,7 +8,7 @@ public interface AdminDao {
 
     Admin add(Admin admin);
 
-    List<Admin> getAll();
+    List<Admin> getAllAdmin();
 
     Admin findAdminById(int id);
 

@@ -137,7 +137,7 @@ public class GarderieServiceImpl implements GarderieService {
 
     @Override
     public List<Admin> getAllAdmins() {
-        return adminDao.getAll();
+        return adminDao.getAllAdmin();
     }
 
     @Override
@@ -240,12 +240,14 @@ public class GarderieServiceImpl implements GarderieService {
     // business logic for food
     @Override
     public Food addFood(Food food) {
-        return foodDao.add(food);
+        foodDao.add(food);
+        food.setPicPath("****");
+        return food;
     }
 
     @Override
     public List<Food> getAllFoods() {
-        return foodDao.getAll();
+        return foodDao.getAllFood();
     }
 
     @Override
@@ -260,11 +262,25 @@ public class GarderieServiceImpl implements GarderieService {
     }
 
     @Override
-    public boolean deleteFoodById(int id){
+    public boolean deleteFoodById (int id) throws FoodsException{
+
+            Food retrieveFood = findFoodById(id);
+            if (retrieveFood == null) throw new FoodsException("No such Food.");
+            File file = new File(retrieveFood.getPicPath());
+            if (file.exists()) {
+                file.delete();
+            }
         return foodDao.deleteFoodById(id);
     }
 
-    public boolean updateFoodInfo(Food food){
+    public boolean updateFoodInfo(Food food) throws FoodsException{
+        Food retrieveFood = findFoodById(food.getID());
+        File file = new File(retrieveFood.getPicPath());
+            if (file.exists()) {
+                file.delete();
+            }
         return foodDao.updateFoodInfo(food);
-    }
+
+        }
+
 }
