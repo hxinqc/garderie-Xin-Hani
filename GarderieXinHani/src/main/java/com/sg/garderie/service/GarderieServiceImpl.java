@@ -45,6 +45,11 @@ public class GarderieServiceImpl implements GarderieService {
 
     private FoodDao foodDao;
 
+    @Autowired
+    private ClassFoodsDao  classFoodsDao;
+
+    @Autowired
+    private ClassTeachersDao  classTeachersDao;
 
     @Value("${file.path}")
     private String FILE_BASE_PATH;
@@ -366,5 +371,45 @@ public class GarderieServiceImpl implements GarderieService {
 
         }
 
+    @Override
+    public void addClassFoods(int classId, int[] foodsIds) {
+         classFoodsDao.addClassFoods(classId,foodsIds);
+    }
+
+    @Override
+    public List<ClassFood> getClassFoodsByClassId(int classId) {
+        return classFoodsDao.getClassFoodsByClassId(classId);
+    }
+
+    @Override
+    public List<ClassFood> getAllClassesFoods() {
+        return classFoodsDao.getAllClassesFoods();
+    }
+
+    @Override
+    public void deleteClassFoodsByClassId(int classId) {
+        classFoodsDao.deleteClassFoodsByClassId(classId);
+
+    }
+
+    @Override
+    public void addClassTeachers(int classId, int[] ids) {
+        classTeachersDao.addClassTeachers(classId,ids);
+    }
+
+    @Override
+    public List<ClassTeacher> getClassTeachersByClassId(int classId) {
+        return classTeachersDao.getClassTeachersByClassId(classId);
+    }
+
+    @Override
+    public List<ClassTeacher> getAllClassesTeachers() {
+        return classTeachersDao.getAllClassesTeachers();
+    }
+
+    @Override
+    public void deleteClassTeachersByClassId(int classId) {
+        classTeachersDao.deleteClassTeachersByClassId(classId);
+    }
 
 }
