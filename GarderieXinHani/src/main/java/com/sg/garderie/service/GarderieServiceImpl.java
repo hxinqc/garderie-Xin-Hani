@@ -250,7 +250,8 @@ public class GarderieServiceImpl implements GarderieService {
     @Override
     public Activities addActivities(Activities activities) throws ActivitiesException {
         activitiesDao.addActivities(activities);
-        activities.setPicPath("****");
+        String fileName = activities.getPicPath().replaceFirst(FILE_BASE_PATH, "");
+        activities.setPicPath("/download/" + fileName);
         return activities;
     }
 
