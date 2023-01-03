@@ -68,8 +68,8 @@ public class FoodDaoImpl implements FoodDao{
     @Override
     public List<Food> getAllFoodsByDateClassId(int classId, LocalDate offerDate) {
         try {
-            final String SELECT_FOODS_FOR_Class = "SELECT F.* FROM Foods F"
-            + "JOIN ClassFood CF ON F.ID=CF.ClassId WHERE F.OfferDate=?"
+            final String SELECT_FOODS_FOR_Class = "SELECT F.* FROM Foods F "
+            + "JOIN ClassFood CF ON F.ID=CF.foodId "
             + "JOIN Class C ON C.ID=CF.ClassId WHERE C.ID=? AND F.offerDate=?";
 
             return jdbc.query(SELECT_FOODS_FOR_Class, new FoodDaoImpl.FoodMapper(), classId, offerDate);

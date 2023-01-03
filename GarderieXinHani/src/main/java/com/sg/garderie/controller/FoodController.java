@@ -60,9 +60,14 @@ public class FoodController {
     }
 
     //  Retrieving foods by classID and date
-    @GetMapping("/food/{id}{date}")
-    public List<Food> allFoodsByDateClassId(@PathVariable int id, @PathVariable LocalDate date) {
-       return  service.getAllFoodsByDateClassId(id,date);
+//    @GetMapping("/food/{id}/{date}")
+//    public List<Food> allFoodsByDateClassId(@PathVariable int id, @PathVariable LocalDate date) {
+//       return  service.getAllFoodsByDateClassId(id,date);
+//
+//    }
+    @GetMapping("/food/{classId}/{date}")
+    public List<Food> allFoodsByDateClassId(@PathVariable int classId, @PathVariable LocalDate date) {
+        return  service.getAllFoodsByDateClassId(classId,date);
 
     }
 
