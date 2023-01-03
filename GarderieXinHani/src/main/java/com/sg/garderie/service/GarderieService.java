@@ -69,4 +69,9 @@ public interface GarderieService {
 
     boolean updateFoodInfo(Food food) throws FoodsException;
 
+    void addClassFoods(int classId, int[] foodsIds);
+    List<ClassFood>getClassFoodsByClassId(int classId);
+    List<ClassFood>getAllClassesFoods();
+    void deleteClassFoodsByClassId(int classId);
+
 }
