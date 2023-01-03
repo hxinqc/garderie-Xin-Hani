@@ -23,12 +23,13 @@ function App() {
        <Route  path="/" element={<Home />}/>
        <Route  path="/Enrolment" element={<Enrolment />}/>
        <Route  path="/Classes" element={<Classes />}/>
-       <Route  path="/Childrens" element={<Children />}/>
+       <Route  path="/Children" element={<Children />}/>
        <Route  path="/Teachers" element={<Teachers />}/>
        <Route  path="/Admin" element={<Admin />}/>
 
  </Routes>
       </Router>
+
   )
 }
 

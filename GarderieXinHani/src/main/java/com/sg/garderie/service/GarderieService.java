@@ -1,5 +1,6 @@
 package com.sg.garderie.service;
 
+import com.sg.garderie.dao.ActivitiesException;
 import com.sg.garderie.dao.FoodsException;
 import com.sg.garderie.dao.NewsException;
 import com.sg.garderie.model.*;
@@ -57,6 +58,17 @@ public interface GarderieService {
     void editChildRoster(ChildRoster childRoster);
     void deleteChildRosterById(int id);
 
+    Activities addActivities(Activities activities) throws ActivitiesException;
+    Activities getActivitiesById(int id) throws ActivitiesException;
+    List<Activities> getActivitiesByDate(LocalDate issueDate);
+    List<Activities> getAllActivities();
+    void editActivities(Activities activities) throws ActivitiesException;
+    void deleteActivitiesById(int id) throws ActivitiesException;
+    void addClassActivities(int classId, int[] activitiesIds);
+    List<ClassActivities> getClassActivitiesByClassId(int classId);
+    List<ClassActivities> getAllClassesActivities();
+    void deleteClassActivitiesByClassId(int classId);
+
     Food addFood(Food food);
 
     List<Food> getAllFoods();
@@ -81,4 +93,5 @@ public interface GarderieService {
     List<ClassTeacher> getAllClassesTeachers();
 
     void deleteClassTeachersByClassId(int classId);
+
 }
