@@ -74,4 +74,11 @@ public interface GarderieService {
     List<ClassFood>getAllClassesFoods();
     void deleteClassFoodsByClassId(int classId);
 
+    void addClassTeachers(int classId, int[] ids);
+
+    List<ClassTeacher> getClassTeachersByClassId(int classId);
+
+    List<ClassTeacher> getAllClassesTeachers();
+
+    void deleteClassTeachersByClassId(int classId);
 }
