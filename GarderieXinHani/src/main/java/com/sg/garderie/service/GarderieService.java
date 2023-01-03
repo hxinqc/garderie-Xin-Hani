@@ -1,6 +1,10 @@
 package com.sg.garderie.service;
 
+<<<<<<< HEAD
 import com.sg.garderie.dao.ActivitiesException;
+=======
+import com.sg.garderie.dao.FoodsException;
+>>>>>>> hani
 import com.sg.garderie.dao.NewsException;
 import com.sg.garderie.model.*;
 
@@ -67,5 +71,18 @@ public interface GarderieService {
     List<ClassActivities> getClassActivitiesByClassId(int classId);
     List<ClassActivities> getAllClassesActivities();
     void deleteClassActivitiesByClassId(int classId);
+
+    Food addFood(Food food);
+
+    List<Food> getAllFoods();
+
+    Food findFoodById(int id);
+
+    List<Food> getAllFoodsByDateClassId(int classId, LocalDate date);
+
+    boolean deleteFoodById(int id) throws FoodsException;
+
+    boolean updateFoodInfo(Food food) throws FoodsException;
+
 
 }

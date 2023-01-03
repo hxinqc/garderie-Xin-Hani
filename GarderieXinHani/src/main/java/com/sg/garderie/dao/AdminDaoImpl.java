@@ -53,7 +53,7 @@ public class AdminDaoImpl implements AdminDao {
 
 
     @Override
-    public List<Admin> getAll() {
+    public List<Admin> getAllAdmin() {
         final String sql = "SELECT ID, Name, Password, Description, IsActive FROM Admin;";
         return jdbcTemplate.query(sql, new AdminMapper());    }
 

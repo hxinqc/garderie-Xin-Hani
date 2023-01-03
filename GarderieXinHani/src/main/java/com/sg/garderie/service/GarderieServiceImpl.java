@@ -37,10 +37,14 @@ public class GarderieServiceImpl implements GarderieService {
     private ChildRosterDao childRosterDao;
 
     @Autowired
+
     private ActivitiesDao activitiesDao;
 
     @Autowired
     private ClassActivitiesDao classActivitiesDao;
+
+    private FoodDao foodDao;
+
 
     @Value("${file.path}")
     private String FILE_BASE_PATH;
@@ -142,7 +146,7 @@ public class GarderieServiceImpl implements GarderieService {
 
     @Override
     public List<Admin> getAllAdmins() {
-        return adminDao.getAll();
+        return adminDao.getAllAdmin();
     }
 
     @Override
@@ -242,6 +246,7 @@ public class GarderieServiceImpl implements GarderieService {
         childRosterDao.deleteChildRosterById(id);
     }
 
+
     @Override
     public Activities addActivities(Activities activities) throws ActivitiesException {
         activitiesDao.addActivities(activities);
@@ -313,4 +318,52 @@ public class GarderieServiceImpl implements GarderieService {
     public void deleteClassActivitiesByClassId(int classId) {
         classActivitiesDao.deleteClassActivitiesByClassId(classId);
     }
+
+    // business logic for food
+    @Override
+    public Food addFood(Food food) {
+        foodDao.add(food);
+        food.setPicPath("****");
+        return food;
+    }
+
+    @Override
+    public List<Food> getAllFoods() {
+        return foodDao.getAllFood();
+    }
+
+    @Override
+    public Food findFoodById(int id) {
+        return foodDao.findFoodById(id);
+    }
+
+
+    @Override
+    public List<Food> getAllFoodsByDateClassId(int classId, LocalDate date){
+        return foodDao.getAllFoodsByDateClassId(classId,date);
+    }
+
+    @Override
+    public boolean deleteFoodById (int id) throws FoodsException{
+
+            Food retrieveFood = findFoodById(id);
+            if (retrieveFood == null) throw new FoodsException("No such Food.");
+            File file = new File(retrieveFood.getPicPath());
+            if (file.exists()) {
+                file.delete();
+            }
+        return foodDao.deleteFoodById(id);
+    }
+
+    public boolean updateFoodInfo(Food food) throws FoodsException{
+        Food retrieveFood = findFoodById(food.getID());
+        File file = new File(retrieveFood.getPicPath());
+            if (file.exists()) {
+                file.delete();
+            }
+        return foodDao.updateFoodInfo(food);
+
+        }
+
+
 }
