@@ -1,10 +1,7 @@
 package com.sg.garderie.service;
 
-<<<<<<< HEAD
 import com.sg.garderie.dao.ActivitiesException;
-=======
 import com.sg.garderie.dao.FoodsException;
->>>>>>> hani
 import com.sg.garderie.dao.NewsException;
 import com.sg.garderie.model.*;
 
