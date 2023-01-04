@@ -10,10 +10,6 @@ import Topbar from "./Topbar";
 
 
 
-
-
-
-
 function App() {
   return (
     <Router>
@@ -26,10 +22,10 @@ function App() {
        <Route  path="/Children" element={<Children />}/>
        <Route  path="/Teachers" element={<Teachers />}/>
        <Route  path="/Admin" element={<Admin />}/>
+       
 
  </Routes>
       </Router>
-
   )
 }
 
