@@ -45,12 +45,12 @@ const btnConfirm = (ev) => {
       method: "POST",
       body: JSON.stringify({
          
-          InscriptionDate:selectedDate,
-          FirstName: firstName,
-          LastName: lastName,
-          Phone: phone,
-          Address: address,
-          OpenPlace:openPlace,
+          inscriptionDate:selectedDate,
+          firstName: firstName,
+          lastName: lastName,
+          phone: phone,
+          address: address,
+          openPlace:openPlace,
       }),
       headers: {
           "Content-Type": "application/json",
@@ -58,10 +58,11 @@ const btnConfirm = (ev) => {
   })
   .then((res) => res.json())
   .then((data) => {
-      //console.log(data);
+    //   console.log(data);
       if(data.status === 200){
           localStorage.setItem('data', JSON.stringify(data.data));
           history('/confirmed');
+        //   console.log(data.data);
       }        
   })
   .catch(err => {
