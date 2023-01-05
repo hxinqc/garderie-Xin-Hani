@@ -4,8 +4,10 @@ import styled from "styled-components";
 // import { useNavigate } from 'react-router-dom';
 
 export default function Classes() {
-  const[name, setName] = useState('');
-  const [openDate, setOpenDate] = useState(null);
+  const[name, setName] = useState(null);
+  const[openDate, setOpenDate] = useState(null);
+  const[message, setMessage] = useState(null);
+  var lastStatus;
 
   const btnConfirm = (ev) => {
     ev.preventDefault();
@@ -18,31 +20,41 @@ export default function Classes() {
         }),
         headers: {
             "Content-Type": "application/json",
-        },
+        }
     })
-    .then((res) => res.json())
+    .then((res) => {
+      lastStatus = res.status;
+      return res.json();
+    })
     .then((data) => {
         console.log(data);
-        if(data.status === 200){
+        console.log(lastStatus);
+        if(lastStatus === 201){
             localStorage.setItem('data', JSON.stringify(data.data));
             // history('/confirmed');
             console.log(data.data);
-            console.log("New class added")
+            setMessage('New class added.');
+            setName(null);
+            setOpenDate(null);
         }        
     })
     .catch(err => {
-        console.log("we have a problem " + err.message)});
+        // console.log("we have a problem " + err.message);
+        setMessage("we have a problem " + err.message);
+      });
     }
+
   return (
     <Form onSubmit={(ev) =>{btnConfirm(ev)}}>
     <div style={{width:"600px", backgroundColor:"pink"}}>Classes
       <Label>
-        <Input required placeholder="Name" type="text" onChange={(e)=>setName(e.target.value)} />
+        <Input required placeholder="Name" type="text" value={name!=null?name:''} onChange={(e)=>setName(e.target.value)} />
       </Label>
-
-      OpenDate:<DateSelect selectedDate={openDate} setselectedDate={setOpenDate} />
+      <br/>
+      OpenDate:<DateSelect placeholder="openDate" selectedDate={openDate} setselectedDate={setOpenDate} value={openDate!=null?openDate:''} />
 
       <Button type="submit">Submit</Button>
+      <Label>Message: {message} </Label>
     </div>
     </Form>
   )
