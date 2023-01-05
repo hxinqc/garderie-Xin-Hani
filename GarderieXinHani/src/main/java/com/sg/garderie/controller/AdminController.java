@@ -21,6 +21,7 @@ public class AdminController {
 
     //Creating a new admin
     @PostMapping("/admin")
+    @CrossOrigin
     @ResponseStatus(HttpStatus.CREATED)
     public Admin create(@RequestBody Admin admin){
         return service.addAdmin(admin);
@@ -29,12 +30,14 @@ public class AdminController {
 
     //Retrieving all admins
     @GetMapping("/admin")
+    @CrossOrigin
     public List<Admin> allAdmins() {
         return service.getAllAdmins();
     }
 
     //Retrieving one admin by adminID
     @GetMapping("/admin/{id}")
+    @CrossOrigin
     public ResponseEntity<Admin> findAdminById(@PathVariable int id) {
         Admin result = service.findAdminById(id);
         if (result == null) {
@@ -45,6 +48,7 @@ public class AdminController {
 
     //Updating one admin
     @PutMapping("/admin/{id}")
+    @CrossOrigin
     public ResponseEntity update(@PathVariable int id, @RequestBody Admin admin) {
         ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
         if (id != admin.getID()) {
@@ -59,6 +63,7 @@ public class AdminController {
 
     //Deleting one admin Info
     @DeleteMapping("/admin/{id}")
+    @CrossOrigin
     public ResponseEntity delete(@PathVariable int id) {
         if (service.deleteAdminById(id)) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);

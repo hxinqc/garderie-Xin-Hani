@@ -16,6 +16,7 @@ public class ClassFoodController {
     private GarderieService service;
 
     @PostMapping("/class/foods")
+    @CrossOrigin
     @ResponseStatus(HttpStatus.CREATED)
     public void addClassFoods(@RequestParam int classId, @RequestParam String foodsIds) {
         int[] ids = Arrays.stream(foodsIds.split(",")).mapToInt(id -> Integer.valueOf(id)).toArray() ;
@@ -25,16 +26,19 @@ public class ClassFoodController {
     }
 
     @GetMapping("/class/foods/{classId}")
+    @CrossOrigin
     public List<ClassFood> getClassFoodsByClassId(@PathVariable int classId) {
         return service.getClassFoodsByClassId(classId);
     }
 
     @GetMapping("/class/foods")
+    @CrossOrigin
     public List<ClassFood> getAllClassFoods() {
         return service.getAllClassesFoods();
     }
 
     @DeleteMapping("/class/foods/{classId}")
+    @CrossOrigin
     @ResponseStatus(HttpStatus.OK)
     public void deleteClassFoodsByClassId(@PathVariable int classId) {
         service.deleteClassFoodsByClassId(classId);

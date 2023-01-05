@@ -17,6 +17,7 @@ public class ClassTeacherController {
     private GarderieService service;
 
     @PostMapping("/class/teachers")
+    @CrossOrigin
     @ResponseStatus(HttpStatus.CREATED)
     public void addClassTeachers(@RequestParam int classId, @RequestParam String teachersIds) {
         int[] ids = Arrays.stream(teachersIds.split(",")).mapToInt(id -> Integer.valueOf(id)).toArray() ;
@@ -26,16 +27,19 @@ public class ClassTeacherController {
     }
 
     @GetMapping("/class/teachers/{classId}")
+    @CrossOrigin
     public List<ClassTeacher> getClassTeachersByClassId(@PathVariable int classId) {
         return service.getClassTeachersByClassId(classId);
     }
 
     @GetMapping("/class/teachers")
+    @CrossOrigin
     public List<ClassTeacher> getAllClassTeachers() {
         return service.getAllClassesTeachers();
     }
 
     @DeleteMapping("/class/teachers/{classId}")
+    @CrossOrigin
     @ResponseStatus(HttpStatus.OK)
     public void deleteClassTeachersByClassId(@PathVariable int classId) {
         service.deleteClassTeachersByClassId(classId);

@@ -2,6 +2,7 @@ package com.sg.garderie.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ public class GarderieController {
     private String FILE_BASE_PATH;
 
     @GetMapping("/download/{fileName:.+}")
+    @CrossOrigin
     public void downloadFileFromLocal(@PathVariable String fileName, HttpServletRequest request,
                                                 HttpServletResponse response) throws IOException {
         File file = new File(FILE_BASE_PATH + fileName);
