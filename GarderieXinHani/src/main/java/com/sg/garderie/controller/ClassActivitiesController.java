@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class ClassActivitiesController {
 
