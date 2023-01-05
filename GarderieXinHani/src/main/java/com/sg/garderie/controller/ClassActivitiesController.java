@@ -17,6 +17,7 @@ public class ClassActivitiesController {
     @Autowired
     private GarderieService service;
     @PostMapping("/class/activities")
+    @CrossOrigin
     @ResponseStatus(HttpStatus.CREATED)
     public void addClassActivities(@RequestParam int classId, @RequestParam String activitiesIds) {
         int[] ids = Arrays.stream(activitiesIds.split(",")).mapToInt(id -> Integer.valueOf(id)).toArray() ;
@@ -26,16 +27,19 @@ public class ClassActivitiesController {
     }
 
     @GetMapping("/class/activities/{classId}")
+    @CrossOrigin
     public List<ClassActivities> getClassActivitiesByClassId(@PathVariable int classId) {
         return service.getClassActivitiesByClassId(classId);
     }
 
     @GetMapping("/class/activities")
+    @CrossOrigin
     public List<ClassActivities> getAllClassActivities() {
         return service.getAllClassesActivities();
     }
 
     @DeleteMapping("/class/activities/{classId}")
+    @CrossOrigin
     @ResponseStatus(HttpStatus.OK)
     public void deleteClassActivitiesByClassId(@PathVariable int classId) {
         service.deleteClassActivitiesByClassId(classId);

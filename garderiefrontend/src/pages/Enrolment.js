@@ -58,10 +58,11 @@ const btnConfirm = (ev) => {
   })
   .then((res) => res.json())
   .then((data) => {
-      //console.log(data);
+      console.log(data);
       if(data.status === 200){
           localStorage.setItem('data', JSON.stringify(data.data));
           history('/confirmed');
+          console.log(data.data);
       }        
   })
   .catch(err => {

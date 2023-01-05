@@ -20,6 +20,7 @@ public class GarderieController {
     private String FILE_BASE_PATH;
 
     @GetMapping("/download/{fileName:.+}")
+    @CrossOrigin
     public void downloadFileFromLocal(@PathVariable String fileName, HttpServletRequest request,
                                                 HttpServletResponse response) throws IOException {
         File file = new File(FILE_BASE_PATH + fileName);

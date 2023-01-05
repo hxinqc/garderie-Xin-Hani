@@ -15,6 +15,7 @@ public class ChildRosterController {
     private GarderieService service;
 
     @PostMapping("/roster")
+    @CrossOrigin
     @ResponseStatus(HttpStatus.CREATED)
     public ChildRoster addRoster(@RequestBody ChildRoster childRoster) {
         service.addChildRoster(childRoster);
@@ -23,21 +24,25 @@ public class ChildRosterController {
     }
 
     @GetMapping("/roster/{id}")
+    @CrossOrigin
     public ChildRoster getRosterById(@PathVariable int id){
         return service.getChildRosterById(id);
     }
 
     @GetMapping("/roster/class/{id}")
+    @CrossOrigin
     public List<ChildRoster> getRosterByClassId(@PathVariable int id){
         return service.getChildRosterByClassId(id);
     }
 
     @GetMapping("/roster")
+    @CrossOrigin
     public List<ChildRoster> getAllRosters() {
         return service.getAllChildRosters();
     }
 
     @PutMapping("/roster/{id}")
+    @CrossOrigin
     public ChildRoster editRosterById(@PathVariable int id, @RequestBody ChildRoster childRoster) {
         childRoster.setId(id);
         service.editChildRoster(childRoster);
@@ -45,6 +50,7 @@ public class ChildRosterController {
     }
 
     @DeleteMapping("/roster/{id}")
+    @CrossOrigin
     @ResponseStatus(HttpStatus.OK)
     public void deleteRosterById(@PathVariable int id) {
         service.deleteChildRosterById(id);

@@ -16,27 +16,32 @@ public class InscriptionController {
     private GarderieService service;
 
     @PostMapping("/inscription")
+    @CrossOrigin
     @ResponseStatus(HttpStatus.CREATED)
     public Inscription addInscription(@RequestBody Inscription inscription) {
         return service.addInscription(inscription);
     }
 
     @GetMapping("/inscription/{id}")
+    @CrossOrigin
     public Inscription getInscriptionById(@PathVariable int id) {
         return service.getInscriptionById(id);
     }
 
     @GetMapping("/inscription/status/{status}")
+    @CrossOrigin
     public List<Inscription> getInscriptionByStatus(@PathVariable INSCRIPTION_STATUS status) {
         return service.getInscriptionByStatus(status);
     }
 
     @GetMapping("/inscription")
+    @CrossOrigin
     public List<Inscription> getAllInscription() {
         return service.getAllInscription();
     }
 
     @PostMapping("/inscription/{id}")
+    @CrossOrigin
     public void editInscriptionById(@PathVariable int id, @RequestBody Inscription inscription){
         inscription.setId(id);
         service.editInscription(inscription);

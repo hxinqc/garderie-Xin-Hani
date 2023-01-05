@@ -15,6 +15,7 @@ public class ClassController {
     @Autowired
     private GarderieService service;
     @PostMapping("/class")
+    @CrossOrigin
     @ResponseStatus(HttpStatus.CREATED)
     public ClassEntity addClass(@RequestBody ClassEntity classEntity)  {
         service.addClass(classEntity);
@@ -23,16 +24,19 @@ public class ClassController {
     }
 
     @GetMapping("/class/{id}")
+    @CrossOrigin
     public ClassEntity getClassById(@PathVariable int id) {
         return service.getClassById(id);
     }
 
     @GetMapping("/classes")
+    @CrossOrigin
     public List<ClassEntity> getAllClasses() {
         return service.getAllClasses();
     }
 
     @PutMapping("/class/{id}")
+    @CrossOrigin
     public ClassEntity editClassById(@PathVariable int id, @RequestBody ClassEntity classEntity) {
         classEntity.setId(id);
         service.editClass(classEntity);
@@ -40,6 +44,7 @@ public class ClassController {
     }
 
     @DeleteMapping("/class/{id}")
+    @CrossOrigin
     @ResponseStatus(HttpStatus.OK)
     public void deleteClassById(@PathVariable int id) {
         service.deleteClassById(id);

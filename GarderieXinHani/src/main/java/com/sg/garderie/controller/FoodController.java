@@ -25,6 +25,7 @@ public class FoodController {
 
     //Creating a new food
     @PostMapping("/food")
+    @CrossOrigin
     @ResponseStatus(HttpStatus.CREATED)
     public Food create(@RequestParam("fileName") MultipartFile multipartFile, HttpServletRequest request) throws IOException {
         Food food = new Food();
@@ -45,12 +46,14 @@ public class FoodController {
 
     //Retrieving all foods
     @GetMapping("/food")
+    @CrossOrigin
     public List<Food> allFoods() {
         return service.getAllFoods();
     }
 
     //Retrieving one food by foodID
     @GetMapping("/food/{id}")
+    @CrossOrigin
     public ResponseEntity<Food> findFoodById(@PathVariable int id) {
         Food result = service.findFoodById(id);
         if (result == null) {
@@ -59,21 +62,16 @@ public class FoodController {
         return ResponseEntity.ok(result);
     }
 
-    //  Retrieving foods by classID and date
-//    @GetMapping("/food/{id}/{date}")
-//    public List<Food> allFoodsByDateClassId(@PathVariable int id, @PathVariable LocalDate date) {
-//       return  service.getAllFoodsByDateClassId(id,date);
-//
-//    }
     @GetMapping("/food/{classId}/{date}")
+    @CrossOrigin
     public List<Food> allFoodsByDateClassId(@PathVariable int classId, @PathVariable LocalDate date) {
         return  service.getAllFoodsByDateClassId(classId,date);
 
     }
 
-
     //Updating one food
     @PutMapping("/food/{id}")
+    @CrossOrigin
     public ResponseEntity update(@PathVariable int id, @RequestBody Food food) throws FoodsException {
         ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
         if (id != food.getID()) {
@@ -88,6 +86,7 @@ public class FoodController {
 
     //Deleting one food Info
     @DeleteMapping("/food/{id}")
+    @CrossOrigin
     public ResponseEntity delete(@PathVariable int id) throws FoodsException {
         if (service.deleteFoodById(id)) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);

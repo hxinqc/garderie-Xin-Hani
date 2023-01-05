@@ -21,6 +21,7 @@ public class TeacherController {
     //Retrieving a teacher
     @PostMapping("/teacher")
     @ResponseStatus(HttpStatus.CREATED)
+    @CrossOrigin
     public Teacher create(@RequestBody Teacher teacher){
         return service.addTeacher(teacher);
     }
@@ -28,6 +29,7 @@ public class TeacherController {
 
     //Retrieving all teachers
     @GetMapping("/teacher")
+    @CrossOrigin
     public List<Teacher> allTeachers() {
         return service.getAllTeachers();
     }
@@ -35,6 +37,7 @@ public class TeacherController {
 
     //Retrieving one teacher by teacherId
     @GetMapping("/teacher/{id}")
+    @CrossOrigin
     public ResponseEntity<Teacher> findTeacherById(@PathVariable int id) {
         Teacher result = service.findTeacherById(id);
         if (result == null) {
@@ -46,6 +49,7 @@ public class TeacherController {
 
     //Updating one teacher
     @PutMapping("/teacher/{id}")
+    @CrossOrigin
     public ResponseEntity update(@PathVariable int id, @RequestBody Teacher teacher) {
         ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
         if (id != teacher.getID()) {
@@ -60,6 +64,7 @@ public class TeacherController {
 
     //Deleting one teacher Info
     @DeleteMapping("/teacher/{id}")
+    @CrossOrigin
     public ResponseEntity delete(@PathVariable int id) {
         if (service.deleteTeacherById(id)) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
