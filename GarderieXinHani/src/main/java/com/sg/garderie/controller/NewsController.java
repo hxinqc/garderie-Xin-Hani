@@ -22,6 +22,7 @@ public class NewsController {
 
     @PostMapping("/news")
     @ResponseStatus(HttpStatus.CREATED)
+    @CrossOrigin
     public News addNews(@RequestParam("fileName") MultipartFile multipartFile, HttpServletRequest request) throws IOException {
         News news = new News();
         news.setName(request.getParameter("name"));
@@ -39,21 +40,25 @@ public class NewsController {
     }
 
     @GetMapping("/news/{id}")
+    @CrossOrigin
     public News getNewsById(@PathVariable int id) throws NewsException{
         return service.getNewsById(id);
     }
 
     @GetMapping("/news/date/{date}")
+    @CrossOrigin
     public List<News> getNewsByDate(@PathVariable LocalDate date) {
         return service.getNewsByDate(date);
     }
 
     @GetMapping("/news")
+    @CrossOrigin
     public List<News> getAllNews() {
         return service.getAllNews();
     }
 
     @PostMapping("/news/{id}")
+    @CrossOrigin
     public News editNewsById(@PathVariable int id, @RequestParam("fileName") MultipartFile multipartFile,
                              HttpServletRequest request)
             throws IOException, NewsException {
@@ -75,6 +80,7 @@ public class NewsController {
 
     @DeleteMapping("/news/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin
     public void deleteNewsById(@PathVariable int id) throws NewsException {
         service.deleteNewsById(id);
     }

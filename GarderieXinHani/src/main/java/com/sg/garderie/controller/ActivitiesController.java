@@ -21,6 +21,7 @@ public class ActivitiesController {
     private GarderieService service;
 
     @PostMapping("/activities")
+    @CrossOrigin
     @ResponseStatus(HttpStatus.CREATED)
     public Activities addActivities(@RequestParam("fileName") MultipartFile multipartFile, HttpServletRequest request)
             throws ActivitiesException, IOException {
@@ -40,21 +41,25 @@ public class ActivitiesController {
     }
 
     @GetMapping("/activities/{id}")
+    @CrossOrigin
     public Activities getActivitiesById(@PathVariable int id) throws ActivitiesException{
         return service.getActivitiesById(id);
     }
 
     @GetMapping("/activities/date/{date}")
+    @CrossOrigin
     public List<Activities> getActivitiesByDate(@PathVariable LocalDate date) {
         return service.getActivitiesByDate(date);
     }
 
     @GetMapping("/activities")
+    @CrossOrigin
     public List<Activities> getAllActivities() {
         return service.getAllActivities();
     }
 
     @PutMapping("/activities/{id}")
+    @CrossOrigin
     public Activities editActivitiesById(@PathVariable int id, @RequestParam("fileName") MultipartFile multipartFile,
                              HttpServletRequest request)
             throws IOException, ActivitiesException {
@@ -75,6 +80,7 @@ public class ActivitiesController {
     }
 
     @DeleteMapping("/activities/{id}")
+    @CrossOrigin
     @ResponseStatus(HttpStatus.OK)
     public void deleteActivitiesById(@PathVariable int id) throws ActivitiesException {
         service.deleteActivitiesById(id);
