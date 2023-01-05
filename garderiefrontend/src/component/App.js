@@ -7,6 +7,7 @@ import Children from '../pages/Children';
 import Teachers from '../pages/Teachers';
 import Admin from '../pages/Admin';
 import Topbar from "./Topbar";
+import Confirmation from "../pages/Confirmation"
 
 
 
@@ -22,6 +23,7 @@ function App() {
        <Route  path="/Children" element={<Children />}/>
        <Route  path="/Teachers" element={<Teachers />}/>
        <Route  path="/Admin" element={<Admin />}/>
+       <Route  path="/confirmed" element={<Confirmation />}/>
        
 
  </Routes>

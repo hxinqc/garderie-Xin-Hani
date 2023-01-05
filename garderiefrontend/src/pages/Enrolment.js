@@ -45,12 +45,12 @@ const btnConfirm = (ev) => {
       method: "POST",
       body: JSON.stringify({
          
-          InscriptionDate:selectedDate,
-          FirstName: firstName,
-          LastName: lastName,
-          Phone: phone,
-          Address: address,
-          OpenPlace:openPlace,
+          inscriptionDate:selectedDate,
+          firstName: firstName,
+          lastName: lastName,
+          phone: phone,
+          address: address,
+          openPlace:openPlace,
       }),
       headers: {
           "Content-Type": "application/json",

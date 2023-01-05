@@ -6,10 +6,10 @@ import {useState} from 'react'
 import styled from "styled-components"
 function DateSelect({selectedDate,setselectedDate}) {
   return (
-    <mydiv>
+    <Mydiv>
         <Datepicker selected={selectedDate}
         onChange={date=>{setselectedDate(date)}}
-        dateFormat="yyyy/MM/dd"
+        dateFormat="yyyy-MM-dd"
         // To desable the past
         minDate={new Date()}
         //To exclude weekends
@@ -17,10 +17,10 @@ function DateSelect({selectedDate,setselectedDate}) {
         showYearDropdown
         scrollableMonthYearDropdown
         />
-    </mydiv>
+    </Mydiv>
   )
 }
-const mydiv = styled.div`
+const Mydiv = styled.div`
     margin: 5px;
     padding: 5px 15px;
 `;
