@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLConnection;
 
+@CrossOrigin
 @RestController
 public class GarderieController {
 
