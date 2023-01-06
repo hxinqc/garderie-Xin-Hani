@@ -10,10 +10,24 @@ export default function News() {
   const [fileName, setFileName] = useState()
   const[message, setMessage] = useState(null);
   var lastStatus;
+  const[orgFileName, setOrgFileName] = useState(null);
 
-  function handleChange(event) {
-    setFileName(event.target.files[0])
-  }
+  // Create a reference to the hidden file input element
+  const hiddenFileInput = React.useRef(null);
+  
+  // Programatically click the hidden file input element
+  // when the Button component is clicked
+  const handleClick = event => {
+    hiddenFileInput.current.click();
+  };
+  // Call a function (passed as a prop from the parent component)
+  // to handle the user-selected file 
+  const handleChange = event => {
+    const fileUploaded = event.target.files[0];
+    setFileName(fileUploaded);
+    setOrgFileName(fileUploaded.name);
+    console.log(fileUploaded);
+  };
 
   function resetForm() {
     setName(null);
@@ -24,18 +38,17 @@ export default function News() {
   const btnConfirm = (ev) => {
     ev.preventDefault();
 
+    var isoDate = issueDate.toISOString();
+
     const formData = new FormData();
     formData.append('name', name);
-    formData.append('issueDate', issueDate);
+    formData.append('issueDate', isoDate.substr(0,isoDate.indexOf('T')));
     formData.append('content', content);
     formData.append('fileName', fileName);
         
     fetch("http://localhost:8080/news", {
         method: "POST",
-        body: formData,
-        headers: {
-            "Content-Type": 'multipart/form-data'
-        }
+        body: formData
     })
     .then((res) => {
       lastStatus = res.status;
@@ -65,11 +78,20 @@ export default function News() {
         <Input required placeholder="Name" type="text" value={name!=null?name:''} onChange={(e)=>setName(e.target.value)} />
       </Label>
       <br/>
-      OpenDate:<DateSelect placeholder="issueDate" selectedDate={issueDate} setselectedDate={setIssueDate} value={issueDate!=null?issueDate:''} />
+      IssueDate:<DateSelect selectedDate={issueDate} setselectedDate={date => {setIssueDate(date); setMessage(date.toISOString())}} 
+      value={issueDate!=null?issueDate:''} />
       <br/>
-      <Label>
-        Select a picture:<input type="fileName" onChange={handleChange}/>
-      </Label>
+      
+      <Button onClick={handleClick}>
+        Select a file
+      </Button>
+      <Label>{orgFileName}</Label>
+      <input
+        type="file"
+        ref={hiddenFileInput}
+        onChange={handleChange}
+        style={{display: 'none'}} 
+      />
       <br/>
       <Label>
         <Input required placeholder="Content" type="text" value={content!=null?content:''} onChange={(e)=>setContent(e.target.value)} />
