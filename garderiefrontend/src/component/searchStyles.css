@@ -1,0 +1,220 @@
+/* This css component is just for search parts based on Teacher, Activity and Food
+  and I imported that to the search page, where I have three search components Some styles 
+  is imported in tree search component */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.heading h1 {
+  color: #444;
+  font-size: 48px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  padding-top: 2rem;
+  text-align: center;
+  text-shadow: 3px 6px rgba(50, 50, 70, 0.3);
+}
+
+.heading h4 {
+  color: #444;
+  font-size: 26px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  padding-top: 1rem;
+  text-align: center;
+  align-items: center;
+}
+.radioDiv {
+  color: #444;
+  font-size: 18px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding-top: 0.2rem;
+  text-align: center;
+  align-items: center;
+  list-style-type: none;
+}
+
+.RadioUl {
+  color: #444;
+  font-size: 16px;
+  font-weight: 100;
+  letter-spacing: 1px;
+  padding-top: 0 rem;
+  text-align: left;
+  /* align-items: left; */
+  display: inline-block;
+  list-style-type: none;
+}
+label {
+  margin-left: -6px;
+  display: inline-block;
+  padding: 5px 10px;
+  text-align: left;
+}
+
+input[type="radio"] {
+  box-sizing: border-box;
+  appearance: none;
+  background: white;
+  outline: 2px solid #333;
+  border: 3px solid white;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  position: relative;
+  top: 3px;
+}
+
+input[type="radio"]:checked {
+  background: #333;
+}
+
+.searchBox {
+  text-align: center;
+  margin: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-bar {
+  width: 400px;
+  height: 40px;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  padding: 0.3rem 1rem;
+  background: rgb(8, 8, 8);
+  color: white;
+}
+
+.main {
+  width: 100vw;
+}
+
+.container {
+  width: 100vw;
+  margin: 0;
+  margin: 0 auto;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.card {
+  width: 250px;
+  height: 400px;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(
+    to left,
+    rgba(204, 255, 51, 0.5),
+    rgba(204, 255, 51, 0.5)
+  );
+  border-radius: 8px;
+  box-shadow: 0.7 px 12px rgba(204, 255, 51, 0.5);
+  /* box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15); */
+
+  overflow: auto;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.card img {
+  width: 100%;
+}
+
+.card .info {
+  color: #444;
+  text-align: center;
+}
+
+.card .info h2 {
+  margin: 0;
+  font-weight: 900;
+  margin-top: 15px;
+}
+
+.card .info p {
+  margin: 0;
+  font-size: 17px;
+  letter-spacing: 2px;
+  margin-top: 10px;
+}
+
+.card:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0;
+  width: 100%;
+  background-image: linear-gradient(
+    to left,
+    rgba(204, 255, 51, 0.7),
+    rgba(204, 255, 51, 0.9)
+  );
+  transition: 0.2s all;
+  background-size: cover;
+}
+
+.card:hover:before {
+  height: 100%;
+}
+
+.card:hover {
+  background: none;
+  height: 100%;
+}
+
+.card .recipe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: justify;
+  padding: 0.5rem 1rem;
+  display: none;
+  transition: 0.2s all;
+  background-image: linear-gradient(
+    to left,
+    rgba(204, 255, 51, 0.5),
+    rgba(204, 255, 51, 0.5)
+  );
+  background-size: cover;
+}
+
+.card:hover .recipe {
+  display: block;
+  background: linear-gradient(
+    to left,
+    rgba(204, 255, 51, 0.5),
+    rgba(204, 255, 51, 0.5)
+  );
+}
+
+.recipe h2 {
+  margin-bottom: 10px;
+}
+
+.recipe img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: block;
+  margin-right: auto;
+  margin-top: auto;
+  align-items: center;
+}
+
+.recipe p {
+  font-size: 15px;
+}
+.recipe a {
+  display: block;
+  text-align: center;
+}
