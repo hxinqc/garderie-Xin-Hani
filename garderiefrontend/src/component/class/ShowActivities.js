@@ -4,20 +4,21 @@
 import React from "react";
 import styled, { StyledComponent } from "styled-components";
 
-const ShowFoods = (getFood) => {
+const ShowActivities = (getActivity) => {
   //console.log(getMeal.data)
   return (
     <div className="card">
-      <img src={getFood.data.picPath} />
+      <img src={getActivity.data.picPath} />
       <div className="info">
-        <h2>{getFood.data.name}</h2>
-        <h2>{getFood.data.offerDate}Offerd Date</h2>
+        <h2>{getActivity.data.name}</h2>
+        <h2>{getActivity.data.activityDate}Activity Date</h2>
       </div>
       <div className="recipe">
         <h2>Description</h2>
-        <p>{getFood.data.description}</p>
+        <p>{getActivity.data.description}</p>
       </div>
     </div>
   );
 };
-export default ShowFoods;
+
+export default ShowActivities;

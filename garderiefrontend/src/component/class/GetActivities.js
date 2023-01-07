@@ -5,21 +5,21 @@
 import React from "react";
 import { useState } from "react";
 import styled, { StyledComponent } from "styled-components";
-import ShowFoods from "./ShowFoods";
+import ShowActivities from "./ShowActivities";
 
 // search = classId  we will get from user in main search page
 
-function GetFoods() {
+function GetActivities() {
   const [search, setSearch] = useState("");
-  const [MyFood, setFood] = useState([]);
+  const [MyActivity, setActivity] = useState([]);
 
-  const searchFood = (evt) => {
+  const searchActivity = (evt) => {
     if (evt.key == "Enter") {
-      fetch(`http://localhost:8080//class/foods/{search}`)
+      fetch(`http://localhost:8080//class/activities/{search}`)
         .then((res) => res.json())
         .then((data) => {
           //console.log(data.meals)
-          setFood(data.Food);
+          setActivity(data.Activities);
         });
     }
   };
@@ -36,7 +36,7 @@ function GetFoods() {
           placeholder="Enter Your Class ID"
           onChange={(e) => setSearch(e.target.value)}
           value={search}
-          onKeyPress={searchFood}
+          onKeyPress={searchActivity}
         ></input>
       </div>
 
@@ -46,11 +46,11 @@ function GetFoods() {
           // by map, I'm sending each of these in to ShowFood component that
           //will show differnt feilds of Food like photo, Name,... in predefined structure
 
-          MyFood == null ? (
+          MyActivity == null ? (
             <p>Not Found</p>
           ) : (
-            MyFood.map((res) => {
-              return <ShowFoods data={res} />;
+            MyActivity.map((res) => {
+              return <ShowActivities data={res} />;
             })
           )
         }
@@ -59,4 +59,4 @@ function GetFoods() {
   );
 }
 
-export default GetFoods;
+export default GetActivities;
