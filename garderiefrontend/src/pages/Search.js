@@ -1,12 +1,12 @@
-import React from 'react'
-import ShowTeachers from '../component/class/ShowTeachers'
-import ShowActivities from '../component/class/ShowActivities'
-import ShowFoods from '../component/class/ShowFoods'
+import React, { useState } from 'react'
+import GetTeachers from '../component/class/GetTeachers'
+import GetActivities from '../component/class/GetActivities'
+import GetFoods from '../component/class/GetFoods'
 import "../component/searchStyles.css"
-import { useState } from 'react'
 
 
-const Search=()=> {
+
+const Search = () => {
 
   const [displayA, setDisplayA] = useState(false);
   const [displayB, setDisplayB] = useState(false);
@@ -30,46 +30,46 @@ const Search=()=> {
 
   return (
     <div>
-        <>
-         <div className="heading">
-                 <h1>Search Your Class Information</h1>
-                    
-         </div>
+      <>
+        <div className="heading">
+          <h1>Search Your Class Information</h1>
 
-                 
-      <div className="radioDiv">
-        <ul className="RadioUl">
-        <li>
-        <input type="radio" value={true} name="option" onClick={showA} /><label htmlFor="first">{"  "}</label>
-        <span>Teachers</span>
-        </li>
+        </div>
 
-        <li>
-        <input  type="radio" value={false} name="option"  onClick={showB} /><label htmlFor="second">{"  "}</label> 
-        <span>Activities</span>
-        </li>
 
-        <li>
-        <input  type="radio" value={false} name="option"  onClick={showC} /> <label htmlFor="third">{}</label>
-        <span>Foods</span>
-        </li>
+        <div className="radioDiv">
+          <ul className="RadioUl">
+            <li>
+              <input type="radio" value={true} name="option" onClick={showA} /><label htmlFor="first">{"  "}</label>
+              <span>Teachers</span>
+            </li>
 
-        </ul>
-      </div>
+            <li>
+              <input type="radio" value={false} name="option" onClick={showB} /><label htmlFor="second">{"  "}</label>
+              <span>Activities</span>
+            </li>
 
-      {/* to have conditional rendering, based on selected radio button */}
+            <li>
+              <input type="radio" value={false} name="option" onClick={showC} /> <label htmlFor="third">{ }</label>
+              <span>Foods</span>
+            </li>
 
-          {displayA && <div><ShowTeachers/></div>}
-          {displayB && <div><ShowActivities/></div>}
-          {displayC && <div><ShowFoods/></div>}
-          
+          </ul>
+        </div>
+
+        {/* to have conditional rendering, based on selected radio button */}
+
+        {displayA && <div><GetTeachers /></div>}
+        {displayB && <div><GetActivities /></div>}
+        {displayC && <div><GetFoods /></div>}
+
       </>
     </div>
-      
 
-      
-     
-    )
+
+
+
+  )
 }
 
 

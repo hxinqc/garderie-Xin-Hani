@@ -17,10 +17,12 @@ function GetTeachers() {
 
   const searchTeacher = (evt) => {
     if (evt.key === "Enter") {
+      // console.log(`http://localhost:8080/class/teachers/${search}`);
       fetch(`http://localhost:8080/class/teachers/${search}`)
         .then((res) => res.json())
         .then((data) => {
           //console.log(data.meals)
+          console.log(data);
           setTeacher(data.Food);
         });
     }
