@@ -11,7 +11,6 @@ export default function News() {
   const [message, setMessage] = useState(null);
   var lastStatus;
   const [orgFileName, setOrgFileName] = useState(null);
-
   // Create a reference to the hidden file input element
   const hiddenFileInput = React.useRef(null);
 
