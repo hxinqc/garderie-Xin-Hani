@@ -64,7 +64,7 @@ public class ClassTeacherDaoImpl implements ClassTeachersDao{
         public ClassTeacher mapRow(ResultSet rs, int index) throws SQLException {
             ClassTeacher classTeacher = new ClassTeacher();
             classTeacher.setClassId(rs.getInt("classId"));
-            classTeacher.setTeacherId(rs.getInt("foodId"));
+            classTeacher.setTeacherId(rs.getInt("teacherId"));
 
             return classTeacher;
         }

@@ -6,7 +6,7 @@ import React from "react";
 import styled, { StyledComponent } from "styled-components";
 
 const ShowTeachers = (getTeacher) => {
-  //console.log(getMeal.data)
+  console.log("myTeacher",getTeacher.data)
   return (
     <div className="card">
       <img src={getTeacher.data.picPath} />

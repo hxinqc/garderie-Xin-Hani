@@ -36,6 +36,10 @@ function Topbar() {
           <NavigationLink to="/Admin">Admin</NavigationLink>
      </LiDiv>
 
+     <LiDiv>
+          <NavigationLink to="/Search">Search</NavigationLink>
+     </LiDiv>
+
  
 
     

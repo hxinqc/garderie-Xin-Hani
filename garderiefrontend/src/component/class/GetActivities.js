@@ -14,8 +14,8 @@ function GetActivities() {
   const [MyActivity, setActivity] = useState([]);
 
   const searchActivity = (evt) => {
-    if (evt.key == "Enter") {
-      fetch(`http://localhost:8080//class/activities/{search}`)
+    if (evt.key === "Enter") {
+      fetch(`http://localhost:8080//class/activities/${search}`)
         .then((res) => res.json())
         .then((data) => {
           //console.log(data.meals)

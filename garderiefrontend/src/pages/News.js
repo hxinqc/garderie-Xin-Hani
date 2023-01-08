@@ -4,17 +4,16 @@ import styled from "styled-components";
 // import { useNavigate } from 'react-router-dom';
 
 export default function News() {
-  const[name, setName] = useState(null);
-  const[issueDate, setIssueDate] = useState(null);
-  const[content, setContent] = useState(null);
+  const [name, setName] = useState(null);
+  const [issueDate, setIssueDate] = useState(null);
+  const [content, setContent] = useState(null);
   const [fileName, setFileName] = useState()
-  const[message, setMessage] = useState(null);
+  const [message, setMessage] = useState(null);
   var lastStatus;
-  const[orgFileName, setOrgFileName] = useState(null);
-
+  const [orgFileName, setOrgFileName] = useState(null);
   // Create a reference to the hidden file input element
   const hiddenFileInput = React.useRef(null);
-  
+
   // Programatically click the hidden file input element
   // when the Button component is clicked
   const handleClick = event => {
@@ -42,64 +41,64 @@ export default function News() {
 
     const formData = new FormData();
     formData.append('name', name);
-    formData.append('issueDate', isoDate.substr(0,isoDate.indexOf('T')));
+    formData.append('issueDate', isoDate.substr(0, isoDate.indexOf('T')));
     formData.append('content', content);
     formData.append('fileName', fileName);
-        
+
     fetch("http://localhost:8080/news", {
-        method: "POST",
-        body: formData
+      method: "POST",
+      body: formData
     })
-    .then((res) => {
-      lastStatus = res.status;
-      return res.json();
-    })
-    .then((data) => {
+      .then((res) => {
+        lastStatus = res.status;
+        return res.json();
+      })
+      .then((data) => {
         console.log(data);
         console.log(lastStatus);
-        if(lastStatus === 201){
-            localStorage.setItem('data', JSON.stringify(data.data));
-            // history('/confirmed');
-            console.log(data.data);
-            setMessage('News added.');
-            resetForm();
-        }        
-    })
-    .catch(err => {
+        if (lastStatus === 201) {
+          localStorage.setItem('data', JSON.stringify(data.data));
+          // history('/confirmed');
+          console.log(data.data);
+          setMessage('News added.');
+          resetForm();
+        }
+      })
+      .catch(err => {
         // console.log("we have a problem " + err.message);
         setMessage("we have a problem " + err.message);
       });
-    }
+  }
 
   return (
-    <Form onSubmit={(ev) =>{btnConfirm(ev)}}>
-    <div style={{width:"600px", backgroundColor:"pink"}}>Classes
-      <Label>
-        <Input required placeholder="Name" type="text" value={name!=null?name:''} onChange={(e)=>setName(e.target.value)} />
-      </Label>
-      <br/>
-      IssueDate:<DateSelect selectedDate={issueDate} setselectedDate={date => {setIssueDate(date); setMessage(date.toISOString())}} 
-      value={issueDate!=null?issueDate:''} />
-      <br/>
-      
-      <Button onClick={handleClick}>
-        Select a file
-      </Button>
-      <Label>{orgFileName}</Label>
-      <input
-        type="file"
-        ref={hiddenFileInput}
-        onChange={handleChange}
-        style={{display: 'none'}} 
-      />
-      <br/>
-      <Label>
-        <Input required placeholder="Content" type="text" value={content!=null?content:''} onChange={(e)=>setContent(e.target.value)} />
-      </Label>
+    <Form onSubmit={(ev) => { btnConfirm(ev) }}>
+      <div style={{ width: "600px", backgroundColor: "pink" }}>Classes
+        <Label>
+          <Input required placeholder="Name" type="text" value={name != null ? name : ''} onChange={(e) => setName(e.target.value)} />
+        </Label>
+        <br />
+        IssueDate:<DateSelect selectedDate={issueDate} setselectedDate={date => { setIssueDate(date); setMessage(date.toISOString()) }}
+          value={issueDate != null ? issueDate : ''} />
+        <br />
 
-      <Button type="submit">Submit</Button>
-      <Label>Message: {message} </Label>
-    </div>
+        <Button onClick={handleClick}>
+          Select a file
+        </Button>
+        <Label>{orgFileName}</Label>
+        <input
+          type="file"
+          ref={hiddenFileInput}
+          onChange={handleChange}
+          style={{ display: 'none' }}
+        />
+        <br />
+        <Label>
+          <Input required placeholder="Content" type="text" value={content != null ? content : ''} onChange={(e) => setContent(e.target.value)} />
+        </Label>
+
+        <Button type="submit">Submit</Button>
+        <Label>Message: {message} </Label>
+      </div>
     </Form>
   )
 

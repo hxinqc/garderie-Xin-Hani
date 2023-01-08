@@ -14,11 +14,11 @@ function GetFoods() {
   const [MyFood, setFood] = useState([]);
 
   const searchFood = (evt) => {
-    if (evt.key == "Enter") {
-      fetch(`http://localhost:8080//class/foods/{search}`)
+    if (evt.key === "Enter") {
+      fetch(`http://localhost:8080//class/foods/${search}`)
         .then((res) => res.json())
         .then((data) => {
-          //console.log(data.meals)
+          //console.log(data.foods)
           setFood(data.Food);
         });
     }
