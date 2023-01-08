@@ -57,7 +57,8 @@ public class GarderieServiceImpl implements GarderieService {
     @Override
     public News addNews(News news) {
         newsDao.addNews(news);
-        news.setPicPath("****");
+        String fileName = news.getPicPath().replaceFirst(FILE_BASE_PATH, "");
+        news.setPicPath("/download/" + fileName);
         return news;
     }
 
@@ -329,7 +330,8 @@ public class GarderieServiceImpl implements GarderieService {
     @Override
     public Food addFood(Food food) {
         foodDao.add(food);
-        food.setPicPath("****");
+        String fileName = food.getPicPath().replaceFirst(FILE_BASE_PATH, "");
+        food.setPicPath("/download/" + fileName);
         return food;
     }
 
