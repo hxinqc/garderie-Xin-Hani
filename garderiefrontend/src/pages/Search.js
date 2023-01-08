@@ -2,7 +2,7 @@ import React from 'react'
 import ShowTeachers from '../component/class/ShowTeachers'
 import ShowActivities from '../component/class/ShowActivities'
 import ShowFoods from '../component/class/ShowFoods'
-import "../searchStyles.css"
+import "../component/searchStyles.css"
 import { useState } from 'react'
 
 
@@ -40,17 +40,17 @@ const Search=()=> {
       <div className="radioDiv">
         <ul className="RadioUl">
         <li>
-        <input type="radio" value={true} name="option" onClick={showA} /><label for="first">{"  "}</label>
+        <input type="radio" value={true} name="option" onClick={showA} /><label htmlFor="first">{"  "}</label>
         <span>Teachers</span>
         </li>
 
         <li>
-        <input  type="radio" value={false} name="option"  onClick={showB} /><label for="second">{"  "}</label> 
+        <input  type="radio" value={false} name="option"  onClick={showB} /><label htmlFor="second">{"  "}</label> 
         <span>Activities</span>
         </li>
 
         <li>
-        <input  type="radio" value={false} name="option"  onClick={showC} /> <label for="third">{}</label>
+        <input  type="radio" value={false} name="option"  onClick={showC} /> <label htmlFor="third">{}</label>
         <span>Foods</span>
         </li>
 

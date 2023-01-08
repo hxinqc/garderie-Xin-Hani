@@ -16,8 +16,8 @@ function GetTeachers() {
   const [MyTeacher, setTeacher] = useState([]);
 
   const searchTeacher = (evt) => {
-    if (evt.key == "Enter") {
-      fetch(`http://localhost:8080//class/teachers/{search}`)
+    if (evt.key === "Enter") {
+      fetch(`http://localhost:8080/class/teachers/${search}`)
         .then((res) => res.json())
         .then((data) => {
           //console.log(data.meals)

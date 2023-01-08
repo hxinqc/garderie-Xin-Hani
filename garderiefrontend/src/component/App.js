@@ -9,6 +9,7 @@ import Admin from '../pages/Admin';
 import Topbar from "./Topbar";
 import Confirmation from "../pages/Confirmation"
 import News from '../pages/News';
+import Search from '../pages/Search';
 
 
 
@@ -25,6 +26,7 @@ function App() {
           <Route  path="/Admin" element={<Admin />}/>
           <Route  path="/confirmed" element={<Confirmation />}/>
           <Route  path="/News" element={<News />}/>
+          <Route  path="/search" element={<Search />}/>
 
         </Routes>
     </Router>
