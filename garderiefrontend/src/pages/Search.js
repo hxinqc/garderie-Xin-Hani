@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
-import GetTeachers from '../component/class/GetTeachers'
-import GetActivities from '../component/class/GetActivities'
-import GetFoods from '../component/class/GetFoods'
-import "../component/searchStyles.css"
-
-
+import React, { useState } from 'react';
+import GetTeachers from '../component/class/GetTeachers';
+import GetActivities from '../component/class/GetActivities';
+import GetFoods from '../component/class/GetFoods';
+import "../component/searchStyles.css";
 
 const Search = () => {
 
@@ -30,12 +28,10 @@ const Search = () => {
 
   return (
     <div>
-      <>
         <div className="heading">
           <h1>Search Your Class Information</h1>
 
         </div>
-
 
         <div className="radioDiv">
           <ul className="RadioUl">
@@ -63,7 +59,6 @@ const Search = () => {
         {displayB && <div><GetActivities /></div>}
         {displayC && <div><GetFoods /></div>}
 
-      </>
     </div>
 
 

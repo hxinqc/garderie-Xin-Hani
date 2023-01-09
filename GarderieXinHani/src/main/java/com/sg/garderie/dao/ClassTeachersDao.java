@@ -1,12 +1,13 @@
 package com.sg.garderie.dao;
 
 import com.sg.garderie.model.ClassTeacher;
+import com.sg.garderie.model.Teacher;
 
 import java.util.List;
 
 public interface ClassTeachersDao {
 
-    List<ClassTeacher> getClassTeachersByClassId(int classId);
+    List<Teacher> getClassTeachersByClassId(int classId);
 
     List<ClassTeacher> getAllClassesTeachers();
 
