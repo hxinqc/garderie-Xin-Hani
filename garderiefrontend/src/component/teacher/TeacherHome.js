@@ -3,33 +3,44 @@ import { Link, useParams } from "react-router-dom";
 
 const TeacherHome = () => {
   const [teachers, setTeachers] = useState([]);
-  const [teacher, setTeacher] = useState([]);
 
   const { id } = useParams();
 
   useEffect(() => {
     loadTeachers();
   }, []);
-
-  const loadTeachers = async () => {
-    await fetch("https://localhost8080/teacher")
+  
+  const loadTeachers = async() => {
+    await fetch("http://localhost:8080/teacher")
       .then((resp) => resp.json())
-      .then((resp) => {
-        setTeachers(resp.data);
+      .then((data) => {
+        console.log(data);
+        setTeachers(data);
+      })
+      .catch(err => {
+        console.log("we have a problem " + err.message);
       });
   };
 
-  const deleteTeacher = async (id) => {
-    await fetch(`http://localhost:8080/teacher/${id}`, {
+  const deleteTeacher=(id) => {
+    if (!window.confirm("Are you sure to delete this teacher?")) {
+      return;
+    }
+    fetch(`http://localhost:8080/teacher/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     })
-      .then((res) => res.json())
-      .catch((err) => {
-        console.log("we have a problem " + err.message);
-      });
-
-    loadTeachers();
+    .then((res) => {
+      if (res.status === 500) {
+        alert('This teacher maybe still in one class, please check before deleting.');
+        return;
+      }
+      loadTeachers();
+    })
+    .catch((err) => {      
+      console.log("we have a problem " + err.message);
+    });
+    
   };
 
   return (
@@ -47,13 +58,13 @@ const TeacherHome = () => {
           </thead>
           <tbody>
             {teachers.map((teacher, index) => (
-              <tr>
-                <th scope="row" key={index}>
+              <tr key={teacher.id}>
+                <td>
                   {index + 1}
-                </th>
+                </td>
                 <td>{teacher.firstName}</td>
                 <td>{teacher.lastName}</td>
-                <td>{teacher.isActive}</td>
+                <td>{teacher.active ? "true": "false"}</td>
                 <td>
                   <Link
                     className="btn btn-primary mx-2"
