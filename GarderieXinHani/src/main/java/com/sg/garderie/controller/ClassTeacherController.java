@@ -1,7 +1,7 @@
 package com.sg.garderie.controller;
 
-import com.sg.garderie.model.ClassFood;
 import com.sg.garderie.model.ClassTeacher;
+import com.sg.garderie.model.Teacher;
 import com.sg.garderie.service.GarderieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +29,7 @@ public class ClassTeacherController {
 
     @GetMapping("/class/teachers/{classId}")
     @CrossOrigin
-    public List<ClassTeacher> getClassTeachersByClassId(@PathVariable int classId) {
+    public List<Teacher> getClassTeachersByClassId(@PathVariable int classId) {
         return service.getClassTeachersByClassId(classId);
     }
 

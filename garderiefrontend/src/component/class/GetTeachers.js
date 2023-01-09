@@ -6,7 +6,6 @@
 import React from "react";
 import { useState } from "react";
 import styled, { StyledComponent } from "styled-components";
-import ShowFoods from "./ShowFoods";
 import ShowTeachers from "./ShowTeachers";
 
 // search = classId  we will get from user in main search page
@@ -23,7 +22,7 @@ function GetTeachers() {
         .then((data) => {
           //console.log(data.meals)
           console.log(data);
-          setTeacher(data.Food);
+          setTeacher(data);
         });
     }
   };
@@ -33,7 +32,7 @@ function GetTeachers() {
       <div className="heading"></div>
 
       <div className="searchBox">
-        <i class="fas fa-search"></i>
+        <i className="fas fa-search"></i>
         <input
           type="search"
           className="search-bar"
@@ -54,7 +53,8 @@ function GetTeachers() {
             <p>Not Found</p>
           ) : (
             MyTeacher.map((res) => {
-              return <ShowTeachers data={res} />;
+              console.log('myteacher here.')
+              return <ShowTeachers data={res} classId={search} />;
             })
           )
         }

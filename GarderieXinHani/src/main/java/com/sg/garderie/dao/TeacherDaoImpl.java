@@ -89,7 +89,7 @@ public class TeacherDaoImpl implements TeacherDao{
 
 
 
-    private static final class TeacherMapper implements RowMapper<Teacher> {
+    public static final class TeacherMapper implements RowMapper<Teacher> {
         @Override
         public Teacher mapRow(ResultSet rs, int index) throws SQLException {
             Teacher teacher = new Teacher();

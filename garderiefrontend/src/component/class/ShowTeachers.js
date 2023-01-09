@@ -6,17 +6,18 @@ import React from "react";
 import styled, { StyledComponent } from "styled-components";
 
 const ShowTeachers = (getTeacher) => {
-  console.log("myTeacher",getTeacher.data)
+  console.log("myTeacher", getTeacher.data)
   return (
-    <div className="card">
-      <img src={getTeacher.data.picPath} />
-      <div className="info">
-        <h2>{getTeacher.data.name}</h2>
-        <h2>{getTeacher.data.offerDate}Offerd Date</h2>
-      </div>
-      <div className="recipe">
-        <h2>Description</h2>
-        <p>{getTeacher.data.description}</p>
+    <div className="card" key={getTeacher.data.id} >
+      <div className="info" >
+        <h2>firstName</h2>
+        <p>{getTeacher.data.firstName}</p>
+      
+        <h2>lastName</h2>
+        <p>{getTeacher.data.lastName}</p>
+
+        <h2>IsActive</h2>
+        <p>{getTeacher.data.isActive}</p>
       </div>
     </div>
   );

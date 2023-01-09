@@ -1,7 +1,7 @@
 package com.sg.garderie.dao;
 
-import com.sg.garderie.model.ClassFood;
 import com.sg.garderie.model.ClassTeacher;
+import com.sg.garderie.model.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -32,14 +32,17 @@ public class ClassTeacherDaoImpl implements ClassTeachersDao{
 
     }
 
-       @Override
-    public List<ClassTeacher> getClassTeachersByClassId(int classId) {
-           try {
-               final String SELECT_CLASS_BY_ID = "SELECT * FROM ClassTeacher WHERE classId = ?";
-               return jdbc.query(SELECT_CLASS_BY_ID, new ClassTeachersMapper(), classId);
-           } catch (DataAccessException ex) {
-               return null;
-           }    }
+    @Override
+    public List<Teacher> getClassTeachersByClassId(int classId) {
+       try {
+           final String SELECT_CLASS_BY_ID = "SELECT teacher.* FROM ClassTeacher JOIN teacher "
+           + "ON ClassTeacher.teacherId = teacher.id WHERE classId = ?";
+
+           return jdbc.query(SELECT_CLASS_BY_ID, new TeacherDaoImpl.TeacherMapper(), classId);
+       } catch (DataAccessException ex) {
+           return null;
+       }
+    }
 
     @Override
     public List<ClassTeacher> getAllClassesTeachers() {
@@ -48,7 +51,8 @@ public class ClassTeacherDaoImpl implements ClassTeachersDao{
             return jdbc.query(SELECT_CLASS_Teachers_BY_ID, new ClassTeachersMapper());
         } catch (DataAccessException ex) {
             return null;
-        }    }
+        }
+    }
 
     @Override
     public void deleteClassTeachersByClassId(int classId) {

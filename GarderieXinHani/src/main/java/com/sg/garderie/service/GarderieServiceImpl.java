@@ -400,7 +400,7 @@ public class GarderieServiceImpl implements GarderieService {
     }
 
     @Override
-    public List<ClassTeacher> getClassTeachersByClassId(int classId) {
+    public List<Teacher> getClassTeachersByClassId(int classId) {
         return classTeachersDao.getClassTeachersByClassId(classId);
     }
 

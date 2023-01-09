@@ -88,7 +88,7 @@ public interface GarderieService {
 
     void addClassTeachers(int classId, int[] ids);
 
-    List<ClassTeacher> getClassTeachersByClassId(int classId);
+    List<Teacher> getClassTeachersByClassId(int classId);
 
     List<ClassTeacher> getAllClassesTeachers();
 
