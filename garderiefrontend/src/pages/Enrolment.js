@@ -173,18 +173,17 @@ const Label = styled.label`
 const Button = styled.button`
   background-color: #04aa6d;
   color: white;
-  padding: 5px 15px;
-  margin: 8px 0;
+  padding: 5px 25px;
+  margin-top: 100px;
   border: none;
   border-radius: 4px;
   font-weight: 600px;
   cursor: pointer;
   opacity: 0.9;
   align-items:center;
-
   position: absolute;
-top:420px;
-right:600px;
+  top:420px;
+  right:600px;
 `;
 
 const Input = styled.input`
