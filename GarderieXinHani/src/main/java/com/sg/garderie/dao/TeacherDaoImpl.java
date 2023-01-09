@@ -28,7 +28,7 @@ public class TeacherDaoImpl implements TeacherDao{
 
     @Override
     public Teacher add(Teacher teacher) {
-        final String sql = "INSERT INTO Admin(Name, Password, Description,IsActive) VALUES(?,?,?,?);";
+        final String sql = "INSERT INTO Teacher(firstName, lastName, IsActive) VALUES(?,?,?);";
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 
         jdbcTemplate.update((Connection conn) -> {

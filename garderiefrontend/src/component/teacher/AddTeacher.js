@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 // import { useNavigate } from 'react-router-dom';
 
 export default function AddTeacher() {
-  const[name, setName] = useState(null);
-  const[openDate, setOpenDate] = useState(null);
-  const[message, setMessage] = useState(null);
+  const[firstName, setFirstName] = useState(null);
+  const[lastName, setLastName] = useState(null);
+  const [message, setMessage] = useState(null);
   var lastStatus;
+
+  function resetForm() {
+    setFirstName(null);
+    setLastName(null);
+  };
 
   const btnConfirm = (ev) => {
     ev.preventDefault();
@@ -14,8 +20,9 @@ export default function AddTeacher() {
     fetch("http://localhost:8080/teacher", {
         method: "POST",
         body: JSON.stringify({
-            name: name,
-            openDate: openDate
+            firstName: firstName,
+            lastName: lastName,
+            isActive: true
         }),
         headers: {
             "Content-Type": "application/json",
@@ -30,11 +37,9 @@ export default function AddTeacher() {
         console.log(lastStatus);
         if(lastStatus === 201){
             localStorage.setItem('data', JSON.stringify(data.data));
-            // history('/confirmed');
             console.log(data.data);
-            setMessage('New class added.');
-            setName(null);
-            setOpenDate(null);
+            setMessage('New teacher added.');
+            resetForm();
         }        
     })
     .catch(err => {
@@ -47,12 +52,20 @@ export default function AddTeacher() {
     <Form onSubmit={(ev) =>{btnConfirm(ev)}}>
     <div style={{width:"600px", backgroundColor:"pink"}}>Classes
       <Label>
-        <Input required placeholder="Name" type="text" value={name!=null?name:''} onChange={(e)=>setName(e.target.value)} />
+        <Input required placeholder="firstName" type="text" value={firstName!=null?firstName:''} 
+        onChange={(e)=>setFirstName(e.target.value)} />
+      </Label>
+      <br/>
+      <Label>
+        <Input required placeholder="lastName" type="text" value={lastName!=null?lastName:''} 
+        onChange={(e)=>setLastName(e.target.value)} />
       </Label>
       <br/>
 
       <Button type="submit">Submit</Button>
       <Label>Message: {message} </Label>
+
+      <Link className="btn btn-primary mx-2" to={"/Teachers"} >Back to teachers</Link>
     </div>
     </Form>
   )
