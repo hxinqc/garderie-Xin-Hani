@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 
-export default function EditTeacher() {
+export default function ViewTeacher() {
   const[firstName, setFirstName] = useState(null);
   const[lastName, setLastName] = useState(null);
   const[isActive, setIsActive] = useState();
