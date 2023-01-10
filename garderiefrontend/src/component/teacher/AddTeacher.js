@@ -50,7 +50,7 @@ export default function AddTeacher() {
 
   return (
     <Form onSubmit={(ev) =>{btnConfirm(ev)}}>
-    <div style={{width:"600px", backgroundColor:"pink"}}>Classes
+    <div style={{width:"600px", backgroundColor:"pink"}}>Add Teacher:
       <Label>
         <Input required placeholder="firstName" type="text" value={firstName!=null?firstName:''} 
         onChange={(e)=>setFirstName(e.target.value)} />

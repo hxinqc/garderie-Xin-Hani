@@ -14,6 +14,7 @@ import Search from "../pages/Search";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import AddTeacher from "./teacher/AddTeacher";
 import EditTeacher from "./teacher/EditTeacher";
+import ViewTeacher from "./teacher/ViewTeacher";
 
 function App() {
   return (
@@ -27,8 +28,8 @@ function App() {
         <Route path="/Teachers" element={<Teachers />} />
 
         <Route path="/Teachers/addTeacher" element={<AddTeacher />} />
-        <Route path="/Teachers/EditTeacher" element={<EditTeacher />} />
-
+        <Route path="/Teachers/editTeacher/:teacherId" element={<EditTeacher />} />
+        <Route path="/Teachers/viewTeacher/:teacherId" element={<ViewTeacher />} />
         <Route path="/Admin" element={<Admin />} />
         <Route path="/confirmed" element={<Confirmation />} />
         <Route path="/News" element={<News />} />

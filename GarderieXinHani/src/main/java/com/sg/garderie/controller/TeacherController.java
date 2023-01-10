@@ -55,7 +55,7 @@ public class TeacherController {
         if (id != teacher.getID()) {
             response = new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
         } else if (service.updateTeacherInfo(teacher)) {
-            response = new ResponseEntity(HttpStatus.NO_CONTENT);
+            response = new ResponseEntity(HttpStatus.OK);
         }
         return response;
     }
