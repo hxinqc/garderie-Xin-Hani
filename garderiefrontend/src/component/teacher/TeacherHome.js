@@ -64,17 +64,17 @@ const TeacherHome = () => {
                 </td>
                 <td>{teacher.firstName}</td>
                 <td>{teacher.lastName}</td>
-                <td>{teacher.active ? "true": "false"}</td>
+                <td>{teacher.isActive ? "true": "false"}</td>
                 <td>
                   <Link
                     className="btn btn-primary mx-2"
-                    to={`/viewteacher/${teacher.id}`}
+                    to={`/teachers/viewTeacher/${teacher.id}`}
                   >
                     View
                   </Link>
                   <Link
                     className="btn btn-outline-primary mx-2"
-                    to={`teachers/editTeacher/${teacher.id}`}
+                    to={`/teachers/editTeacher/${teacher.id}`}
                   >
                     Edit
                   </Link>

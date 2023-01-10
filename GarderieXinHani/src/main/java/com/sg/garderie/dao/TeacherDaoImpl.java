@@ -1,6 +1,5 @@
 package com.sg.garderie.dao;
 
-import com.sg.garderie.model.Admin;
 import com.sg.garderie.model.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -39,7 +38,7 @@ public class TeacherDaoImpl implements TeacherDao{
 
             statement.setString(1, String.valueOf(teacher.getFirstName()));
             statement.setString(2, (teacher.getLastName()));
-            statement.setBoolean(3, (teacher.isActive()));
+            statement.setBoolean(3, (teacher.getIsActive()));
 
             return statement;
 
@@ -73,17 +72,16 @@ public class TeacherDaoImpl implements TeacherDao{
     @Override
     @Transactional
     public boolean updateTeacherInfo(Teacher teacher) {
-        final String sql = "UPDATE admin SET "
-                + "name = ?, "
-                + "password = ?, "
-                + "description = ?, "
-                + "isActive=?, "
+        final String sql = "UPDATE teacher SET "
+                + "firstName = ?, "
+                + "lastName = ?, "
+                + "isActive = ? "
                 + "WHERE id = ?;";
 
         return jdbcTemplate.update(sql,
                 teacher.getFirstName(),
                 teacher.getLastName(),
-                teacher.isActive(),
+                teacher.getIsActive(),
                 teacher.getID())> 0;
     }
 
@@ -96,7 +94,7 @@ public class TeacherDaoImpl implements TeacherDao{
             teacher.setID(rs.getInt("ID"));
             teacher.setFirstName(rs.getString("FirstName"));
             teacher.setLastName(rs.getString("LastName"));
-            teacher.setActive(rs.getBoolean("IsActive"));
+            teacher.setIsActive(rs.getBoolean("IsActive"));
             return teacher;
         }
     }

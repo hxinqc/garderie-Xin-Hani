@@ -58,7 +58,7 @@ public class NewsController {
         return service.getAllNews();
     }
 
-    @PostMapping("/news/{id}")
+    @PutMapping("/news/{id}")
     @CrossOrigin
     public News editNewsById(@PathVariable int id, @RequestParam("fileName") MultipartFile multipartFile,
                              HttpServletRequest request)
