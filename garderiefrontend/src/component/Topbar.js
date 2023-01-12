@@ -13,28 +13,29 @@ function Topbar() {
           </LiDiv>
 
           <LiDiv>
-            <NavigationLink to="/Teachers">Teachers</NavigationLink>
+            <NavigationLink to="/Teachers">TEACHERS</NavigationLink>
           </LiDiv>
 
           <LiDiv>
-            <NavigationLink to="/Children">Children</NavigationLink>
+            <NavigationLink to="/Children">CHILDREN</NavigationLink>
           </LiDiv>
 
           <LiDiv>
-            <NavigationLink to="/Classes">Classes</NavigationLink>
+            <NavigationLink to="/Classes">CLASSES</NavigationLink>
+          </LiDiv>
+
+                 <LiDiv>
+            <NavigationLink to="/Search">SEARCH</NavigationLink>
           </LiDiv>
 
           <LiDiv>
-            <NavigationLink to="/Enrolment">Enrolment</NavigationLink>
+            <NavigationLink to="/Enrolment">ENROLMENT</NavigationLink>
           </LiDiv>
 
           <LiDiv>
-            <NavigationLink to="/Admin">Admin</NavigationLink>
+            <NavigationLink to="/Admin">ADMIN</NavigationLink>
           </LiDiv>
 
-          <LiDiv>
-            <NavigationLink to="/Search">Search</NavigationLink>
-          </LiDiv>
         </NavigationList>
       </TopCenter>
     </Wrapper>

@@ -7,20 +7,24 @@ function Home() {
   return (
     <Homediv >
     
-      Home
+      News
 
     </Homediv>
   )
 }
 
 const Homediv = styled.div`
-height: calc(100vh - 50px);
+height: 120vh ;
 display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
 background-image:  url(${HomeBackground});
-
+background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow-y: hidden; 
+  overflow-x: hidden; 
 
 `;
 
