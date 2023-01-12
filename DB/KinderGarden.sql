@@ -41,9 +41,9 @@ CREATE TABLE `ChildRoster` (
   `ClassId` int,
   `FirstName` varchar(20) not null,
   `LastName` varchar(20) not null,
-  `InscriptId` int,
+  `InscriptionId` int,
   PRIMARY KEY (`ID`),
-  FOREIGN KEY (`InscriptId`) REFERENCES `Inscription`(`ID`),
+  FOREIGN KEY (`InscriptionId`) REFERENCES `Inscription`(`ID`),
   FOREIGN KEY (`ClassId`) REFERENCES `Class`(`ID`)
 );
 

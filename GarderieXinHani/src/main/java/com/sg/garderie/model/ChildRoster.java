@@ -4,10 +4,10 @@ import java.util.Objects;
 
 public class ChildRoster {
     private int id;
-    private int classId;
+    private Integer classId;
     private String firstName;
     private String lastName;
-    private int inscriptionId;
+    private Integer inscriptionId;
 
     public int getId() {
         return id;
@@ -17,11 +17,11 @@ public class ChildRoster {
         this.id = id;
     }
 
-    public int getClassId() {
+    public Integer getClassId() {
         return classId;
     }
 
-    public void setClassId(int classId) {
+    public void setClassId(Integer classId) {
         this.classId = classId;
     }
 
@@ -41,11 +41,11 @@ public class ChildRoster {
         this.lastName = lastName;
     }
 
-    public int getInscriptionId() {
+    public Integer getInscriptionId() {
         return inscriptionId;
     }
 
-    public void setInscriptionId(int inscriptionId) {
+    public void setInscriptionId(Integer inscriptionId) {
         this.inscriptionId = inscriptionId;
     }
 
