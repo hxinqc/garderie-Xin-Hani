@@ -8,7 +8,8 @@ import styled from "styled-components"
 function DateSelect({ selectedDate, setselectedDate }) {
   return (
     <Mydiv>
-      <Datepicker selected={selectedDate}
+      <Datepicker selected={selectedDate} placeholderText={'Please select a date'} 
+
         onChange={date => { setselectedDate(date) }}
         dateFormat="yyyy-MM-dd"
         // To desable the past

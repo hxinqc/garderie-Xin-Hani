@@ -171,19 +171,24 @@ const Label = styled.label`
 `;
 
 const Button = styled.button`
-  background-color: #04aa6d;
-  color: white;
-  padding: 5px 25px;
-  margin-top: 100px;
+  position: relative;
+  align-items: center;
+  margin-bottom: 20px;
+  display: block;
+  margin: 0 auto;
+  width: 120px;
+  background-color: #f9c000;
+  color: #333;
   border: none;
-  border-radius: 4px;
-  font-weight: 600px;
   cursor: pointer;
-  opacity: 0.9;
-  align-items:center;
-  position: absolute;
-  top:420px;
-  right:600px;
+  align-items: center;
+  padding: 10px;
+  font-weight: 500;
+  margin-top: 30px;
+  font-size: 15px;
+  border-radius: 30px;
+  box-shadow: 0 0 4px #f7dd00;
+  transition: box-shadow 0.5s ease;
 `;
 
 const Input = styled.input`
