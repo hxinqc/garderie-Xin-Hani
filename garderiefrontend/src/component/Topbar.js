@@ -33,7 +33,7 @@ function Topbar() {
           </LiDiv>
 
           <LiDiv>
-            <NavigationLink to="/Admin">ADMIN</NavigationLink>
+            <NavigationLink to="/Admins">ADMINS</NavigationLink>
           </LiDiv>
 
         </NavigationList>

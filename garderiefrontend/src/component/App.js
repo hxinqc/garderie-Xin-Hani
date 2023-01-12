@@ -5,7 +5,7 @@ import Enrolment from "../pages/Enrolment";
 import Classes from "../pages/Classes";
 import Children from "../pages/Children";
 import Teachers from "../pages/Teachers";
-import Admin from "../pages/Admin";
+import Admins from "../pages/Admins";
 import Topbar from "./Topbar";
 import Confirmation from "../pages/Confirmation";
 import News from "../pages/News";
@@ -15,6 +15,10 @@ import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import AddTeacher from "./teacher/AddTeacher";
 import EditTeacher from "./teacher/EditTeacher";
 import ViewTeacher from "./teacher/ViewTeacher";
+
+import AddAdmin from "./admin/AddAdmin";
+import EditAdmin from "./admin/EditAdmin";
+import ViewAdmin from "./admin/ViewAdmin";
 
 function App() {
   return (
@@ -30,7 +34,10 @@ function App() {
         <Route path="/Teachers/addTeacher" element={<AddTeacher />} />
         <Route path="/Teachers/editTeacher/:teacherId" element={<EditTeacher />} />
         <Route path="/Teachers/viewTeacher/:teacherId" element={<ViewTeacher />} />
-        <Route path="/Admin" element={<Admin />} />
+        <Route path="/Admins" element={<Admins />} />
+        <Route path="/Admins/addAdmin" element={<AddAdmin />} />
+        <Route path="/Admins/editAdmin/:adminId" element={<EditAdmin />} />
+        <Route path="/Admins/viewAdmin/:adminId" element={<ViewAdmin />} />
         <Route path="/confirmed" element={<Confirmation />} />
         <Route path="/News" element={<News />} />
         <Route path="/search" element={<Search />} />

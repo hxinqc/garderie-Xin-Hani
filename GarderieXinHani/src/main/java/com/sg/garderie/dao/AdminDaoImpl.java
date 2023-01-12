@@ -2,7 +2,6 @@ package com.sg.garderie.dao;
 
 import com.sg.garderie.model.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -40,7 +39,7 @@ public class AdminDaoImpl implements AdminDao {
             statement.setString(1, String.valueOf(admin.getName()));
             statement.setString(2, (admin.getPassword()));
             statement.setString(3, (admin.getDescription()));
-            statement.setBoolean(4, (admin.isActive()));
+            statement.setBoolean(4, (admin.getIsActive()));
 
             return statement;
 
@@ -81,14 +80,14 @@ public class AdminDaoImpl implements AdminDao {
                 + "name = ?, "
                 + "password = ?, "
                 + "description = ?, "
-                + "isActive=?, "
+                + "isActive=? "
                 + "WHERE id = ?;";
 
         return jdbcTemplate.update(sql,
                 admin.getName(),
                 admin.getPassword(),
                 admin.getDescription(),
-                admin.isActive(),
+                admin.getIsActive(),
                 admin.getID())> 0;    }
 
 
@@ -101,7 +100,7 @@ public class AdminDaoImpl implements AdminDao {
             admin.setName(rs.getString("Name"));
             admin.setPassword(rs.getString("Password"));
             admin.setDescription(rs.getString("Description"));
-            admin.setActive(rs.getBoolean("IsActive"));
+            admin.setIsActive(rs.getBoolean("IsActive"));
             return admin;
         }
     }
