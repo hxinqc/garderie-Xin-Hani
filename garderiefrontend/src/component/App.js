@@ -24,6 +24,8 @@ import AddChild from "./child/AddChild";
 import EditChild from "./child/EditChild";
 import ViewChild from "./child/ViewChild";
 
+import DisplayNews from "./news/DisplayNews";
+
 function App() {
   return (
     <Router>
@@ -48,6 +50,8 @@ function App() {
         <Route path="/Admins/viewAdmin/:adminId" element={<ViewAdmin />} />
         <Route path="/confirmed" element={<Confirmation />} />
         <Route path="/News" element={<News />} />
+        <Route path="/DisplayNews" element={<DisplayNews />} />
+
         <Route path="/search" element={<Search />} />
       </Routes>
     </Router>

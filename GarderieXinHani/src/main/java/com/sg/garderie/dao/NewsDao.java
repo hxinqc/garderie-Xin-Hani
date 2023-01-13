@@ -10,6 +10,7 @@ public interface NewsDao {
     News addNews(News news);
     News getNewsById(int id);
     List<News> getNewsByDate(LocalDate issueDate);
+    List<News> getLatestNews(int count);
     List<News> getAllNews();
     void editNews(News news);
     void deleteNewsById(int id);

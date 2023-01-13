@@ -49,7 +49,7 @@ CREATE TABLE `ChildRoster` (
 
 CREATE TABLE `News` (
   `ID` INT NOT NULL AUTO_INCREMENT,
-  `Name` varchar(40) not null,
+  `Name` varchar(100) not null,
   `IssueDate` datetime not null,
   `PicPath` varchar(100),
   `Content` MEDIUMTEXT,

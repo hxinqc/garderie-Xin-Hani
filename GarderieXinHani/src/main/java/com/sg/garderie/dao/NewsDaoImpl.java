@@ -58,6 +58,17 @@ public class NewsDaoImpl implements NewsDao {
     }
 
     @Override
+    public List<News> getLatestNews(int count) {
+        try {
+            final String SELECT_NEWS_BY_ID = "SELECT * FROM News ORDER BY issueDate DESC limit " +
+                    count;
+            return jdbc.query(SELECT_NEWS_BY_ID, new NewsMapper());
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+
+    @Override
     public List<News> getAllNews() {
         try {
             final String SELECT_NEWS_BY_ID = "SELECT * FROM News ";
