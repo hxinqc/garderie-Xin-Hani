@@ -9,7 +9,7 @@ const TeacherNavbar=()=> {
     <> 
           {/* <LabelDiv>Teachers Info </LabelDiv> */}
 
-    <NavDiv>
+    <NavDiv className="container">
         {/* <nav className="navbar navbar-expand-lg navbar-light bg-primary">
         <div className="container-fluid"> */}
         <MyButton>
@@ -67,7 +67,7 @@ display: flex;
 width: 550px;
 height: 50px;
 align-items:center;
-margin-left: 410px;
+// margin-left: 410px;
 /* background-color:black; */
 background: rgba(0, 0, 22, 0.8);
 align-items: center;
