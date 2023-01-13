@@ -53,6 +53,7 @@ public class GarderieServiceImpl implements GarderieService {
 
     @Value("${file.path}")
     private String FILE_BASE_PATH;
+    private final int NEWS_COUNT = 5;
 
     @Override
     public News addNews(News news) {
@@ -85,6 +86,14 @@ public class GarderieServiceImpl implements GarderieService {
     @Override
     public List<News> getNewsByDate(LocalDate date) {
         List<News> list = newsDao.getNewsByDate(date);
+        list.stream().forEach(news -> news.setPicPath("/download/" +
+                news.getPicPath().replaceFirst(FILE_BASE_PATH, "")));
+        return list;
+    }
+
+    @Override
+    public List<News> getLatestNews() {
+        List<News> list = newsDao.getLatestNews(NEWS_COUNT);
         list.stream().forEach(news -> news.setPicPath("/download/" +
                 news.getPicPath().replaceFirst(FILE_BASE_PATH, "")));
         return list;

@@ -52,6 +52,12 @@ public class NewsController {
         return service.getNewsByDate(date);
     }
 
+    @GetMapping("/news/latest")
+    @CrossOrigin
+    public List<News> getLatestNews() {
+        return service.getLatestNews();
+    }
+
     @GetMapping("/news")
     @CrossOrigin
     public List<News> getAllNews() {
