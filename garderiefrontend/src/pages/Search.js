@@ -29,7 +29,7 @@ const Search = () => {
   return (
     <div>
         <div className="heading">
-          <h1>Search Your Class Information</h1>
+          <h4>Search Your Class Information</h4>
 
         </div>
 

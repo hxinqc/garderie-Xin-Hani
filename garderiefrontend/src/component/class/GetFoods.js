@@ -33,7 +33,7 @@ function GetFoods() {
         <input
           type="search"
           className="search-bar"
-          placeholder="Enter Your Class ID"
+          placeholder="Enter Your Class Number"
           onChange={(e) => setSearch(e.target.value)}
           value={search}
           onKeyPress={searchFood}

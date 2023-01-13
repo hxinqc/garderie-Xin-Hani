@@ -10,12 +10,12 @@
 
 .heading h1 {
   color: #444;
-  font-size: 48px;
-  font-weight: 900;
+  font-size: 32px;
+  font-weight: 500;
   letter-spacing: 1px;
   padding-top: 2rem;
   text-align: center;
-  text-shadow: 3px 6px rgba(50, 50, 70, 0.3);
+  /* text-shadow: 3px 6px rgba(50, 50, 70, 0.3); */
 }
 
 .heading h4 {
@@ -58,13 +58,13 @@ label {
 
 input[type="radio"] {
   margin: 5px;
-  padding: 5px 15px;
+  padding: 5px 5px;
   background-color: white;
   box-sizing: border-box;
   appearance: none;
   outline: 2px solid #333;
   border: 3px solid white;
-  width: 16px;
+  width: 10px;
   height: 16px;
   cursor: pointer;
   position: relative;
