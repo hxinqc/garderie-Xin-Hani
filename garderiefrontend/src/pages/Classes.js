@@ -88,7 +88,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* background-image:  linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,.8) 100%),url(${Class}); */
   background-image: url(${Class});
   background-position: center;
   background-repeat: no-repeat;
@@ -109,8 +108,6 @@ const Form = styled.form`
   flex-direction: column;
   align-items: center;
   background: rgba(0, 0, 22, 0.8);
-  /* background: rgba(0, 153, 154, 0.5); */
-
   padding: 60px;
   margin: 15px;
   border: none;
@@ -154,13 +151,16 @@ const Button = styled.button`
 
 const Input = styled.input`
 margin: 0 auto;
+  color: black;
+  padding: 5px 20px;
+  display: block;
+  width: 100%;
+  align-items: center;
+  margin-top: 5px;
+  background-color: white;
+  display: flex;
+  justify-content: right;
+  width: 230px;
+  margin-right: 20px;
 
-padding: 5px 20px;
-display: block;
-width: 100%;
-align-items: center;
-margin-top: 5px;
-background-color: white;
-display: flex;
-justify-content: right;
 `;

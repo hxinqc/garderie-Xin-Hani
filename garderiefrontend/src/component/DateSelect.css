@@ -1,20 +1,8 @@
 /* .react-datepicker-wrapper, */
 /* .react-datepicker__input-container, */
 .react-datepicker__input-container input {
-  /* 
- 
-  color: white;
-  width: 200px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  background: transparent;
-  align-items: center;
-  outline: none;
-  font-size: 13px;
-  display: block;
-  transition: box-shadow 0.5s ease; */
   margin: 0 auto;
-
+  color: black;
   padding: 5px 20px;
   display: block;
   width: 100%;
@@ -23,10 +11,11 @@
   background-color: white;
   display: flex;
   justify-content: right;
+  width: 230px;
+  margin-right: 14px;
 }
 .react-datepicker-wrapper {
   display: block;
   margin: 0 auto;
   align-items: center;
-  margin-left: -5px;
 }
