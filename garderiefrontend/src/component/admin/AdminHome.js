@@ -4,8 +4,6 @@ import { Link, useParams } from "react-router-dom";
 const AdminHome = () => {
   const [admins, setAdmins] = useState([]);
 
-  const { id } = useParams();
-
   useEffect(() => {
     loadAdmins();
   }, []);

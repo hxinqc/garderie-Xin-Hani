@@ -72,7 +72,7 @@ export default function EditAdmin() {
     })
     .then((data) => {
         console.log(data);
-        if(lastStatus === 200){
+        if(lastStatus === 204){
             setMessage('Admin edited.');
             resetForm();
         }        
