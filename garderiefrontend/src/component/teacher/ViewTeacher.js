@@ -40,12 +40,12 @@ export default function ViewTeacher() {
     <Mydiv >Selected Teacher Info </Mydiv>
      
       <Label>
-        FirstName: {firstName!=null?firstName:''} 
+        First Name: {firstName!=null?firstName:''} 
         
       </Label>
       <br/>
       <Label>
-        LastName: {lastName!=null?lastName:''} 
+        Last Name: {lastName!=null?lastName:''} 
       </Label>
       <br/>
       <Label>

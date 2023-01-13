@@ -30,9 +30,9 @@ export default function EditTeacher() {
         setLastName(data.lastName);
 
         if (data.isActive) {
-          setSelect({ value: true, label: 'true' });
+          setSelect({ value: true, label: 'True' });
         } else {
-          setSelect({ value: false, label: 'false' });
+          setSelect({ value: false, label: 'False' });
         }
       })
       .catch(err => {
