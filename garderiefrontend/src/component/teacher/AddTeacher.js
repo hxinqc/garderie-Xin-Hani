@@ -38,7 +38,7 @@ export default function AddTeacher() {
         if(lastStatus === 201){
             localStorage.setItem('data', JSON.stringify(data.data));
             console.log(data.data);
-            setMessage('New teacher added.');
+            setMessage('New Teacher Added');
             resetForm();
         }        
     })
@@ -66,12 +66,13 @@ export default function AddTeacher() {
       <br/>
 <Buttonsdiv>
       <Button type="submit">Submit</Button>
-      <MessageLabel> {message} </MessageLabel>
 
       <Link to="/Teachers" style={{ textDecoration: 'none' }}>
      <Button type="button"> Back </Button>
  </Link>
  </Buttonsdiv>
+ <MessageLabel> {message} </MessageLabel>
+
     </div>
     </Form>
     </FormDiv>
@@ -100,7 +101,7 @@ const Wrapper = styled.div`
 const FormDiv = styled.div``;
 
 const Form = styled.form`
-  height: 280px;
+  height: 320px;
   width: 320px;
   border-radius: 10px;
   display: flex;
@@ -121,9 +122,10 @@ const Label = styled.label`
 const MessageLabel=styled.label`
 align-items: center;
 color:white;
-margin-left: 2px;
+margin-left: 45px;
+margin-top:10px;
 display: block;
-font-weight: 400;
+font-weight: 300;
 color:white;
 `;
 
@@ -140,10 +142,10 @@ const Button = styled.button`
   cursor: pointer;
   align-items: center;
   padding: 3px;
-  font-weight: 300;
+  font-weight: 400;
   margin-top: 5px;
   font-size: 15px;
-  border-radius: 30px;
+  border-radius: 5px;
   box-shadow: 0 0 4px #f7dd00;
   transition: box-shadow 0.5s ease;
 `;
@@ -166,8 +168,8 @@ margin: 0 auto;
 const Buttonsdiv = styled.div`
 display:flex;
 /* align-items:center; */
-margin-left: 10px;
-margin-right: 35px;
+margin-left: 20px;
+margin-right: 50px;
 margin-top: 10px;
 `;
 
