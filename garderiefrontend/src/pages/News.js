@@ -32,6 +32,8 @@ export default function News() {
     setName(null);
     setIssueDate(null);
     setContent(null);
+    setFileName();
+    setOrgFileName();
   }
 
   const btnConfirm = (ev) => {
@@ -74,11 +76,16 @@ export default function News() {
     <Form onSubmit={(ev) => { btnConfirm(ev) }}>
       <div style={{ width: "600px", backgroundColor: "pink" }}>Classes
         <Label>
-          <Input required placeholder="Name" type="text" value={name != null ? name : ''} onChange={(e) => setName(e.target.value)} />
+          <Input required placeholder="Name" type="text" style={{ width: 200 }}
+          value={name != null ? name : ''} onChange={(e) => setName(e.target.value)} />
         </Label>
         <br />
-        IssueDate:<DateSelect selectedDate={issueDate} setselectedDate={date => { setIssueDate(date); setMessage(date.toISOString()) }}
-          value={issueDate != null ? issueDate : ''} />
+        <div style={{ width: "300px" }}>
+          IssueDate:<DateSelect selectedDate={issueDate}
+            setselectedDate={date => { setIssueDate(date); setMessage(date.toISOString()) }}
+            value={issueDate != null ? issueDate : ''} />
+        </div>
+        
         <br />
 
         <Button onClick={handleClick}>
@@ -93,7 +100,9 @@ export default function News() {
         />
         <br />
         <Label>
-          <Input required placeholder="Content" type="text" value={content != null ? content : ''} onChange={(e) => setContent(e.target.value)} />
+          <textarea  required placeholder="Content"  rows="10" cols="50"
+          value={content != null ? content : ''} onChange={(e) => setContent(e.target.value)} >
+          </textarea>
         </Label>
 
         <Button type="submit">Submit</Button>

@@ -15,6 +15,7 @@ public interface GarderieService {
     String saveFile(String fileName, byte[] bytes) throws IOException;
     News getNewsById(int id) throws NewsException;
     List<News> getNewsByDate(LocalDate date);
+    List<News> getLatestNews();
     List<News> getAllNews();
     void editNews(News news) throws NewsException;
     void deleteNewsById(int id) throws NewsException;

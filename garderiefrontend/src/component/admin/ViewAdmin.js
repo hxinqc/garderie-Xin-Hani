@@ -4,11 +4,8 @@ import { Link, useParams } from "react-router-dom";
 
 export default function ViewAdmin() {
   const [name, setName] = useState(null);
-  const [password, setPassword] = useState(null);
   const [description, setDescription] = useState(null);
   const [isActive, setIsActive] = useState();
-  const [message, setMessage] = useState(null);
-  var lastStatus;
   const { adminId } = useParams();
   
   const retrieveData =() => {
@@ -17,7 +14,6 @@ export default function ViewAdmin() {
       .then((data) => {
         console.log(data);
         setName(data.name);
-        setPassword(data.password);
         setDescription(data.description);
 
         if (data.isActive) {
@@ -55,7 +51,6 @@ export default function ViewAdmin() {
         isActive: {isActive?'true':'false'}
       </Label>
       <br/>
-      <Label>Message: {message} </Label>
 
       <Link className="btn btn-primary mx-2" to={"/Admins"} >Back to admins</Link>
     </div>
@@ -73,21 +68,4 @@ const Form = styled.form`
     border-radius: 7px;
 `;
 const Label = styled.label`
-`;
-
-const Button = styled.button`
-    width: 100px;
-    background-color: #fa9000;
-    color: #333;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    font-size: 18px;
-    font-weight: 600;
-    margin-top: 10px;    
-`;
-
-const Input = styled.input`
-    margin: 5px;
-    padding: 5px 15px;
 `;
