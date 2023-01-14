@@ -13,6 +13,14 @@ function Topbar() {
           </LiDiv>
 
           <LiDiv>
+            <NavigationLink to="/Search">SEARCH</NavigationLink>
+          </LiDiv>
+
+          <LiDiv>
+            <NavigationLink to="/Enrolment">ENROLMENT</NavigationLink>
+          </LiDiv>
+
+          <LiDiv>
             <NavigationLink to="/Teachers">TEACHERS</NavigationLink>
           </LiDiv>
 
@@ -24,18 +32,21 @@ function Topbar() {
             <NavigationLink to="/Classes">CLASSES</NavigationLink>
           </LiDiv>
 
-                 <LiDiv>
-            <NavigationLink to="/Search">SEARCH</NavigationLink>
+          <LiDiv>
+            <NavigationLink to="/Foods">FOOD</NavigationLink>
           </LiDiv>
 
           <LiDiv>
-            <NavigationLink to="/Enrolment">ENROLMENT</NavigationLink>
+            <NavigationLink to="/Activity">ACTIVITY</NavigationLink>
+          </LiDiv>
+
+          <LiDiv>
+            <NavigationLink to="/Enroled">ENROLED</NavigationLink>
           </LiDiv>
 
           <LiDiv>
             <NavigationLink to="/Admins">ADMINS</NavigationLink>
           </LiDiv>
-
         </NavigationList>
       </TopCenter>
     </Wrapper>
@@ -56,14 +67,14 @@ const Wrapper = styled.div`
 `;
 
 const TopLeft = styled.div`
-  flex: 3;
+  flex: 2;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 const TopCenter = styled.div`
-  flex: 6;
+  flex: 8;
   display: flex;
   margin: 10;
   padding: 0;
@@ -71,7 +82,7 @@ const TopCenter = styled.div`
 `;
 
 const TopRight = styled.div`
-  flex: 3;
+  flex: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,7 +127,7 @@ const IDiv = styled.div`
 const NavigationLink = styled(NavLink)`
   position: relative;
   text-decoration: none;
-  padding: 0 16px;
+  padding: 0 10px;
   color: #57d7fc;
   &.active {
     color: #fe4660;
