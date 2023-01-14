@@ -34,6 +34,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/Enrolment" element={<Enrolment />} />
         <Route path="/Classes" element={<Classes />} />
+
+
         <Route path="/Children" element={<Children />} />
         <Route path="/Child/addChild" element={<AddChild />} />
         <Route path="/Child/editChild/:id" element={<EditChild />} />
@@ -48,6 +50,7 @@ function App() {
         <Route path="/Admins/addAdmin" element={<AddAdmin />} />
         <Route path="/Admins/editAdmin/:adminId" element={<EditAdmin />} />
         <Route path="/Admins/viewAdmin/:adminId" element={<ViewAdmin />} />
+        
         <Route path="/confirmed" element={<Confirmation />} />
         <Route path="/News" element={<News />} />
         <Route path="/DisplayNews" element={<DisplayNews />} />
