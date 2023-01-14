@@ -25,7 +25,7 @@ import EditChild from "./child/EditChild";
 import ViewChild from "./child/ViewChild";
 
 import DisplayNews from "./news/DisplayNews";
-import EnrolementHome from "./enrolement/EnrolementHome";
+import EnrolmentHome from "./enrolment/EnrolmentHome";
 
 function App() {
   return (
@@ -34,7 +34,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Enrolment" element={<Enrolment />} />
-        <Route path="/Enrolments" element={<EnrolementHome />} />
+        <Route path="/Enrolments" element={<EnrolmentHome />} />
 
         <Route path="/Classes" element={<Classes />} />
 
