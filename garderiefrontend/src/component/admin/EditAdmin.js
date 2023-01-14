@@ -72,12 +72,12 @@ export default function EditAdmin() {
       })
       .then((data) => {
         console.log(data);
-        if (lastStatus === 200) {
-          setMessage("Admin edited.");
-          resetForm();
-        }
-      })
-      .catch((err) => {
+        if(lastStatus === 204){
+            setMessage('Admin edited.');
+            resetForm();
+        }        
+    })
+    .catch(err => {
         // console.log("we have a problem " + err.message);
         setMessage("we have a problem " + err.message);
       });

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, use } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 // import { useNavigate } from 'react-router-dom';
 
 export default function AddChild() {
@@ -8,6 +8,8 @@ export default function AddChild() {
   const [lastName, setLastName] = useState(null);
   const [message, setMessage] = useState(null);
   var lastStatus;
+
+  const { inscriptionId } = useParams();
 
   function resetForm() {
     setFirstName(null);
@@ -22,7 +24,7 @@ export default function AddChild() {
         body: JSON.stringify({
           firstName: firstName,
           lastName: lastName,
-          inscriptionId: null
+          inscriptionId: inscriptionId
         }),
         headers: {
             "Content-Type": "application/json",
