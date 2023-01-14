@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
-import Select from 'react-select';
+import Select from "react-select";
 import { act } from "react-dom/test-utils";
 
 export default function EditTeacher() {
-  const[firstName, setFirstName] = useState(null);
-  const[lastName, setLastName] = useState(null);
-  const[select, setSelect] = useState();
+  const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
+  const [select, setSelect] = useState();
   const [message, setMessage] = useState(null);
   var lastStatus;
   const { teacherId } = useParams();
   var options = [
-    { value: true, label: 'True' },
-    { value: false, label: 'False' }
+    { value: true, label: "True" },
+    { value: false, label: "False" },
   ];
-  
+
   function resetForm() {
     setFirstName(null);
     setLastName(null);
-  };
+  }
 
-  const retrieveData =() => {
+  const retrieveData = () => {
     fetch(`http://localhost:8080/teacher/${teacherId}`)
       .then((resp) => resp.json())
       .then((data) => {
@@ -30,12 +30,12 @@ export default function EditTeacher() {
         setLastName(data.lastName);
 
         if (data.isActive) {
-          setSelect({ value: true, label: 'True' });
+          setSelect({ value: true, label: "True" });
         } else {
-          setSelect({ value: false, label: 'False' });
+          setSelect({ value: false, label: "False" });
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("we have a problem " + err.message);
       });
   };
@@ -51,92 +51,110 @@ export default function EditTeacher() {
       id: teacherId,
       firstName: firstName,
       lastName: lastName,
-      isActive: select.value
+      isActive: select.value,
     });
     console.log(request);
     fetch(`http://localhost:8080/teacher/${teacherId}`, {
-        method: "PUT",
-        body: request,
-        headers: {
-            "Content-Type": "application/json",
-        }
+      method: "PUT",
+      body: request,
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
-    .then((res) => {
-      lastStatus = res.status;
-      return res;
-    })
-    .then((data) => {
+      .then((res) => {
+        lastStatus = res.status;
+        return res;
+      })
+      .then((data) => {
         console.log(data);
         // console.log(lastStatus);
-        if(lastStatus === 200){
-            // localStorage.setItem('data', JSON.stringify(data.data));
-            // console.log(data.data);
-            setMessage('Teacher Information Edited');
-            resetForm();
-        }        
-    })
-    .catch(err => {
+        if (lastStatus === 200) {
+          // localStorage.setItem('data', JSON.stringify(data.data));
+          // console.log(data.data);
+          setMessage("Teacher Information Edited");
+          resetForm();
+        }
+      })
+      .catch((err) => {
         // console.log("we have a problem " + err.message);
         setMessage("we have a problem " + err.message);
       });
-  }
-
-  
+  };
 
   return (
-    
     <Wrapper>
-    <FormDiv>
-    <Form onSubmit={(ev) =>{btnConfirm(ev)}}>
-    <div>
-      <Label>
-        <Input required placeholder="First Name" type="text" value={firstName!=null?firstName:''} 
-        onChange={(e)=>setFirstName(e.target.value)} />
-      </Label>
-      <br/>
-      <Label>
-        <Input required placeholder="Last Name" type="text" value={lastName!=null?lastName:''} 
-        onChange={(e)=>setLastName(e.target.value)} />
-      </Label>
-      <br/>
-      <SelectDiv>
-      <Select
-        className="basic-single"
-        classNamePrefix="select"
-        // defaultValue={{value: true, label: 'true'}}
-        value={select}
-        name="isActive"
-        options={options}
-        onChange={(ev) => { setSelect({value: ev.value, label: ev.label}) }}
-        // ref={selectObj}
-      />
-      </SelectDiv>
+            <Title> Modify Teacher Info</Title>
 
-<Buttonsdiv>
-      <Button type="submit">Submit</Button>
+      <FormDiv>
+        <Form
+          onSubmit={(ev) => {
+            btnConfirm(ev);
+          }}
+        >
+          <div>
+            <Label>
+              <Input
+                required
+                placeholder="First Name"
+                type="text"
+                value={firstName != null ? firstName : ""}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </Label>
+            <br />
+            <Label>
+              <Input
+                required
+                placeholder="Last Name"
+                type="text"
+                value={lastName != null ? lastName : ""}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </Label>
+            <br />
+            <SelectDiv>
+              <Select
+                className="basic-single"
+                classNamePrefix="select"
+                // defaultValue={{value: true, label: 'true'}}
+                value={select}
+                name="isActive"
+                options={options}
+                onChange={(ev) => {
+                  setSelect({ value: ev.value, label: ev.label });
+                }}
+                // ref={selectObj}
+              />
+            </SelectDiv>
 
-      <Link to="/Teachers" style={{ textDecoration: 'none' }}>
-     <Button type="button"> Back </Button>
- </Link>
- </Buttonsdiv>
- <MessageLabel> {message} </MessageLabel>
+            <Buttonsdiv>
+              <Button type="submit">Submit</Button>
 
-    </div>
-    </Form>
-     </FormDiv>
-     </Wrapper>
-  )
-
+              <Link to="/Teachers" style={{ textDecoration: "none" }}>
+                <Button type="button"> Back </Button>
+              </Link>
+            </Buttonsdiv>
+            <MessageLabel> {message} </MessageLabel>
+          </div>
+        </Form>
+      </FormDiv>
+    </Wrapper>
+  );
 }
-
 
 const SelectDiv = styled.div`
   padding: 5px 13px;
-  margin-left:-5px;
+  margin-left: -5px;
   margin-right: 7px;
-
 `;
 
+const Title = styled.div`
+  position: absolute;
+  color: white;
+  margin-top: -350px;
+  margin-left: -100px;
+  z-index: 5;
+`;
 
 const Wrapper = styled.div`
   height: calc(100vh - 60px);
@@ -171,18 +189,18 @@ const Form = styled.form`
 `;
 const Label = styled.label`
   align-items: center;
-  color:white;
+  color: white;
   display: block;
 `;
 
-const MessageLabel=styled.label`
-align-items: center;
-color:white;
-margin-left: 45px;
-margin-top:30px;
-display: block;
-font-weight: 300;
-color:white;
+const MessageLabel = styled.label`
+  align-items: center;
+  color: white;
+  margin-left: 45px;
+  margin-top: 30px;
+  display: block;
+  font-weight: 300;
+  color: white;
 `;
 
 const Button = styled.button`
@@ -207,7 +225,7 @@ const Button = styled.button`
 `;
 
 const Input = styled.input`
-margin: 0 auto;
+  margin: 0 auto;
   color: black;
   padding: 6px 20px;
   display: block;
@@ -220,12 +238,11 @@ margin: 0 auto;
   width: 230px;
   margin-right: 12px;
   border-radius: 5px;
-
 `;
 const Buttonsdiv = styled.div`
-display:flex;
-/* align-items:center; */
-margin-left: 20px;
-margin-right: 50px;
-margin-top: 10px;
+  display: flex;
+  /* align-items:center; */
+  margin-left: 20px;
+  margin-right: 50px;
+  margin-top: 10px;
 `;

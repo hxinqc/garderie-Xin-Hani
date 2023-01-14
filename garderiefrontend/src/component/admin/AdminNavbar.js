@@ -1,16 +1,19 @@
-import React from 'react'
+import React from "react";
 import { Link } from "react-router-dom";
-import styled from 'styled-components';
+import styled from "styled-components";
+import "./adminCRUDNav.css"
 
 
-const AdminNavbar=()=> {
+const AdminNavbar = () => {
   return (
-    <NavDiv>
-        <nav className="navbar navbar-expand-lg navbar-light bg-primary">
-        <div className="container-fluid">
+    <NavDiv className="container">
+      {/* <nav className="navbar navbar-expand-lg navbar-light bg-primary">
+        <div className="container-fluid"> */}
+        <MyButton >
           <Link className="navbar-brand" to="/Admins">
-            Admins Information
+            Selected Admins Info
           </Link>
+          </MyButton>
           <button
             className="navbar-toggler"
             type="button"
@@ -26,17 +29,41 @@ const AdminNavbar=()=> {
           <Link className="btn btn-outline-light" to="/Admins/AddAdmin">
             Add Admin
           </Link>
-        </div>
-      </nav>
-        
-
+       
     </NavDiv>
-  )
-}
-const NavDiv = styled.div`
-width: 600px;
-align-items:center;
-margin-left: 400px;
+  );
+};
+
+const LabelDiv = styled.div`
+  color: red;
+  margin-left: 400px;
+  font-size: 22px;
+  font-weight: 300;
+  z-index: 100;
 `;
 
-export default AdminNavbar
+const MyButton = styled.div`
+  display: flex;
+  color: white;
+  margin-left: 300px;
+  margin-top: 30px;
+  align-items: center;
+  justify-content: center;
+`;
+
+const NavDiv = styled.div`
+  display: flex;
+  width: 520px;
+  height: 50px;
+  align-items: center;
+  // margin-left: 410px;
+  /* background-color:black; */
+  background: rgba(0, 0, 22, 0.8);
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+  margin-bottom: -20px;
+`;
+
+export default AdminNavbar;
