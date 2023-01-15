@@ -41,7 +41,7 @@ function Topbar() {
           </LiDiv>
 
           <LiDiv>
-            <NavigationLink to="/Enroled">ENROLED</NavigationLink>
+            <NavigationLink to="/Enrolled">ENROLLED</NavigationLink>
           </LiDiv>
 
           <LiDiv>
