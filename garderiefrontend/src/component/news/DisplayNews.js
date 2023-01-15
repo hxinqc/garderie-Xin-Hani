@@ -38,7 +38,7 @@ function DisplayNews() {
                 <div height = "40">
                     { newsDetail.name }
                 </div>
-                <div className="slide-picture" style={ { 'backgroundImage': `url(${'http://localhost:8080' + newsDetail.picPath})` } }>
+                <div className="slide-picture" style={ { 'backgroundImage': `url(${process.env.REACT_APP_BASE_URL + newsDetail.picPath})` } }>
                 </div>
                 <div className="slide-picture">
                     <span>{ newsDetail.content }</span>

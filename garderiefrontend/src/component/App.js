@@ -24,6 +24,16 @@ import AddChild from "./child/AddChild";
 import EditChild from "./child/EditChild";
 import ViewChild from "./child/ViewChild";
 
+import Activities from "./activity/ActivityHome";
+import AddActivity from "./activity/AddActivity";
+import EditActivity from "./activity/EditActivity";
+import ViewActivity from "./activity/ViewActivity";
+
+import Foods from "./food/FoodHome";
+import AddFood from "./food/AddFood";
+import EditFood from "./food/EditFood";
+import ViewFood from "./food/ViewFood";
+
 import DisplayNews from "./news/DisplayNews";
 import EnrolmentHome from "./enrolment/EnrolmentHome";
 
@@ -38,7 +48,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Enrolment" element={<Enrolment />} />
-        <Route path="/Enrolments" element={<EnrolmentHome />} />
+        <Route path="/Enroled" element={<EnrolmentHome />} />
 
         <Route path="/Classes" element={<Classes />} />
         <Route path="/Classes/addClass" element={<AddClass/>}/>
@@ -57,6 +67,16 @@ function App() {
         <Route path="/Teachers/editTeacher/:teacherId" element={<EditTeacher />} />
         <Route path="/Teachers/viewTeacher/:teacherId" element={<ViewTeacher />} />
         
+        <Route path="/Activities" element={<Activities />} />
+        <Route path="/activity/AddActivity" element={<AddActivity />} />
+        <Route path="/activity/EditActivity/:id" element={<EditActivity />} />
+        <Route path="/activity/viewActivity/:id" element={<ViewActivity />} />
+
+        <Route path="/Foods" element={<Foods />} />
+        <Route path="/food/AddFood" element={<AddFood />} />
+        <Route path="/food/EditFood/:id" element={<EditFood />} />
+        <Route path="/food/ViewFood/:id" element={<ViewFood />} />
+
         <Route path="/Admins" element={<Admins />} />
         <Route path="/Admins/addAdmin" element={<AddAdmin />} />
         <Route path="/Admins/editAdmin/:adminId" element={<EditAdmin />} />

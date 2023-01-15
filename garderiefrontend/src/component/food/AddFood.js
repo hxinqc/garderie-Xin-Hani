@@ -1,83 +1,71 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import DateSelect from "../DateSelect";
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
-import Select from "react-select";
-import { act } from "react-dom/test-utils";
+import { Link } from "react-router-dom";
+// import { useNavigate } from 'react-router-dom';
 
-export default function EditAdmin() {
+export default function AddFood() {
   const [name, setName] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [offerDate, setOfferDate] = useState(null);
   const [description, setDescription] = useState(null);
-  const [select, setSelect] = useState();
+  const [fileName, setFileName] = useState();
   const [message, setMessage] = useState(null);
   var lastStatus;
-  const { adminId } = useParams();
-  var options = [
-    { value: true, label: "True" },
-    { value: false, label: "False" },
-  ];
+  const [orgFileName, setOrgFileName] = useState(null);
+  // Create a reference to the hidden file input element
+  const hiddenFileInput = React.useRef(null);
+
+  // Programatically click the hidden file input element
+  // when the Button component is clicked
+  const handleClick = (event) => {
+    hiddenFileInput.current.click();
+  };
+  // Call a function (passed as a prop from the parent component)
+  // to handle the user-selected file
+  const handleChange = (event) => {
+    const fileUploaded = event.target.files[0];
+    setFileName(fileUploaded);
+    setOrgFileName(fileUploaded.name);
+    console.log(fileUploaded);
+  };
 
   function resetForm() {
     setName(null);
-    setPassword(null);
+    setOfferDate(null);
     setDescription(null);
-    setSelect();
+    setFileName();
+    setOrgFileName();
   }
-
-  const retrieveData = () => {
-    fetch(`http://localhost:8080/admin/${adminId}`)
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log(data);
-        setName(data.name);
-        setPassword(data.password);
-        setDescription(data.description);
-
-        if (data.isActive) {
-          setSelect({ value: true, label: "True" });
-        } else {
-          setSelect({ value: false, label: "False" });
-        }
-      })
-      .catch((err) => {
-        console.log("we have a problem " + err.message);
-      });
-  };
-
-  useEffect(() => {
-    retrieveData();
-  }, []);
 
   const btnConfirm = (ev) => {
     ev.preventDefault();
-    console.log(select.value);
-    var request = JSON.stringify({
-      id: adminId,
-      name: name,
-      password: password,
-      description: description,
-      isActive: select.value,
-    });
-    console.log(request);
-    fetch(`http://localhost:8080/admin/${adminId}`, {
-      method: "PUT",
-      body: request,
-      headers: {
-        "Content-Type": "application/json",
-      },
+
+    var isoDate = offerDate.toISOString();
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("offerDate", isoDate.substr(0, isoDate.indexOf("T")));
+    formData.append("fileName", fileName);
+    formData.append("description", description);
+
+    fetch("http://localhost:8080/food", {
+      method: "POST",
+      body: formData,
     })
       .then((res) => {
         lastStatus = res.status;
-        return res;
+        return res.json();
       })
       .then((data) => {
         console.log(data);
-        if(lastStatus === 204){
-            setMessage('Admin edited.');
-            resetForm();
-        }        
-    })
-    .catch(err => {
+        console.log(lastStatus);
+        if (lastStatus === 201) {
+          localStorage.setItem("data", JSON.stringify(data.data));
+          setMessage("Food added.");
+          resetForm();
+        }
+      })
+      .catch((err) => {
         // console.log("we have a problem " + err.message);
         setMessage("we have a problem " + err.message);
       });
@@ -85,8 +73,6 @@ export default function EditAdmin() {
 
   return (
     <Wrapper>
-      <Title> Insert Admin Info</Title>
-
       <FormDiv>
         <Form
           onSubmit={(ev) => {
@@ -94,75 +80,62 @@ export default function EditAdmin() {
           }}
         >
           <div>
+            {/* Food */}
             <Label>
               <Input
                 required
                 placeholder="Name"
                 type="text"
+                // style={{ width: 200 }}
                 value={name != null ? name : ""}
                 onChange={(e) => setName(e.target.value)}
               />
             </Label>
             <br />
-            <Label>
-              <Input
-                required
-                placeholder="Password"
-                type="password"
-                value={password != null ? password : ""}
-                onChange={(e) => setPassword(e.target.value)}
+            <div >
+              {/* offerDate: */}
+              <DateSelect
+                selectedDate={offerDate}
+                setselectedDate={(date) => {
+                  setOfferDate(date);
+                }}
+                value={offerDate != null ? offerDate : ""}
               />
-            </Label>
+            </div>
+            <br />
+            <Button onClick={handleClick}>Select a file</Button>
+            <Label>{orgFileName}</Label>
+            <input
+              type="file"
+              ref={hiddenFileInput}
+              onChange={handleChange}
+              style={{ display: "none" }}
+            />
             <br />
             <Label>
-              <Input
+              <textarea
+                required
                 placeholder="Description"
-                type="text"
+                rows="10"
+                cols="50"
                 value={description != null ? description : ""}
                 onChange={(e) => setDescription(e.target.value)}
-              />
+              ></textarea>
             </Label>
-            <br />
-            <SelectDiv>
-              <Select
-                className="basic-single"
-                classNamePrefix="select"
-                value={select}
-                name="isActive"
-                options={options}
-                onChange={(ev) => {
-                  setSelect({ value: ev.value, label: ev.label });
-                }}
-              />
-            </SelectDiv>
             <Buttonsdiv>
               <Button type="submit">Submit</Button>
-
-              <Link  to={"/Admins"} style={{ textDecoration: "none" }}>
+              <Link to="/Foods" style={{ textDecoration: "none" }}>
                 <Button type="button"> Back </Button>
               </Link>
             </Buttonsdiv>
-            <MessageLabel> {message} </MessageLabel>
+            
+            <Label>Message: {message} </Label>
           </div>
         </Form>
       </FormDiv>
     </Wrapper>
   );
 }
-
-const SelectDiv = styled.div`
-  padding: 5px 13px;
-  margin-left: -5px;
-  margin-right: 7px;
-`;
-
-const Title = styled.div`
-  position: absolute;
-  color: white;
-  margin-top: -400px;
-  margin-left: -100px;
-  z-index: 5;
-`;
 
 const Wrapper = styled.div`
   height: calc(100vh - 60px);
@@ -183,8 +156,8 @@ const Wrapper = styled.div`
 const FormDiv = styled.div``;
 
 const Form = styled.form`
-  height: 480px;
-  width: 320px;
+  // height: 390px;
+  width: 600px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -205,7 +178,7 @@ const MessageLabel = styled.label`
   align-items: center;
   color: white;
   margin-left: 45px;
-  margin-top: 30px;
+  margin-top: 10px;
   display: block;
   font-weight: 300;
   color: white;
@@ -225,7 +198,7 @@ const Button = styled.button`
   align-items: center;
   padding: 3px;
   font-weight: 400;
-  margin-top: 25px;
+  margin-top: 5px;
   font-size: 15px;
   border-radius: 5px;
   box-shadow: 0 0 4px #f7dd00;
@@ -235,7 +208,7 @@ const Button = styled.button`
 const Input = styled.input`
   margin: 0 auto;
   color: black;
-  padding: 6px 20px;
+  padding: 5px 20px;
   display: block;
   width: 100%;
   align-items: center;
@@ -245,7 +218,6 @@ const Input = styled.input`
   justify-content: right;
   width: 230px;
   margin-right: 12px;
-  border-radius: 5px;
 `;
 const Buttonsdiv = styled.div`
   display: flex;

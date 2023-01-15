@@ -1,43 +1,52 @@
 import React, { useState, useEffect } from "react";
+import DateSelect from "../DateSelect";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
-import Select from "react-select";
-import { act } from "react-dom/test-utils";
 
-export default function EditAdmin() {
+export default function EditFood() {
   const [name, setName] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [offerDate, setOfferDate] = useState(null);
   const [description, setDescription] = useState(null);
-  const [select, setSelect] = useState();
+  // const [fileName, setFileName] = useState();
   const [message, setMessage] = useState(null);
+  // const [orgFileName, setOrgFileName] = useState(null);
+  const { id } = useParams();
   var lastStatus;
-  const { adminId } = useParams();
-  var options = [
-    { value: true, label: "True" },
-    { value: false, label: "False" },
-  ];
+  const hiddenFileInput = React.useRef(null);
 
   function resetForm() {
     setName(null);
-    setPassword(null);
+    setOfferDate(null);
     setDescription(null);
-    setSelect();
+    // setFileName();
+    // setOrgFileName();
   }
 
+  const handleClick = event => {
+    hiddenFileInput.current.click();
+  };
+  // Call a function (passed as a prop from the parent component)
+  // to handle the user-selected file 
+  // const handleChange = event => {
+  //   const fileUploaded = event.target.files[0];
+  //   // setFileName(fileUploaded);
+  //   setOrgFileName(fileUploaded.name);
+  //   console.log(fileUploaded);
+  // };
+
   const retrieveData = () => {
-    fetch(`http://localhost:8080/admin/${adminId}`)
+    fetch(`http://localhost:8080/food/${id}`)
       .then((resp) => resp.json())
       .then((data) => {
         console.log(data);
         setName(data.name);
-        setPassword(data.password);
-        setDescription(data.description);
+        var dateStr = data.offerDate.split("-");
+        var generateDate = new Date(dateStr[0], dateStr[1] - 1, dateStr[2]);
+        console.log(generateDate);
+        setOfferDate(generateDate);
 
-        if (data.isActive) {
-          setSelect({ value: true, label: "True" });
-        } else {
-          setSelect({ value: false, label: "False" });
-        }
+        // setFileName(data.picPath);
+        setDescription(data.description);
       })
       .catch((err) => {
         console.log("we have a problem " + err.message);
@@ -50,16 +59,23 @@ export default function EditAdmin() {
 
   const btnConfirm = (ev) => {
     ev.preventDefault();
-    console.log(select.value);
+
+    // const formData = new FormData();
+    // formData.append('id', id);
+    // formData.append('name', name);
+    var isoDate = offerDate.toISOString();
+    // formData.append('offerDate', isoDate.substr(0, isoDate.indexOf('T')));
+    // formData.append('description', description);
+    // // formData.append('fileName', fileName);
+    // console.log(formData);
     var request = JSON.stringify({
-      id: adminId,
+      id: id,
       name: name,
-      password: password,
-      description: description,
-      isActive: select.value,
+      offerDate: isoDate.substr(0, isoDate.indexOf('T')),
+      description: description
     });
-    console.log(request);
-    fetch(`http://localhost:8080/admin/${adminId}`, {
+
+    fetch(`http://localhost:8080/food/${id}`, {
       method: "PUT",
       body: request,
       headers: {
@@ -72,12 +88,12 @@ export default function EditAdmin() {
       })
       .then((data) => {
         console.log(data);
-        if(lastStatus === 204){
-            setMessage('Admin edited.');
-            resetForm();
-        }        
-    })
-    .catch(err => {
+        if (lastStatus === 204) {
+          setMessage("Food edited.");
+          resetForm();
+        }
+      })
+      .catch((err) => {
         // console.log("we have a problem " + err.message);
         setMessage("we have a problem " + err.message);
       });
@@ -85,7 +101,7 @@ export default function EditAdmin() {
 
   return (
     <Wrapper>
-      <Title> Insert Admin Info</Title>
+      <Title> Edit Food Info</Title>
 
       <FormDiv>
         <Form
@@ -104,15 +120,26 @@ export default function EditAdmin() {
               />
             </Label>
             <br />
-            <Label>
-              <Input
-                required
-                placeholder="Password"
-                type="password"
-                value={password != null ? password : ""}
-                onChange={(e) => setPassword(e.target.value)}
+            <div style={{ width: "300px" }}>
+              OfferDate:
+              <DateSelect
+                selectedDate={offerDate!=null?offerDate:""}
+                setselectedDate={(date) => {
+                  setOfferDate(date);
+                  console.log(date.toISOString());
+                }}
+                value={offerDate != null ? offerDate : ""}
               />
-            </Label>
+            </div>
+            {/* <br />
+            <Button onClick={handleClick}>Select a file</Button>
+            <Label>{orgFileName}</Label>
+            <input
+              type="file"
+              ref={hiddenFileInput}
+              onChange={handleChange}
+              style={{ display: "none" }}
+            /> */}
             <br />
             <Label>
               <Input
@@ -123,22 +150,11 @@ export default function EditAdmin() {
               />
             </Label>
             <br />
-            <SelectDiv>
-              <Select
-                className="basic-single"
-                classNamePrefix="select"
-                value={select}
-                name="isActive"
-                options={options}
-                onChange={(ev) => {
-                  setSelect({ value: ev.value, label: ev.label });
-                }}
-              />
-            </SelectDiv>
+
             <Buttonsdiv>
               <Button type="submit">Submit</Button>
 
-              <Link  to={"/Admins"} style={{ textDecoration: "none" }}>
+              <Link to={"/Foods"} style={{ textDecoration: "none" }}>
                 <Button type="button"> Back </Button>
               </Link>
             </Buttonsdiv>
@@ -149,12 +165,6 @@ export default function EditAdmin() {
     </Wrapper>
   );
 }
-
-const SelectDiv = styled.div`
-  padding: 5px 13px;
-  margin-left: -5px;
-  margin-right: 7px;
-`;
 
 const Title = styled.div`
   position: absolute;
