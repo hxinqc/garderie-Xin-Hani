@@ -4,72 +4,60 @@ import { Link, useParams } from "react-router-dom";
 import DateSelect from "../DateSelect";
 import { parse } from "date-fns";
 
-
-
 function ViewClass() {
-    const[name, setName] = useState(null);
-    const[openDate, setOpenDate] = useState(null);
-    const [message, setMessage] = useState(null);
-    var lastStatus;
-    const { id } = useParams();
-    
-    const retrieveData =() => {
-      fetch(`http://localhost:8080/class/${id}`)
-        .then((resp) => resp.json())
-        .then((data) => {
-          console.log(data);
-          setName(data.name);
-          setOpenDate(data.openDate);
-  
-          })
-        .catch(err => {
-          console.log("we have a problem " + err.message);
-        });
-    };
-  
-    useEffect(() => {
-      retrieveData();
-    }, []);
-  
-    return (
-      <Wrapper>
-        <FormDiv>
-      <Form>
-      <Mydiv >Selected Class Info </Mydiv>
-       
-        <Label>
-         Class Name: {name!=null?name:''} 
-          
-        </Label>
-        <br/>
+  const [name, setName] = useState(null);
+  const [openDate, setOpenDate] = useState(null);
+  const [message, setMessage] = useState(null);
+  var lastStatus;
+  const { id } = useParams();
 
-        <Label>
-         Open Date: {openDate != null ? openDate: ""} 
-          
-        </Label>
-        <br/>
-       
-        <MessageLabel> {message} </MessageLabel>
+  const retrieveData = () => {
+    fetch(`http://localhost:8080/class/${id}`)
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data);
+        setName(data.name);
+        setOpenDate(data.openDate);
+      })
+      .catch((err) => {
+        console.log("we have a problem " + err.message);
+      });
+  };
 
+  useEffect(() => {
+    retrieveData();
+  }, []);
 
-<Link to="/Classes" style={{ textDecoration: 'none' }}>
-<Button type="button"> Back </Button>
-</Link>
-      </Form>
+  return (
+    <Wrapper>
+      <FormDiv>
+        <Form>
+          <Mydiv>Selected Class Info </Mydiv>
+
+          <Label>Class Name: {name != null ? name : ""}</Label>
+          <br />
+
+          <Label>Open Date: {openDate != null ? openDate : ""}</Label>
+          <br />
+
+          <MessageLabel> {message} </MessageLabel>
+
+          <Link to="/Classes" style={{ textDecoration: "none" }}>
+            <Button type="button"> Back </Button>
+          </Link>
+        </Form>
       </FormDiv>
-  
-      </Wrapper>
-    )
-  
-  }
+    </Wrapper>
+  );
+}
 
-
-const Mydiv=styled.div`
-color:white;
-display: flex;
-align-items: center;
-font-weight:900px;
-margin-bottom:30px;
+const Mydiv = styled.div`
+  color: white;
+  display: flex;
+  align-items: center;
+  font-weight: 900px;
+  margin-bottom: 30px;
+  font-size: 22px;
 `;
 
 const Wrapper = styled.div`
@@ -105,17 +93,17 @@ const Form = styled.form`
 `;
 const Label = styled.label`
   align-items: center;
-  color:white;
+  color: white;
   display: block;
 `;
 
-const MessageLabel=styled.label`
-align-items: center;
-color:white;
-margin-left: 2px;
-display: block;
-font-weight: 400;
-color:white;
+const MessageLabel = styled.label`
+  align-items: center;
+  color: white;
+  margin-left: 2px;
+  display: block;
+  font-weight: 400;
+  color: white;
 `;
 
 const Button = styled.button`
@@ -131,7 +119,7 @@ const Button = styled.button`
   cursor: pointer;
   align-items: center;
   padding: 3px;
-  font-weight: 300;
+  font-weight: 400;
   margin-top: 5px;
   font-size: 15px;
   border-radius: 30px;
@@ -140,7 +128,7 @@ const Button = styled.button`
 `;
 
 const Input = styled.input`
-margin: 0 auto;
+  margin: 0 auto;
   color: black;
   padding: 5px 20px;
   display: block;
@@ -152,14 +140,13 @@ margin: 0 auto;
   justify-content: right;
   width: 230px;
   margin-right: 12px;
-
 `;
 const Buttonsdiv = styled.div`
-display:flex;
-/* align-items:center; */
-margin-left: 10px;
-margin-right: 35px;
-margin-top: 10px;
+  display: flex;
+  /* align-items:center; */
+  margin-left: 10px;
+  margin-right: 35px;
+  margin-top: 10px;
 `;
 
-export default ViewClass
+export default ViewClass;

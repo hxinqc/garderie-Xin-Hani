@@ -96,17 +96,15 @@ function EditClass() {
             </Label>
             <br />
             <Label>
-         
               <SelectDiv>
-              <DateSelect
-                selectedDate={openDate!=null?openDate:""}
-                setselectedDate={(date) => {
-                  setOpenDate(date);
-                  console.log(date.toISOString());
-                }}
-                value={openDate != null ? openDate : ""}
-              />
-
+                <DateSelect
+                  selectedDate={openDate != null ? openDate : ""}
+                  setselectedDate={(date) => {
+                    setOpenDate(date);
+                    console.log(date.toISOString());
+                  }}
+                  value={openDate != null ? openDate : ""}
+                />
               </SelectDiv>
             </Label>
             <br />
@@ -127,17 +125,18 @@ function EditClass() {
 }
 
 const SelectDiv = styled.div`
-  padding: 5px 13px;
-  margin-left: -8px;
+  padding: 5px 11px;
+  margin-left: 5px;
   margin-right: 0px;
 `;
 
 const Title = styled.div`
   position: absolute;
   color: white;
-  margin-top: -350px;
+  margin-top: -320px;
   margin-left: -100px;
   z-index: 5;
+  font-size: 18px;
 `;
 
 const Wrapper = styled.div`
@@ -159,7 +158,7 @@ const Wrapper = styled.div`
 const FormDiv = styled.div``;
 
 const Form = styled.form`
-  height: 420px;
+  height: 380px;
   width: 320px;
   border-radius: 10px;
   display: flex;
@@ -180,19 +179,23 @@ const Label = styled.label`
 const MessageLabel = styled.label`
   align-items: center;
   color: white;
-  margin-left: 45px;
-  margin-top: 30px;
+  margin-left: 62px;
+  margin-top: 5px;
   display: block;
   font-weight: 300;
   color: white;
+  justify-content: center;
 `;
 
 const Button = styled.button`
   position: relative;
   align-items: center;
   margin-bottom: 20px;
-  display: block;
-  margin: 0 auto;
+  /* display: block;
+  margin: 0 auto; */
+  display: flex;
+  margin-left: 35px;
+  justify-content: center;
   width: 80px;
   background-color: #f9c000;
   color: #333;
@@ -212,7 +215,7 @@ const Input = styled.input`
   margin: 0 auto;
   display: block;
   color: black;
-  padding: 6px 20px;
+  padding: 6px 26px;
   display: block;
   width: 100%;
   align-items: center;
@@ -221,15 +224,15 @@ const Input = styled.input`
   display: flex;
   justify-content: right;
   width: 230px;
-  margin-right: 40px;
-  border-radius: 5px;
+  margin-right: 43px;
+  border-radius: 2px;
 `;
 const Buttonsdiv = styled.div`
   display: flex;
   /* align-items:center; */
   margin-left: 20px;
   margin-right: 50px;
-  margin-top: 10px;
+  margin-top: -20px;
 `;
 
 export default EditClass;

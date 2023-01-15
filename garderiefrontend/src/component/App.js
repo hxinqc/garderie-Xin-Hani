@@ -51,10 +51,9 @@ function App() {
         <Route path="/Enrolled" element={<EnrolmentHome />} />
 
         <Route path="/Classes" element={<Classes />} />
-        <Route path="/Classes/addClass" element={<AddClass/>}/>
+        <Route path="/Classes/addClass" element={<AddClass />} />
         <Route path="/Classes/editClass/:id" element={<EditClass />} />
         <Route path="/Classes/viewClass/:id" element={<ViewClass />} />
-
 
         <Route path="/Children" element={<Children />} />
         <Route path="/Child/addChild/:inscriptionId" element={<AddChild />} />
@@ -64,9 +63,15 @@ function App() {
 
         <Route path="/Teachers" element={<Teachers />} />
         <Route path="/Teachers/addTeacher" element={<AddTeacher />} />
-        <Route path="/Teachers/editTeacher/:teacherId" element={<EditTeacher />} />
-        <Route path="/Teachers/viewTeacher/:teacherId" element={<ViewTeacher />} />
-        
+        <Route
+          path="/Teachers/editTeacher/:teacherId"
+          element={<EditTeacher />}
+        />
+        <Route
+          path="/Teachers/viewTeacher/:teacherId"
+          element={<ViewTeacher />}
+        />
+
         <Route path="/Activities" element={<Activities />} />
         <Route path="/activity/AddActivity" element={<AddActivity />} />
         <Route path="/activity/EditActivity/:id" element={<EditActivity />} />
