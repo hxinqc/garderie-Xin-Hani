@@ -74,7 +74,7 @@ export default function News() {
 
   return (
     <Form onSubmit={(ev) => { btnConfirm(ev) }}>
-      <div style={{ width: "600px", backgroundColor: "pink" }}>Classes
+      <div style={{ width: "600px", backgroundColor: "pink" }}>News
         <Label>
           <Input required placeholder="Name" type="text" style={{ width: 200 }}
           value={name != null ? name : ''} onChange={(e) => setName(e.target.value)} />

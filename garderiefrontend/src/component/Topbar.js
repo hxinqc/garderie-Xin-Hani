@@ -37,7 +37,7 @@ function Topbar() {
           </LiDiv>
 
           <LiDiv>
-            <NavigationLink to="/Activity">ACTIVITY</NavigationLink>
+            <NavigationLink to="/Activities">ACTIVITY</NavigationLink>
           </LiDiv>
 
           <LiDiv>
