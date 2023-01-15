@@ -2,36 +2,36 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const AdminHome = () => {
+const FoodHome = () => {
   // var BASE_URL = "http://localhost:8080";
-  const [activities, setActivities] = useState([]);
+  const [foods, setFoods] = useState([]);
 
   useEffect(() => {
-    loadActivities();
+    loadFoods();
   }, []);
 
-  const loadActivities = async () => {
-    await fetch("http://localhost:8080/activities")
+  const loadFoods = async () => {
+    await fetch("http://localhost:8080/food")
       .then((resp) => resp.json())
       .then((data) => {
         console.log(data);
-        setActivities(data);
+        setFoods(data);
       })
       .catch((err) => {
         console.log("we have a problem " + err.message);
       });
   };
 
-  const deleteActivity = (id) => {
-    if (!window.confirm("Are you sure to delete this activity?")) {
+  const deleteFood = (id) => {
+    if (!window.confirm("Are you sure to delete this food?")) {
       return;
     }
-    fetch(`http://localhost:8080/activities/${id}`, {
+    fetch(`http://localhost:8080/food/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => {
-        loadActivities();
+        loadFoods();
       })
       .catch((err) => {
         console.log("we have a problem " + err.message);
@@ -44,8 +44,8 @@ const AdminHome = () => {
           {/* <nav className="navbar navbar-expand-lg navbar-light bg-primary">
         <div className="container-fluid"> */}
           <MyButton>
-            <Link className="navbar-brand" to="/Activities">
-              Activities Info
+            <Link className="navbar-brand" to="/Foods">
+              Foods Info
             </Link>
           </MyButton>
           <button
@@ -60,8 +60,8 @@ const AdminHome = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <Link className="btn btn-outline-light" to="/activity/AddActivity">
-            Add Activity
+          <Link className="btn btn-outline-light" to="/food/AddFood">
+            Add Food
           </Link>
         </NavDiv>
       <div className="py-4">
@@ -71,36 +71,36 @@ const AdminHome = () => {
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Name</th>
-              <th scope="col">ActivityDate</th>
+              <th scope="col">OfferDate</th>
               <th scope="col">Description</th>
               {/* <th scope="col">PicPath</th> */}
               <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            {activities.map((activity, index) => (
-              <tr key={activity.id}>
+            {foods!=null && foods.map((food, index) => (
+              <tr key={food.id}>
                 <td>{index + 1}</td>
-                <td>{activity.name}</td>
-                <td>{activity.activityDate}</td>
-                <td>{activity.description}</td>
-                {/* <td>{BASE_URL + activity.picPath}</td> */}
+                <td>{food.name}</td>
+                <td>{food.offerDate}</td>
+                <td>{food.description}</td>
+                {/* <td>{BASE_URL + food.picPath}</td> */}
                 <td>
                   <Link
                     className="btn btn-primary mx-2"
-                    to={`/activity/ViewActivity/${activity.id}`}
+                    to={`/food/ViewFood/${food.id}`}
                   >
                     View
                   </Link>
                   <Link
                     className="btn btn-outline-primary mx-2"
-                    to={`/activity/EditActivity/${activity.id}`}
+                    to={`/food/EditFood/${food.id}`}
                   >
                     Edit
                   </Link>
                   <button
                     className="btn btn-danger mx-2"
-                    onClick={() => deleteActivity(activity.id)}
+                    onClick={() => deleteFood(food.id)}
                   >
                     Delete
                   </button>
@@ -114,7 +114,7 @@ const AdminHome = () => {
   );
 };
 
-export default AdminHome;
+export default FoodHome;
 
 const MyButton = styled.div`
   display: flex;

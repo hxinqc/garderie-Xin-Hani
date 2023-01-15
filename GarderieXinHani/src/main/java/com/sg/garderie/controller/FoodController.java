@@ -76,13 +76,13 @@ public class FoodController {
         ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
         if (id != food.getID()) {
             response = new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
-        } else if (service.updateFoodInfo(food)) {
-            response = new ResponseEntity(HttpStatus.NO_CONTENT);
+        } else {
+            if (service.updateFoodInfo(food)) {
+                response = new ResponseEntity(HttpStatus.NO_CONTENT);
+            }
         }
         return response;
     }
-
-
 
     //Deleting one food Info
     @DeleteMapping("/food/{id}")

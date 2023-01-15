@@ -43,6 +43,7 @@ public class GarderieServiceImpl implements GarderieService {
     @Autowired
     private ClassActivitiesDao classActivitiesDao;
 
+    @Autowired
     private FoodDao foodDao;
 
     @Autowired
@@ -346,12 +347,17 @@ public class GarderieServiceImpl implements GarderieService {
 
     @Override
     public List<Food> getAllFoods() {
-        return foodDao.getAllFood();
+        List<Food> list = foodDao.getAllFood();
+        list.stream().forEach(food -> food.setPicPath("/download/" +
+                food.getPicPath().replaceFirst(FILE_BASE_PATH, "")));
+        return list;
     }
 
     @Override
     public Food findFoodById(int id) {
-        return foodDao.findFoodById(id);
+        Food food = foodDao.findFoodById(id);
+        food.setPicPath("/download/" + food.getPicPath().replaceFirst(FILE_BASE_PATH, ""));
+        return food;
     }
 
 

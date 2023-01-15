@@ -3,23 +3,23 @@ import DateSelect from "../DateSelect";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 
-export default function EditActivity() {
+export default function EditFood() {
   const [name, setName] = useState(null);
-  const [activityDate, setActivityDate] = useState(null);
+  const [offerDate, setOfferDate] = useState(null);
   const [description, setDescription] = useState(null);
-  const [fileName, setFileName] = useState();
+  // const [fileName, setFileName] = useState();
   const [message, setMessage] = useState(null);
-  const [orgFileName, setOrgFileName] = useState(null);
+  // const [orgFileName, setOrgFileName] = useState(null);
   const { id } = useParams();
   var lastStatus;
   const hiddenFileInput = React.useRef(null);
 
   function resetForm() {
     setName(null);
-    setActivityDate(null);
+    setOfferDate(null);
     setDescription(null);
-    setFileName();
-    setOrgFileName();
+    // setFileName();
+    // setOrgFileName();
   }
 
   const handleClick = event => {
@@ -27,28 +27,25 @@ export default function EditActivity() {
   };
   // Call a function (passed as a prop from the parent component)
   // to handle the user-selected file 
-  const handleChange = event => {
-    const fileUploaded = event.target.files[0];
-    setFileName(fileUploaded);
-    setOrgFileName(fileUploaded.name);
-    console.log(fileUploaded);
-  };
+  // const handleChange = event => {
+  //   const fileUploaded = event.target.files[0];
+  //   // setFileName(fileUploaded);
+  //   setOrgFileName(fileUploaded.name);
+  //   console.log(fileUploaded);
+  // };
 
   const retrieveData = () => {
-    fetch(`http://localhost:8080/activities/${id}`)
+    fetch(`http://localhost:8080/food/${id}`)
       .then((resp) => resp.json())
       .then((data) => {
         console.log(data);
         setName(data.name);
-        var dateStr = data.activityDate.split("-");
+        var dateStr = data.offerDate.split("-");
         var generateDate = new Date(dateStr[0], dateStr[1] - 1, dateStr[2]);
-        // generateDate.setFullYear(dateStr[0]);
-        // generateDate.setMonth(dateStr[1] - 1);
-        // generateDate.setDate(dateStr[2]);
         console.log(generateDate);
-        setActivityDate(generateDate);
+        setOfferDate(generateDate);
 
-        setFileName(data.picPath);
+        // setFileName(data.picPath);
         setDescription(data.description);
       })
       .catch((err) => {
@@ -63,19 +60,27 @@ export default function EditActivity() {
   const btnConfirm = (ev) => {
     ev.preventDefault();
 
-    const formData = new FormData();
-    formData.append('id', id);
-    formData.append('name', name);
-    var isoDate = activityDate.toISOString();
-    console.log(isoDate);
-    formData.append('activityDate', isoDate.substr(0, isoDate.indexOf('T')));
-    formData.append('description', description);
-    formData.append('fileName', fileName);
+    // const formData = new FormData();
+    // formData.append('id', id);
+    // formData.append('name', name);
+    var isoDate = offerDate.toISOString();
+    // formData.append('offerDate', isoDate.substr(0, isoDate.indexOf('T')));
+    // formData.append('description', description);
+    // // formData.append('fileName', fileName);
+    // console.log(formData);
+    var request = JSON.stringify({
+      id: id,
+      name: name,
+      offerDate: isoDate.substr(0, isoDate.indexOf('T')),
+      description: description
+    });
 
-    console.log(formData);
-    fetch(`http://localhost:8080/activities/${id}`, {
+    fetch(`http://localhost:8080/food/${id}`, {
       method: "PUT",
-      body: formData
+      body: request,
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
       .then((res) => {
         lastStatus = res.status;
@@ -83,8 +88,8 @@ export default function EditActivity() {
       })
       .then((data) => {
         console.log(data);
-        if (lastStatus === 200) {
-          setMessage("Activity edited.");
+        if (lastStatus === 204) {
+          setMessage("Food edited.");
           resetForm();
         }
       })
@@ -96,7 +101,7 @@ export default function EditActivity() {
 
   return (
     <Wrapper>
-      <Title> Edit Activity Info</Title>
+      <Title> Edit Food Info</Title>
 
       <FormDiv>
         <Form
@@ -116,17 +121,17 @@ export default function EditActivity() {
             </Label>
             <br />
             <div style={{ width: "300px" }}>
-              ActivityDate:
+              OfferDate:
               <DateSelect
-                selectedDate={activityDate!=null?activityDate:""}
+                selectedDate={offerDate!=null?offerDate:""}
                 setselectedDate={(date) => {
-                  setActivityDate(date);
+                  setOfferDate(date);
                   console.log(date.toISOString());
                 }}
-                value={activityDate != null ? activityDate : ""}
+                value={offerDate != null ? offerDate : ""}
               />
             </div>
-            <br />
+            {/* <br />
             <Button onClick={handleClick}>Select a file</Button>
             <Label>{orgFileName}</Label>
             <input
@@ -134,7 +139,7 @@ export default function EditActivity() {
               ref={hiddenFileInput}
               onChange={handleChange}
               style={{ display: "none" }}
-            />
+            /> */}
             <br />
             <Label>
               <Input
@@ -149,7 +154,7 @@ export default function EditActivity() {
             <Buttonsdiv>
               <Button type="submit">Submit</Button>
 
-              <Link to={"/Activities"} style={{ textDecoration: "none" }}>
+              <Link to={"/Foods"} style={{ textDecoration: "none" }}>
                 <Button type="button"> Back </Button>
               </Link>
             </Buttonsdiv>

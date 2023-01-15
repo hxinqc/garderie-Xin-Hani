@@ -83,7 +83,7 @@ public class FoodDaoImpl implements FoodDao{
 
     @Override
     public Food findFoodById(int id) {
-        final String sql = "SELECT * FROM News WHERE id = ?";
+        final String sql = "SELECT * FROM Foods WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new FoodDaoImpl.FoodMapper(), id);    }
 
 
@@ -95,18 +95,16 @@ public class FoodDaoImpl implements FoodDao{
 
     @Override
     public boolean updateFoodInfo(Food food) {
-        final String sql = "UPDATE food SET "
+        final String sql = "UPDATE foods SET "
                 + "Name = ?, "
                 + "offerDate = ?, "
-                + "Description = ?, "
-                + "picPath=?, "
+                + "Description = ? "
                 + "WHERE id = ?;";
 
         return jdbcTemplate.update(sql,
                 food.getName(),
                 food.getOfferDate(),
                 food.getDescription(),
-                food.getPicPath(),
                 food.getID())> 0;
     }
 

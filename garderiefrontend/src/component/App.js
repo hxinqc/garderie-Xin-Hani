@@ -29,6 +29,11 @@ import AddActivity from "./activity/AddActivity";
 import EditActivity from "./activity/EditActivity";
 import ViewActivity from "./activity/ViewActivity";
 
+import Foods from "./food/FoodHome";
+import AddFood from "./food/AddFood";
+import EditFood from "./food/EditFood";
+import ViewFood from "./food/ViewFood";
+
 import DisplayNews from "./news/DisplayNews";
 import EnrolmentHome from "./enrolment/EnrolmentHome";
 
@@ -59,6 +64,11 @@ function App() {
         <Route path="/activity/AddActivity" element={<AddActivity />} />
         <Route path="/activity/EditActivity/:id" element={<EditActivity />} />
         <Route path="/activity/viewActivity/:id" element={<ViewActivity />} />
+
+        <Route path="/Foods" element={<Foods />} />
+        <Route path="/food/AddFood" element={<AddFood />} />
+        <Route path="/food/EditFood/:id" element={<EditFood />} />
+        <Route path="/food/ViewFood/:id" element={<ViewFood />} />
 
         <Route path="/Admins" element={<Admins />} />
         <Route path="/Admins/addAdmin" element={<AddAdmin />} />

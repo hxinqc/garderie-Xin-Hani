@@ -1,90 +1,67 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import DateSelect from "../DateSelect";
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+// import { useNavigate } from 'react-router-dom';
 
-export default function EditActivity() {
+export default function AddFood() {
   const [name, setName] = useState(null);
-  const [activityDate, setActivityDate] = useState(null);
+  const [offerDate, setOfferDate] = useState(null);
   const [description, setDescription] = useState(null);
   const [fileName, setFileName] = useState();
   const [message, setMessage] = useState(null);
-  const [orgFileName, setOrgFileName] = useState(null);
-  const { id } = useParams();
   var lastStatus;
+  const [orgFileName, setOrgFileName] = useState(null);
+  // Create a reference to the hidden file input element
   const hiddenFileInput = React.useRef(null);
 
-  function resetForm() {
-    setName(null);
-    setActivityDate(null);
-    setDescription(null);
-    setFileName();
-    setOrgFileName();
-  }
-
-  const handleClick = event => {
+  // Programatically click the hidden file input element
+  // when the Button component is clicked
+  const handleClick = (event) => {
     hiddenFileInput.current.click();
   };
   // Call a function (passed as a prop from the parent component)
-  // to handle the user-selected file 
-  const handleChange = event => {
+  // to handle the user-selected file
+  const handleChange = (event) => {
     const fileUploaded = event.target.files[0];
     setFileName(fileUploaded);
     setOrgFileName(fileUploaded.name);
     console.log(fileUploaded);
   };
 
-  const retrieveData = () => {
-    fetch(`http://localhost:8080/activities/${id}`)
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log(data);
-        setName(data.name);
-        var dateStr = data.activityDate.split("-");
-        var generateDate = new Date(dateStr[0], dateStr[1] - 1, dateStr[2]);
-        // generateDate.setFullYear(dateStr[0]);
-        // generateDate.setMonth(dateStr[1] - 1);
-        // generateDate.setDate(dateStr[2]);
-        console.log(generateDate);
-        setActivityDate(generateDate);
-
-        setFileName(data.picPath);
-        setDescription(data.description);
-      })
-      .catch((err) => {
-        console.log("we have a problem " + err.message);
-      });
-  };
-
-  useEffect(() => {
-    retrieveData();
-  }, []);
+  function resetForm() {
+    setName(null);
+    setOfferDate(null);
+    setDescription(null);
+    setFileName();
+    setOrgFileName();
+  }
 
   const btnConfirm = (ev) => {
     ev.preventDefault();
 
-    const formData = new FormData();
-    formData.append('id', id);
-    formData.append('name', name);
-    var isoDate = activityDate.toISOString();
-    console.log(isoDate);
-    formData.append('activityDate', isoDate.substr(0, isoDate.indexOf('T')));
-    formData.append('description', description);
-    formData.append('fileName', fileName);
+    var isoDate = offerDate.toISOString();
 
-    console.log(formData);
-    fetch(`http://localhost:8080/activities/${id}`, {
-      method: "PUT",
-      body: formData
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("offerDate", isoDate.substr(0, isoDate.indexOf("T")));
+    formData.append("fileName", fileName);
+    formData.append("description", description);
+
+    fetch("http://localhost:8080/food", {
+      method: "POST",
+      body: formData,
     })
       .then((res) => {
         lastStatus = res.status;
-        return res;
+        return res.json();
       })
       .then((data) => {
         console.log(data);
-        if (lastStatus === 200) {
-          setMessage("Activity edited.");
+        console.log(lastStatus);
+        if (lastStatus === 201) {
+          localStorage.setItem("data", JSON.stringify(data.data));
+          setMessage("Food added.");
           resetForm();
         }
       })
@@ -96,8 +73,6 @@ export default function EditActivity() {
 
   return (
     <Wrapper>
-      <Title> Edit Activity Info</Title>
-
       <FormDiv>
         <Form
           onSubmit={(ev) => {
@@ -105,25 +80,26 @@ export default function EditActivity() {
           }}
         >
           <div>
+            {/* Food */}
             <Label>
               <Input
                 required
                 placeholder="Name"
                 type="text"
+                // style={{ width: 200 }}
                 value={name != null ? name : ""}
                 onChange={(e) => setName(e.target.value)}
               />
             </Label>
             <br />
-            <div style={{ width: "300px" }}>
-              ActivityDate:
+            <div >
+              {/* offerDate: */}
               <DateSelect
-                selectedDate={activityDate!=null?activityDate:""}
+                selectedDate={offerDate}
                 setselectedDate={(date) => {
-                  setActivityDate(date);
-                  console.log(date.toISOString());
+                  setOfferDate(date);
                 }}
-                value={activityDate != null ? activityDate : ""}
+                value={offerDate != null ? offerDate : ""}
               />
             </div>
             <br />
@@ -137,37 +113,29 @@ export default function EditActivity() {
             />
             <br />
             <Label>
-              <Input
+              <textarea
+                required
                 placeholder="Description"
-                type="text"
+                rows="10"
+                cols="50"
                 value={description != null ? description : ""}
                 onChange={(e) => setDescription(e.target.value)}
-              />
+              ></textarea>
             </Label>
-            <br />
-
             <Buttonsdiv>
               <Button type="submit">Submit</Button>
-
-              <Link to={"/Activities"} style={{ textDecoration: "none" }}>
+              <Link to="/Foods" style={{ textDecoration: "none" }}>
                 <Button type="button"> Back </Button>
               </Link>
             </Buttonsdiv>
-            <MessageLabel> {message} </MessageLabel>
+            
+            <Label>Message: {message} </Label>
           </div>
         </Form>
       </FormDiv>
     </Wrapper>
   );
 }
-
-const Title = styled.div`
-  position: absolute;
-  color: white;
-  margin-top: -400px;
-  margin-left: -100px;
-  z-index: 5;
-`;
 
 const Wrapper = styled.div`
   height: calc(100vh - 60px);
@@ -188,8 +156,8 @@ const Wrapper = styled.div`
 const FormDiv = styled.div``;
 
 const Form = styled.form`
-  height: 480px;
-  width: 320px;
+  // height: 390px;
+  width: 600px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -210,7 +178,7 @@ const MessageLabel = styled.label`
   align-items: center;
   color: white;
   margin-left: 45px;
-  margin-top: 30px;
+  margin-top: 10px;
   display: block;
   font-weight: 300;
   color: white;
@@ -230,7 +198,7 @@ const Button = styled.button`
   align-items: center;
   padding: 3px;
   font-weight: 400;
-  margin-top: 25px;
+  margin-top: 5px;
   font-size: 15px;
   border-radius: 5px;
   box-shadow: 0 0 4px #f7dd00;
@@ -240,7 +208,7 @@ const Button = styled.button`
 const Input = styled.input`
   margin: 0 auto;
   color: black;
-  padding: 6px 20px;
+  padding: 5px 20px;
   display: block;
   width: 100%;
   align-items: center;
@@ -250,7 +218,6 @@ const Input = styled.input`
   justify-content: right;
   width: 230px;
   margin-right: 12px;
-  border-radius: 5px;
 `;
 const Buttonsdiv = styled.div`
   display: flex;
