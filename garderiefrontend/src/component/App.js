@@ -37,6 +37,10 @@ import ViewFood from "./food/ViewFood";
 import DisplayNews from "./news/DisplayNews";
 import EnrolmentHome from "./enrolment/EnrolmentHome";
 
+import AddClass from "./classCRUD/AddClass";
+import EditClass from "./classCRUD/EditClass";
+import ViewClass from "./classCRUD/ViewClass";
+
 function App() {
   return (
     <Router>
@@ -47,6 +51,9 @@ function App() {
         <Route path="/Enroled" element={<EnrolmentHome />} />
 
         <Route path="/Classes" element={<Classes />} />
+        <Route path="/Classes/addClass" element={<AddClass/>}/>
+        <Route path="/Classes/editClass/:id" element={<EditClass />} />
+        <Route path="/Classes/viewClass/:id" element={<ViewClass />} />
 
 
         <Route path="/Children" element={<Children />} />
@@ -74,7 +81,7 @@ function App() {
         <Route path="/Admins/addAdmin" element={<AddAdmin />} />
         <Route path="/Admins/editAdmin/:adminId" element={<EditAdmin />} />
         <Route path="/Admins/viewAdmin/:adminId" element={<ViewAdmin />} />
-        
+
         <Route path="/confirmed" element={<Confirmation />} />
         <Route path="/News" element={<News />} />
         <Route path="/DisplayNews" element={<DisplayNews />} />

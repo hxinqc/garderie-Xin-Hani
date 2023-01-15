@@ -21,7 +21,7 @@ function Topbar() {
           </LiDiv>
 
           <LiDiv>
-            <NavigationLink to="/Teachers">TEACHERS</NavigationLink>
+            <NavigationLink to="/Teachers">TEACHER</NavigationLink>
           </LiDiv>
 
           <LiDiv>
@@ -29,7 +29,7 @@ function Topbar() {
           </LiDiv>
 
           <LiDiv>
-            <NavigationLink to="/Classes">CLASSES</NavigationLink>
+            <NavigationLink to="/Classes">CLASS</NavigationLink>
           </LiDiv>
 
           <LiDiv>
@@ -45,7 +45,7 @@ function Topbar() {
           </LiDiv>
 
           <LiDiv>
-            <NavigationLink to="/Admins">ADMINS</NavigationLink>
+            <NavigationLink to="/Admins">ADMIN</NavigationLink>
           </LiDiv>
         </NavigationList>
       </TopCenter>
