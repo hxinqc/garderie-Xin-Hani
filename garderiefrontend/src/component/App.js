@@ -7,6 +7,8 @@ import Children from "../pages/Children";
 import Teachers from "../pages/Teachers";
 import Admins from "../pages/Admins";
 import Activities from "../pages/Activities";
+import Foods from "../pages/Foods";
+
 import Topbar from "./Topbar";
 import Confirmation from "../pages/Confirmation";
 import News from "../pages/News";
@@ -29,7 +31,6 @@ import AddActivity from "./activity/AddActivity";
 import EditActivity from "./activity/EditActivity";
 import ViewActivity from "./activity/ViewActivity";
 
-import Foods from "./food/FoodHome";
 import AddFood from "./food/AddFood";
 import EditFood from "./food/EditFood";
 import ViewFood from "./food/ViewFood";

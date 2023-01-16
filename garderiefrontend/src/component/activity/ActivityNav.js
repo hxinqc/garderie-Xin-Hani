@@ -13,7 +13,7 @@ function ActivityNav() {
         {/* <nav className="navbar navbar-expand-lg navbar-light bg-primary">
         <div className="container-fluid"> */}
         <MyButton>
-          <Link className="navbar-brand" to="/Classes">
+          <Link className="navbar-brand" to="/Activities">
             Activity Info
           </Link>
         </MyButton>
