@@ -6,6 +6,7 @@ import Classes from "../pages/Classes";
 import Children from "../pages/Children";
 import Teachers from "../pages/Teachers";
 import Admins from "../pages/Admins";
+import Activities from "../pages/Activities";
 import Topbar from "./Topbar";
 import Confirmation from "../pages/Confirmation";
 import News from "../pages/News";
@@ -24,7 +25,6 @@ import AddChild from "./child/AddChild";
 import EditChild from "./child/EditChild";
 import ViewChild from "./child/ViewChild";
 
-import Activities from "./activity/ActivityHome";
 import AddActivity from "./activity/AddActivity";
 import EditActivity from "./activity/EditActivity";
 import ViewActivity from "./activity/ViewActivity";
@@ -63,14 +63,8 @@ function App() {
 
         <Route path="/Teachers" element={<Teachers />} />
         <Route path="/Teachers/addTeacher" element={<AddTeacher />} />
-        <Route
-          path="/Teachers/editTeacher/:teacherId"
-          element={<EditTeacher />}
-        />
-        <Route
-          path="/Teachers/viewTeacher/:teacherId"
-          element={<ViewTeacher />}
-        />
+        <Route path="/Teachers/editTeacher/:teacherId" element={<EditTeacher />}/>
+        <Route path="/Teachers/viewTeacher/:teacherId" element={<ViewTeacher />}/>
 
         <Route path="/Activities" element={<Activities />} />
         <Route path="/activity/AddActivity" element={<AddActivity />} />

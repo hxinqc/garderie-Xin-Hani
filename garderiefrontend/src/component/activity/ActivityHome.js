@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const AdminHome = () => {
+const ActivityHome = () => {
   // var BASE_URL = "http://localhost:8080";
   const [activities, setActivities] = useState([]);
 
@@ -40,30 +40,7 @@ const AdminHome = () => {
 
   return (
     <div className="container">
-      <NavDiv>
-          {/* <nav className="navbar navbar-expand-lg navbar-light bg-primary">
-        <div className="container-fluid"> */}
-          <MyButton>
-            <Link className="navbar-brand" to="/Activities">
-              Activities Info
-            </Link>
-          </MyButton>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-
-          <Link className="btn btn-outline-light" to="/activity/AddActivity">
-            Add Activity
-          </Link>
-        </NavDiv>
+   
       <div className="py-4">
         
         <table className="table border shadow">
@@ -114,7 +91,7 @@ const AdminHome = () => {
   );
 };
 
-export default AdminHome;
+export default ActivityHome;
 
 const MyButton = styled.div`
   display: flex;
