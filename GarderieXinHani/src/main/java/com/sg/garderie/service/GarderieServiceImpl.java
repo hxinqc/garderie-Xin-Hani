@@ -5,6 +5,7 @@ import com.sg.garderie.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.io.IOException;
@@ -156,6 +157,11 @@ public class GarderieServiceImpl implements GarderieService {
     }
 
     @Override
+    public void updateInscriptionStatus(Integer id, String status) {
+        inscriptionDao.updateStatus(id, status);
+    }
+
+    @Override
     public Admin addAdmin(Admin admin) {
         return adminDao.add(admin);
     }
@@ -233,8 +239,14 @@ public class GarderieServiceImpl implements GarderieService {
     }
 
     @Override
+    @Transactional
     public ChildRoster addChildRoster(ChildRoster childRoster) {
-        return childRosterDao.addChildRoster(childRoster);
+        ChildRoster childRoster1;
+        childRoster1 = childRosterDao.addChildRoster(childRoster);
+        if (childRoster.getInscriptionId() != null) {
+            inscriptionDao.updateStatus(childRoster.getInscriptionId(), INSCRIPTION_STATUS.ACCEPTED.name());
+        }
+        return childRoster1;
     }
 
     @Override

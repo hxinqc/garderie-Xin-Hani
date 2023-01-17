@@ -49,6 +49,19 @@ const EnrolementHome = () => {
       });
   };
 
+  const updateStatus = (id, status) => {
+    fetch(`http://localhost:8080/inscription/${id}/${status}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => {
+        loadEnrolements();
+      })
+      .catch((err) => {
+        console.log("we have a problem " + err.message);
+      });
+  };
+
   return (
     <div className="container">
       <FormDiv>
@@ -108,6 +121,18 @@ const EnrolementHome = () => {
                   >
                     Add Roster
                   </Link>
+                  <button
+                    className="btn btn-danger mx-2"
+                    onClick={() => updateStatus(enrolement.id, "REFUSED")}
+                  >
+                    Refused
+                  </button>
+                  <button
+                    className="btn btn-danger mx-2"
+                    onClick={() => updateStatus(enrolement.id, "WAITING")}
+                  >
+                    Waiting
+                  </button>
                 </td>
               </tr>
             ))}
