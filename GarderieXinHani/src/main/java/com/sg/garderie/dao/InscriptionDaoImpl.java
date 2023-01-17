@@ -74,6 +74,12 @@ public class InscriptionDaoImpl implements InscriptionDao {
                 inscription.getStatus().name(), inscription.getId());
     }
 
+    @Override
+    public void updateStatus(Integer id, String status) {
+        final String UPDATE_INSCRIPTION = "UPDATE inscription SET Status=? WHERE id=?";
+        jdbc.update(UPDATE_INSCRIPTION, status, id);
+    }
+
     public static final class InscriptionMapper implements RowMapper<Inscription> {
 
         @Override
