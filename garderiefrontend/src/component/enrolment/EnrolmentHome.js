@@ -57,6 +57,7 @@ const EnrolementHome = () => {
             btnConfirm(ev);
           }}
         >
+          <UpSection>
           <SelectDiv>
             <Select
               className="basic-single"
@@ -73,6 +74,7 @@ const EnrolementHome = () => {
           <Buttonsdiv>
             <Button type="submit">Submit</Button>
           </Buttonsdiv>
+          </UpSection>
         </Form>
       </FormDiv>
       <div className="py-4">
@@ -106,7 +108,7 @@ const EnrolementHome = () => {
                     className="btn btn-primary mx-2"
                     to={`/child/AddChild/${enrolement.id}`}
                   >
-                    Add Roster
+                    Add Enroled Chiled
                   </Link>
                 </td>
               </tr>
@@ -120,12 +122,18 @@ const EnrolementHome = () => {
 
 export default EnrolementHome;
 
+
+const UpSection = styled.div`
+display: flex;
+margin-right: 500px;
+`;
+
 const FormDiv = styled.div``;
 
 const Form = styled.form`
-  // height: 480px;
+/* height: 20px;
   width: 600px;
-  border-radius: 10px;
+   border-radius: 10px; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -133,7 +141,7 @@ const Form = styled.form`
   padding: 60px;
   margin: 15px;
   border: none;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 1); */
 `;
 
 const Buttonsdiv = styled.div`
@@ -141,13 +149,14 @@ const Buttonsdiv = styled.div`
   /* align-items:center; */
   margin-left: 20px;
   margin-right: 50px;
-  margin-top: 10px;
+  margin-top: -12px;
 `;
 
 const SelectDiv = styled.div`
   padding: 5px 13px;
   margin-left: -5px;
   margin-right: 7px;
+  margin-top: 5px;
 `;
 
 const Button = styled.button`
