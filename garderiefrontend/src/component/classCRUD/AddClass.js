@@ -1,80 +1,79 @@
-
 import React, { useState } from "react";
 import DateSelect from "../DateSelect";
 import styled from "styled-components";
 import Class from "../../assets/Class.jpg";
 import { Link } from "react-router-dom";
 
-
 function AddClass() {
+  const [name, setName] = useState(null);
+  const [openDate, setOpenDate] = useState(null);
+  const [message, setMessage] = useState(null);
+  var lastStatus;
 
-    const [name, setName] = useState(null);
-    const [openDate, setOpenDate] = useState(null);
-    const [message, setMessage] = useState(null);
-    var lastStatus;
-  
-    const btnConfirm = (ev) => {
-      ev.preventDefault();
-  
-      fetch("http://localhost:8080/class", {
-        method: "POST",
-        body: JSON.stringify({
-          name: name,
-          openDate: openDate,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
+  const btnConfirm = (ev) => {
+    ev.preventDefault();
+
+    fetch("http://localhost:8080/class", {
+      method: "POST",
+      body: JSON.stringify({
+        name: name,
+        openDate: openDate,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        lastStatus = res.status;
+        return res.json();
       })
-        .then((res) => {
-          lastStatus = res.status;
-          return res.json();
-        })
-        .then((data) => {
-          console.log(data);
-          console.log(lastStatus);
-          if (lastStatus === 201) {
-            localStorage.setItem("data", JSON.stringify(data.data));
-            // history('/confirmed');
-            console.log(data.data);
-            setMessage("New class successfully added.");
-            setName(null);
-            setOpenDate(null);
-          }
-        })
-        .catch((err) => {
-          // console.log("we have a problem " + err.message);
-          setMessage("we have a problem " + err.message);
-        });
-    };
-  
-    return (
-        <Wrapper>
-          <FormDiv>
-            <Form
-              onSubmit={(ev) => {
-                btnConfirm(ev);
-              }}
-            >
-              <div>
-                <Label>
-                  <Input
-                    required
-                    placeholder="Enter Class Name"
-                    type="text"
-                    value={name != null ? name : ""}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </Label>
-                <br />
-                <DateSelect
-                  placeholder="open Dates"
-                  selectedDate={openDate}
-                  setselectedDate={setOpenDate}
-                  value={openDate != null ? openDate : ""}
-                />
-    
-               <Buttonsdiv>
+      .then((data) => {
+        console.log(data);
+        console.log(lastStatus);
+        if (lastStatus === 201) {
+          localStorage.setItem("data", JSON.stringify(data.data));
+          // history('/confirmed');
+          console.log(data.data);
+          setMessage("New class successfully added");
+          setName(null);
+          setOpenDate(null);
+        }
+      })
+      .catch((err) => {
+        // console.log("we have a problem " + err.message);
+        setMessage("we have a problem " + err.message);
+      });
+  };
+
+  return (
+    <Wrapper>
+      <Title> Insert Class Info</Title>
+
+      <FormDiv>
+        <Form
+          onSubmit={(ev) => {
+            btnConfirm(ev);
+          }}
+        >
+          <div>
+            <Label>
+              <Input
+                required
+                placeholder="Enter Class Name"
+                type="text"
+                value={name != null ? name : ""}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </Label>
+            <br />
+            <DateSelect
+              placeholder="open Dates"
+              selectedDate={openDate}
+              setselectedDate={setOpenDate}
+              value={openDate != null ? openDate : ""}
+            />
+
+            <Buttonsdiv>
               <Button type="submit">Submit</Button>
 
               <Link to="/Classes" style={{ textDecoration: "none" }}>
@@ -82,16 +81,21 @@ function AddClass() {
               </Link>
             </Buttonsdiv>
             <MessageLabel> {message} </MessageLabel>
+          </div>
+        </Form>
+      </FormDiv>
+    </Wrapper>
+  );
+}
 
-
-
-              </div>
-            </Form>
-          </FormDiv>
-        </Wrapper>
-      );
-    }
-
+const Title = styled.div`
+  position: absolute;
+  color: white;
+  margin-top: -250px;
+  margin-left: -100px;
+  z-index: 5;
+  font-size: 20px;
+`;
 
 const Wrapper = styled.div`
   height: calc(100vh - 60px);
@@ -127,17 +131,17 @@ const Form = styled.form`
 `;
 const Label = styled.label`
   align-items: center;
-  color:white;
+  color: white;
   display: block;
 `;
 
-const MessageLabel=styled.label`
-align-items: center;
-color:white;
-margin-left: 2px;
-display: block;
-font-weight: 400;
-color:white;
+const MessageLabel = styled.label`
+  align-items: center;
+  color: white;
+  margin-left: 20px;
+  display: block;
+  font-weight: 400;
+  color: white;
 `;
 const Button = styled.button`
   position: relative;
@@ -160,9 +164,8 @@ const Button = styled.button`
   transition: box-shadow 0.5s ease;
 `;
 
-
 const Input = styled.input`
-margin: 0 auto;
+  margin: 0 auto;
   color: black;
   padding: 5px 20px;
   display: block;
@@ -173,8 +176,7 @@ margin: 0 auto;
   display: flex;
   justify-content: right;
   width: 230px;
-  margin-right: 20px;
-
+  margin-right: 24px;
 `;
 
 const Buttonsdiv = styled.div`
@@ -185,6 +187,4 @@ const Buttonsdiv = styled.div`
   margin-top: 10px;
 `;
 
-
-export default AddClass
-
+export default AddClass;

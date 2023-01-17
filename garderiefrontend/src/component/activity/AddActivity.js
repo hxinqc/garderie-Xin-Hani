@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DateSelect from "../DateSelect";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+
 // import { useNavigate } from 'react-router-dom';
 
 export default function AddActivity() {
@@ -61,7 +62,7 @@ export default function AddActivity() {
         console.log(lastStatus);
         if (lastStatus === 201) {
           localStorage.setItem("data", JSON.stringify(data.data));
-          setMessage("Activity added.");
+          setMessage("Activity Successfully added");
           resetForm();
         }
       })
@@ -73,6 +74,8 @@ export default function AddActivity() {
 
   return (
     <Wrapper>
+      <Title> Insert Activity Info</Title>
+
       <FormDiv>
         <Form
           onSubmit={(ev) => {
@@ -92,19 +95,30 @@ export default function AddActivity() {
               />
             </Label>
             <br />
-            <div >
+            <DateDiv>
               {/* ActivityDate: */}
               <DateSelect
+                placeholder="Activity Date"
                 selectedDate={activityDate}
                 setselectedDate={(date) => {
                   setActivityDate(date);
                 }}
                 value={activityDate != null ? activityDate : ""}
               />
-            </div>
+            </DateDiv>
             <br />
-            <Button onClick={handleClick}>Select a file</Button>
-            <Label>{orgFileName}</Label>
+            <Label>
+              <Textarea
+                required
+                placeholder="Description"
+                rows="10"
+                cols="50"
+                value={description != null ? description : ""}
+                onChange={(e) => setDescription(e.target.value)}
+              ></Textarea>
+            </Label>
+            <FileButton onClick={handleClick}>Select File</FileButton>
+            <FileLabel>{orgFileName}</FileLabel>
             <input
               type="file"
               ref={hiddenFileInput}
@@ -112,30 +126,70 @@ export default function AddActivity() {
               style={{ display: "none" }}
             />
             <br />
-            <Label>
-              <textarea
-                required
-                placeholder="Description"
-                rows="10"
-                cols="50"
-                value={description != null ? description : ""}
-                onChange={(e) => setDescription(e.target.value)}
-              ></textarea>
-            </Label>
+
             <Buttonsdiv>
               <Button type="submit">Submit</Button>
               <Link to="/Activities" style={{ textDecoration: "none" }}>
                 <Button type="button"> Back </Button>
               </Link>
             </Buttonsdiv>
-            
-            <Label>Message: {message} </Label>
+
+            <MessageLabel> {message} </MessageLabel>
           </div>
         </Form>
       </FormDiv>
     </Wrapper>
   );
 }
+
+// const Backdiv = styled.div`
+// width:500px;
+// height: 450px;
+// margin:60px auto 0;
+// background:rgb(0,0,0,0.6);
+// `;
+
+const FileLabel = styled.label`
+  margin-left: 40px;
+  z-index: 5;
+  color: white;
+  margin-bottom: -20px;
+`;
+
+const DateDiv = styled.div`
+  margin-right: 15px;
+  margin-top: -25px;
+`;
+const Textarea = styled.textarea`
+  height: 100px;
+  width: 224px;
+  border-radius: 1px;
+  border: 1px solid #ccc;
+  font-weight: 200;
+  font-size: 15px;
+  font-family: Verdana;
+  box-shadow: 1px 1px 5px #ccc;
+  margin-top: -20px;
+  margin-left: 20px;
+  /* &.hover {
+    width: 200px;
+    height: 29px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    font-weight: 200;
+    font-size: 15px;
+    font-family: Verdana;
+    box-shadow: 1px 1px 5px #ccc;
+  } */
+`;
+
+const Title = styled.div`
+  position: absolute;
+  color: white;
+  margin-top: -420px;
+  margin-left: -120px;
+  z-index: 5;
+`;
 
 const Wrapper = styled.div`
   height: calc(100vh - 60px);
@@ -156,17 +210,18 @@ const Wrapper = styled.div`
 const FormDiv = styled.div``;
 
 const Form = styled.form`
-  // height: 390px;
-  width: 600px;
+  height: 500px;
+  width: 320px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: rgba(0, 0, 22, 0.8);
   padding: 60px;
-  margin: 15px;
+  margin: 5px;
   border: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+  margin-top: 10px;
 `;
 const Label = styled.label`
   align-items: center;
@@ -177,19 +232,18 @@ const Label = styled.label`
 const MessageLabel = styled.label`
   align-items: center;
   color: white;
-  margin-left: 45px;
-  margin-top: 10px;
+  margin-left: 2px;
   display: block;
-  font-weight: 300;
+  font-weight: 400;
   color: white;
+  margin-top: 20px;
+  margin-left: 14px;
 `;
-
 const Button = styled.button`
   position: relative;
   align-items: center;
   margin-bottom: 20px;
-  display: block;
-  margin: 0 auto;
+  margin-left: 16px;
   width: 80px;
   background-color: #f9c000;
   color: #333;
@@ -201,6 +255,27 @@ const Button = styled.button`
   margin-top: 5px;
   font-size: 15px;
   border-radius: 5px;
+  box-shadow: 0 0 4px #f7dd00;
+  transition: box-shadow 0.5s ease;
+`;
+
+const FileButton = styled.button`
+  position: relative;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-left: 25px;
+  width: 80px;
+  background-color: #f9c000;
+  color: #333;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  height: 40px;
+  width: 90px;
+  font-weight: 400;
+  margin-top: 15px;
+  font-size: 15px;
+  border-radius: 2px;
   box-shadow: 0 0 4px #f7dd00;
   transition: box-shadow 0.5s ease;
 `;
@@ -217,12 +292,13 @@ const Input = styled.input`
   display: flex;
   justify-content: right;
   width: 230px;
-  margin-right: 12px;
+  margin-right: 40px;
 `;
+
 const Buttonsdiv = styled.div`
   display: flex;
   /* align-items:center; */
-  margin-left: 20px;
-  margin-right: 50px;
-  margin-top: 10px;
+  margin-left: 40px;
+  margin-right: 30px;
+  margin-top: 40px;
 `;

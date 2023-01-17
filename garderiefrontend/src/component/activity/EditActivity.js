@@ -116,7 +116,6 @@ export default function EditActivity() {
             </Label>
             <br />
             <div style={{ width: "300px" }}>
-              ActivityDate:
               <DateSelect
                 selectedDate={activityDate!=null?activityDate:""}
                 setselectedDate={(date) => {
@@ -127,8 +126,8 @@ export default function EditActivity() {
               />
             </div>
             <br />
-            <Button onClick={handleClick}>Select a file</Button>
-            <Label>{orgFileName}</Label>
+            <FileButton onClick={handleClick}>Select File</FileButton>
+            <FileLabel>{orgFileName}</FileLabel>
             <input
               type="file"
               ref={hiddenFileInput}
@@ -161,6 +160,15 @@ export default function EditActivity() {
   );
 }
 
+ 
+const FileLabel = styled.label`
+margin-left: 40px;
+z-index: 5;
+color:white;
+margin-bottom:-20px;
+
+`;
+
 const Title = styled.div`
   position: absolute;
   color: white;
@@ -188,7 +196,7 @@ const Wrapper = styled.div`
 const FormDiv = styled.div``;
 
 const Form = styled.form`
-  height: 480px;
+  height: 500px;
   width: 320px;
   border-radius: 10px;
   display: flex;
@@ -196,10 +204,12 @@ const Form = styled.form`
   align-items: center;
   background: rgba(0, 0, 22, 0.8);
   padding: 60px;
-  margin: 15px;
+  margin: 5px;
   border: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 1);
-`;
+  margin-top: 10px;
+  `;
+
 const Label = styled.label`
   align-items: center;
   color: white;
@@ -232,7 +242,7 @@ const Button = styled.button`
   font-weight: 400;
   margin-top: 25px;
   font-size: 15px;
-  border-radius: 5px;
+  border-radius: 2px;
   box-shadow: 0 0 4px #f7dd00;
   transition: box-shadow 0.5s ease;
 `;
@@ -249,8 +259,8 @@ const Input = styled.input`
   display: flex;
   justify-content: right;
   width: 230px;
-  margin-right: 12px;
-  border-radius: 5px;
+  margin-right: 22spx;
+  border-radius: 2px;
 `;
 const Buttonsdiv = styled.div`
   display: flex;
@@ -258,4 +268,24 @@ const Buttonsdiv = styled.div`
   margin-left: 20px;
   margin-right: 50px;
   margin-top: 10px;
+`;
+const FileButton = styled.button`
+  position: relative;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-left: 35px;
+  width: 80px;
+  background-color: #f9c000;
+  color: #333;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  height: 40px;
+  width: 90px;
+  font-weight: 400;
+  margin-top: 15px;
+  font-size: 15px;
+  border-radius: 2px;
+  box-shadow: 0 0 4px #f7dd00;
+  transition: box-shadow 0.5s ease;
 `;

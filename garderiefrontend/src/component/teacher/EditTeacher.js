@@ -71,7 +71,7 @@ export default function EditTeacher() {
         if (lastStatus === 200) {
           // localStorage.setItem('data', JSON.stringify(data.data));
           // console.log(data.data);
-          setMessage("Teacher Information Edited");
+          setMessage("Teacher Information successfully Edited");
           resetForm();
         }
       })
@@ -83,7 +83,7 @@ export default function EditTeacher() {
 
   return (
     <Wrapper>
-            <Title> Modify Teacher Info</Title>
+      <Title> Modify Teacher Info</Title>
 
       <FormDiv>
         <Form
@@ -154,6 +154,7 @@ const Title = styled.div`
   margin-top: -350px;
   margin-left: -100px;
   z-index: 5;
+  font-size: 22px;
 `;
 
 const Wrapper = styled.div`
@@ -196,10 +197,12 @@ const Label = styled.label`
 const MessageLabel = styled.label`
   align-items: center;
   color: white;
-  margin-left: 45px;
+  margin-left: 15px;
   margin-top: 30px;
   display: block;
   font-weight: 300;
+  font-size: 18px;
+
   color: white;
 `;
 

@@ -7,20 +7,20 @@ const AdminHome = () => {
   useEffect(() => {
     loadAdmins();
   }, []);
-  
-  const loadAdmins = async() => {
+
+  const loadAdmins = async () => {
     await fetch("http://localhost:8080/admin")
       .then((resp) => resp.json())
       .then((data) => {
         console.log(data);
         setAdmins(data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("we have a problem " + err.message);
       });
   };
 
-  const deleteAdmin=(id) => {
+  const deleteAdmin = (id) => {
     if (!window.confirm("Are you sure to delete this admin?")) {
       return;
     }
@@ -28,14 +28,12 @@ const AdminHome = () => {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     })
-    .then((res) => {
-      
-      loadAdmins();
-    })
-    .catch((err) => {      
-      console.log("we have a problem " + err.message);
-    });
-    
+      .then((res) => {
+        loadAdmins();
+      })
+      .catch((err) => {
+        console.log("we have a problem " + err.message);
+      });
   };
 
   return (
@@ -54,12 +52,10 @@ const AdminHome = () => {
           <tbody>
             {admins.map((admin, index) => (
               <tr key={admin.id}>
-                <td>
-                  {index + 1}
-                </td>
+                <td>{index + 1}</td>
                 <td>{admin.name}</td>
                 <td>{admin.description}</td>
-                <td>{admin.isActive ? "true": "false"}</td>
+                <td>{admin.isActive ? "true" : "false"}</td>
                 <td>
                   <Link
                     className="btn btn-primary mx-2"

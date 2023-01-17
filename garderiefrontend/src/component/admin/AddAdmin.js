@@ -53,6 +53,8 @@ export default function AddAdmin() {
 
   return (
     <Wrapper>
+      <Title> Insert Admin Info</Title>
+
       <FormDiv>
         <Form
           onSubmit={(ev) => {
@@ -104,6 +106,14 @@ export default function AddAdmin() {
     </Wrapper>
   );
 }
+const Title = styled.div`
+  position: absolute;
+  color: white;
+  margin-top: -300px;
+  margin-left: -100px;
+  z-index: 5;
+  font-size: 20px;
+`;
 
 const Wrapper = styled.div`
   height: calc(100vh - 60px);
