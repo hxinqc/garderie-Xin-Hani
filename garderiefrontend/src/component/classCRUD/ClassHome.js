@@ -53,6 +53,7 @@ function ClassHome() {
               <th scope="col">ID</th>
               <th scope="col">Name</th>
               <th scope="col">Open Date</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
