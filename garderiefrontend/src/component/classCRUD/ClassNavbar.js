@@ -12,11 +12,11 @@ function ClassNavbar() {
     <NavDiv className="container">
         {/* <nav className="navbar navbar-expand-lg navbar-light bg-primary">
         <div className="container-fluid"> */}
-        <MyButton>
+        <LabelDiv>
           <Link className="navbar-brand" to="/Classes">
             Class Info
           </Link>
-        </MyButton>
+        </LabelDiv>
         <button
           className="navbar-toggler"
           type="button"
@@ -42,8 +42,8 @@ function ClassNavbar() {
 }
 
 const LabelDiv=styled.div`
-color:red;
-margin-left: 400px;
+color:white;
+margin-left: 250px;
 font-size: 22px;
 font-weight: 300;
 z-index: 100;
@@ -54,11 +54,10 @@ z-index: 100;
 const MyButton = styled.div`
 display: flex;
 color: white;
-margin-left: 260px;
+margin-left: 230px;
 margin-top: 30px;
 align-items: center;
 justify-content: center;
-
 `;
 
 

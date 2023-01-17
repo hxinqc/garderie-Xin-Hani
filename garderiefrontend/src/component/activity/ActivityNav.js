@@ -1,21 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import "./teacherCRUDNav.css";
+import "./activityNav.css";
 
-const TeacherNavbar = () => {
-  return (
+
+function ActivityNav() {
+  return(
     <>
-      {/* <LabelDiv>Teachers Info </LabelDiv> */}
 
       <NavDiv className="container">
         {/* <nav className="navbar navbar-expand-lg navbar-light bg-primary">
         <div className="container-fluid"> */}
         <LabelDiv>
-          <Link className="navbar-brand" to="/Teachers">
-            Teachers Info
+          <Link className="navbar-brand" to="/Activities">
+            Activity Info
           </Link>
-        </LabelDiv>
+          </LabelDiv>
+
         <button
           className="navbar-toggler"
           type="button"
@@ -29,8 +30,9 @@ const TeacherNavbar = () => {
         </button>
 
         <MyButton>
-        <Link className="btn btn-outline-light" to="/Teachers/addTeacher">
-          Add Teacher
+
+        <Link className="btn btn-outline-light" to="/activity/AddActivity">
+          Add Activity
         </Link>
         </MyButton>
 
@@ -39,37 +41,39 @@ const TeacherNavbar = () => {
       </NavDiv>
     </>
   );
-};
+}
 
-const LabelDiv=styled.div`
-color:white;
-margin-left: 250px;
-font-size: 22px;
-font-weight: 300;
-z-index: 100;
-`;
-const MyButton = styled.div`
-display: flex;
-color: white;
-margin-left: 100px;
-margin-top: 10px;
-align-items: center;
-justify-content: center;
-`;
 const NavDiv = styled.div`
 display: flex;
 width: 550px;
 height: 50px;
-align-items:center;
-/* margin-left: 410px; */
+align-items: center;
 // margin-left: 410px;
 /* background-color:black; */
 background: rgba(0, 0, 22, 0.8);
 align-items: center;
 justify-content: center;
-color:white;
+color: white;
 box-shadow: 0 0 10px rgba(0, 0, 0, 1);
-margin-bottom:-20px;
+margin-bottom: -20px;
 `;
 
-export default TeacherNavbar;
+const LabelDiv = styled.div`
+color: red;
+margin-left: 100px;
+font-size: 16px;
+font-weight: 300;
+z-index: 100;
+margin-top: 10px;
+
+`;
+
+const MyButton = styled.div`
+display: flex;
+color: white;
+margin-left: 400px;
+margin-top: -44px;
+align-items: center;
+justify-content: center;
+`;
+export default ActivityNav

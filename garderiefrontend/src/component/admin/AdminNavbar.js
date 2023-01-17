@@ -8,11 +8,11 @@ const AdminNavbar = () => {
     <NavDiv className="container">
       {/* <nav className="navbar navbar-expand-lg navbar-light bg-primary">
         <div className="container-fluid"> */}
-      <MyButton>
+      <LabelDiv>
         <Link className="navbar-brand" to="/Admins">
-          Selected Admins Info
+          Admins Info
         </Link>
-      </MyButton>
+      </LabelDiv>
       <button
         className="navbar-toggler"
         type="button"
@@ -25,26 +25,30 @@ const AdminNavbar = () => {
         <span className="navbar-toggler-icon"></span>
       </button>
 
+<MyButton>
       <Link className="btn btn-outline-light" to="/Admins/AddAdmin">
         Add Admin
       </Link>
+      </MyButton>
     </NavDiv>
   );
 };
 
-const LabelDiv = styled.div`
-  color: red;
-  margin-left: 400px;
-  font-size: 22px;
-  font-weight: 300;
-  z-index: 100;
+const LabelDiv=styled.div`
+color:white;
+margin-left: 230px;
+font-size: 22px;
+font-weight: 300;
+z-index: 100;
 `;
+
+
 
 const MyButton = styled.div`
   display: flex;
   color: white;
-  margin-left: 300px;
-  margin-top: 30px;
+  margin-left: 20px;
+  margin-top: 8px;
   align-items: center;
   justify-content: center;
 `;

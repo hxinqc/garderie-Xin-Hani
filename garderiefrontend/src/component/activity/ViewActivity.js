@@ -37,7 +37,7 @@ export default function ViewActivity() {
           <br />
           <Label>Name: {name != null ? name : ""}</Label>
           <br />
-          <Label>ActivityDate: {activityDate!= null ? activityDate : ""}</Label>
+          <Label>Activity Date: {activityDate!= null ? activityDate : ""}</Label>
           <br />
           <img src={(BASE_URL + picPath)} width="300" height="200"/>
           <br />
@@ -58,7 +58,8 @@ const Mydiv = styled.div`
   display: flex;
   align-items: center;
   font-weight: 900px;
-  margin-bottom: 30px;
+  font-size: 20px;
+  margin-bottom: 5px;
 `;
 
 const Wrapper = styled.div`
@@ -80,8 +81,8 @@ const Wrapper = styled.div`
 const FormDiv = styled.div``;
 
 const Form = styled.form`
-  height: 600px;
-  width: 800px;
+  height: 550px;
+  width: 400px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -108,9 +109,8 @@ const MessageLabel = styled.label`
 `;
 
 const Button = styled.button`
-  position: relative;
+  position: absolute;
   align-items: center;
-  margin-bottom: 20px;
   display: block;
   margin: 0 auto;
   width: 80px;
@@ -120,8 +120,8 @@ const Button = styled.button`
   cursor: pointer;
   align-items: center;
   padding: 3px;
-  font-weight: 300;
-  margin-top: 5px;
+  font-weight: 400;
+  margin-left: -40px;
   font-size: 15px;
   border-radius: 30px;
   box-shadow: 0 0 4px #f7dd00;

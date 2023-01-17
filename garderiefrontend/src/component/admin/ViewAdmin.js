@@ -61,6 +61,7 @@ const Mydiv = styled.div`
   align-items: center;
   font-weight: 900px;
   margin-bottom: 30px;
+  font-size: 20px;
 `;
 
 const Wrapper = styled.div`
@@ -122,7 +123,7 @@ const Button = styled.button`
   cursor: pointer;
   align-items: center;
   padding: 3px;
-  font-weight: 300;
+  font-weight: 400;
   margin-top: 5px;
   font-size: 15px;
   border-radius: 30px;

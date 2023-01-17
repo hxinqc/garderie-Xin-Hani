@@ -72,12 +72,12 @@ export default function EditAdmin() {
       })
       .then((data) => {
         console.log(data);
-        if(lastStatus === 204){
-            setMessage('Admin edited.');
-            resetForm();
-        }        
-    })
-    .catch(err => {
+        if (lastStatus === 204) {
+          setMessage("Admin Info successfully edited");
+          resetForm();
+        }
+      })
+      .catch((err) => {
         // console.log("we have a problem " + err.message);
         setMessage("we have a problem " + err.message);
       });
@@ -85,7 +85,7 @@ export default function EditAdmin() {
 
   return (
     <Wrapper>
-      <Title> Insert Admin Info</Title>
+      <Title> Modify Admin Info</Title>
 
       <FormDiv>
         <Form
@@ -138,7 +138,7 @@ export default function EditAdmin() {
             <Buttonsdiv>
               <Button type="submit">Submit</Button>
 
-              <Link  to={"/Admins"} style={{ textDecoration: "none" }}>
+              <Link to={"/Admins"} style={{ textDecoration: "none" }}>
                 <Button type="button"> Back </Button>
               </Link>
             </Buttonsdiv>
@@ -204,8 +204,8 @@ const Label = styled.label`
 const MessageLabel = styled.label`
   align-items: center;
   color: white;
-  margin-left: 45px;
-  margin-top: 30px;
+  margin-left: 5px;
+  margin-top: 20px;
   display: block;
   font-weight: 300;
   color: white;

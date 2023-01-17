@@ -7,20 +7,20 @@ const ChildHome = () => {
   useEffect(() => {
     loadChildren();
   }, []);
-  
-  const loadChildren = async() => {
+
+  const loadChildren = async () => {
     await fetch("http://localhost:8080/roster")
       .then((resp) => resp.json())
       .then((data) => {
         console.log(data);
         setChildren(data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("we have a problem " + err.message);
       });
   };
 
-  const deleteRoster=(id) => {
+  const deleteRoster = (id) => {
     if (!window.confirm("Are you sure to delete this roster?")) {
       return;
     }
@@ -28,14 +28,12 @@ const ChildHome = () => {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     })
-    .then((res) => {
-      
-      loadChildren();
-    })
-    .catch((err) => {      
-      console.log("we have a problem " + err.message);
-    });
-    
+      .then((res) => {
+        loadChildren();
+      })
+      .catch((err) => {
+        console.log("we have a problem " + err.message);
+      });
   };
 
   return (
@@ -54,9 +52,7 @@ const ChildHome = () => {
           <tbody>
             {children.map((child, index) => (
               <tr key={child.id}>
-                <td>
-                  {index + 1}
-                </td>
+                <td>{index + 1}</td>
                 <td>{child.firstName}</td>
                 <td>{child.lastName}</td>
                 <td>{child.inscripId}</td>

@@ -50,7 +50,7 @@ export default function AddTeacher() {
 
   return (
     <Wrapper>
-            <Title> Modify Admin Info</Title>
+      <Title> Insert Tacher Info</Title>
 
       <FormDiv>
         <Form
