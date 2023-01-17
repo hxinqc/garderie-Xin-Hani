@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DateSelect from "../DateSelect";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+
 // import { useNavigate } from 'react-router-dom';
 
 export default function AddActivity() {
@@ -73,7 +74,7 @@ export default function AddActivity() {
 
   return (
     <Wrapper>
-            <Title> Insert Activity Info</Title>
+      <Title> Insert Activity Info</Title>
 
       <FormDiv>
         <Form
@@ -94,7 +95,7 @@ export default function AddActivity() {
               />
             </Label>
             <br />
-            <DateDiv >
+            <DateDiv>
               {/* ActivityDate: */}
               <DateSelect
                 placeholder="Activity Date"
@@ -106,15 +107,6 @@ export default function AddActivity() {
               />
             </DateDiv>
             <br />
-            <FileButton onClick={handleClick}>Select File</FileButton>
-            <Label>{orgFileName}</Label>
-            <input
-              type="file"
-              ref={hiddenFileInput}
-              onChange={handleChange}
-              style={{ display: "none" }}
-            />
-            <br />
             <Label>
               <Textarea
                 required
@@ -125,13 +117,23 @@ export default function AddActivity() {
                 onChange={(e) => setDescription(e.target.value)}
               ></Textarea>
             </Label>
+            <FileButton onClick={handleClick}>Select File</FileButton>
+            <FileLabel>{orgFileName}</FileLabel>
+            <input
+              type="file"
+              ref={hiddenFileInput}
+              onChange={handleChange}
+              style={{ display: "none" }}
+            />
+            <br />
+            
             <Buttonsdiv>
               <Button type="submit">Submit</Button>
               <Link to="/Activities" style={{ textDecoration: "none" }}>
                 <Button type="button"> Back </Button>
               </Link>
             </Buttonsdiv>
-            
+
             <MessageLabel> {message} </MessageLabel>
           </div>
         </Form>
@@ -141,36 +143,53 @@ export default function AddActivity() {
 }
 
 
-const DateDiv = styled.div`
-margin-right:15px;
-margin-top:-25px;
+// const Backdiv = styled.div`
+// width:500px;
+// height: 450px;
+// margin:60px auto 0;
+// background:rgb(0,0,0,0.6);
+// `;
+
+
+const FileLabel = styled.label`
+margin-left: 40px;
+z-index: 5;
+color:white;
+margin-bottom:-20px;
+
 `;
-const Textarea =styled.textarea`
-height: 100px;
-  width: 300px;
-border-radius: 3px;
-border: 1px solid #CCC;
-font-weight: 200;
-font-size: 15px;
-font-family: Verdana;
-box-shadow: 1px 1px 5px #CCC;
-margin-top: 60px;
-&.hover{
-  width: 200px;
-height: 29px;
-border-radius: 3px;
-border: 1px solid #CCC;
-font-weight: 200;
-font-size: 15px;
-font-family: Verdana;
-box-shadow: 1px 1px 5px #CCC;
-}
+
+const DateDiv = styled.div`
+  margin-right: 15px;
+  margin-top: -25px;
+`;
+const Textarea = styled.textarea`
+  height: 100px;
+  width: 224px;
+  border-radius: 1px;
+  border: 1px solid #ccc;
+  font-weight: 200;
+  font-size: 15px;
+  font-family: Verdana;
+  box-shadow: 1px 1px 5px #ccc;
+  margin-top: -20px;
+  margin-left: 20px;
+  /* &.hover {
+    width: 200px;
+    height: 29px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    font-weight: 200;
+    font-size: 15px;
+    font-family: Verdana;
+    box-shadow: 1px 1px 5px #ccc;
+  } */
 `;
 
 const Title = styled.div`
   position: absolute;
   color: white;
-  margin-top: -500px;
+  margin-top: -420px;
   margin-left: -120px;
   z-index: 5;
 `;
@@ -194,7 +213,7 @@ const Wrapper = styled.div`
 const FormDiv = styled.div``;
 
 const Form = styled.form`
-  height: 600px;
+  height: 500px;
   width: 320px;
   border-radius: 10px;
   display: flex;
@@ -205,7 +224,7 @@ const Form = styled.form`
   margin: 5px;
   border: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 1);
-  margin-top:10px;
+  margin-top: 10px;
 `;
 const Label = styled.label`
   align-items: center;
@@ -247,22 +266,22 @@ const FileButton = styled.button`
   position: relative;
   align-items: center;
   margin-bottom: 20px;
-  margin-left: 100px;
+  margin-left: 25px;
   width: 80px;
   background-color: #f9c000;
   color: #333;
   border: none;
   cursor: pointer;
   align-items: center;
-  height:40px;
+  height: 40px;
   width: 90px;
   font-weight: 400;
-  margin-top: 5px;
+  margin-top: 15px;
   font-size: 15px;
-  border-radius: 5px;
+  border-radius: 2px;
   box-shadow: 0 0 4px #f7dd00;
-  transition: box-shadow 0.5s ease`;
-
+  transition: box-shadow 0.5s ease;
+`;
 
 const Input = styled.input`
   margin: 0 auto;
@@ -282,7 +301,7 @@ const Input = styled.input`
 const Buttonsdiv = styled.div`
   display: flex;
   /* align-items:center; */
-  margin-left: 50px;
+  margin-left: 40px;
   margin-right: 30px;
-  margin-top: 10px;
+  margin-top: 40px;
 `;
