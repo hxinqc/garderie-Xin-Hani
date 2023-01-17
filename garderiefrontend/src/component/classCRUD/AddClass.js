@@ -138,7 +138,7 @@ const Label = styled.label`
 const MessageLabel = styled.label`
   align-items: center;
   color: white;
-  margin-left: 2px;
+  margin-left: 20px;
   display: block;
   font-weight: 400;
   color: white;
