@@ -273,7 +273,7 @@ const FileButton = styled.button`
   position: relative;
   align-items: center;
   margin-bottom: 20px;
-  margin-left: 25px;
+  margin-left: 35px;
   width: 80px;
   background-color: #f9c000;
   color: #333;

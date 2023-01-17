@@ -126,7 +126,7 @@ export default function AddActivity() {
               style={{ display: "none" }}
             />
             <br />
-            
+
             <Buttonsdiv>
               <Button type="submit">Submit</Button>
               <Link to="/Activities" style={{ textDecoration: "none" }}>
@@ -142,7 +142,6 @@ export default function AddActivity() {
   );
 }
 
-
 // const Backdiv = styled.div`
 // width:500px;
 // height: 450px;
@@ -150,13 +149,11 @@ export default function AddActivity() {
 // background:rgb(0,0,0,0.6);
 // `;
 
-
 const FileLabel = styled.label`
-margin-left: 40px;
-z-index: 5;
-color:white;
-margin-bottom:-20px;
-
+  margin-left: 40px;
+  z-index: 5;
+  color: white;
+  margin-bottom: -20px;
 `;
 
 const DateDiv = styled.div`
