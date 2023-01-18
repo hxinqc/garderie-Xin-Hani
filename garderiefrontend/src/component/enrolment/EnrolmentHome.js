@@ -65,7 +65,7 @@ const EnrolementHome = () => {
   return (
     <div className="container">
       <FormDiv>
-      <Title> Select Enroled Status to See Ralated</Title>
+      <Title> Select Enroled Status to See Ralated Childs</Title>
 
         <Form
           onSubmit={(ev) => {
@@ -153,7 +153,7 @@ const Title = styled.div`
   position: absolute;
   color: white;
   margin-top: 20px;
-  margin-left: 130px;
+  margin-left: 100px;
   z-index: 5;
   font-weight:300px;
   font-size: 19px;
