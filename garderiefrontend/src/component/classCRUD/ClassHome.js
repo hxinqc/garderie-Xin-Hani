@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function ClassHome() {
   const [classes, setClasses] = useState([]);
-
-  const { id } = useParams();
 
   useEffect(() => {
     loadClasses();
@@ -14,7 +12,6 @@ function ClassHome() {
     await fetch("http://localhost:8080/classes")
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data);
         setClasses(data);
       })
       .catch((err) => {
@@ -68,6 +65,18 @@ function ClassHome() {
                     to={`/classes/viewClass/${eachClass.id}`}
                   >
                     View
+                  </Link>
+                  <Link
+                    className="btn btn-primary mx-2"
+                    to={`/classes/teachers/${eachClass.id}`}
+                  >
+                    Assign Teachers
+                  </Link>
+                  <Link
+                    className="btn btn-primary mx-2"
+                    to={`/classes/activities/${eachClass.id}`}
+                  >
+                    Activities
                   </Link>
                   <Link
                     className="btn btn-outline-primary mx-2"
