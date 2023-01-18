@@ -309,6 +309,15 @@ public class GarderieServiceImpl implements GarderieService {
     }
 
     @Override
+    public List<ActivitiesClassId> getAllActivitiesClassDisplay(int classId) {
+        List<ActivitiesClassId> list = classActivitiesDao.getAllActivitiesClassDisplay(classId);
+        if (list != null)
+            list.stream().forEach(activities -> activities.setPicPath("/download/" +
+                activities.getPicPath().replaceFirst(FILE_BASE_PATH, "")));
+        return list;
+    }
+
+    @Override
     public void editActivities(Activities activities) throws ActivitiesException {
         Activities retrieveActivities = getActivitiesById(activities.getId());
         File file = new File(retrieveActivities.getPicPath());

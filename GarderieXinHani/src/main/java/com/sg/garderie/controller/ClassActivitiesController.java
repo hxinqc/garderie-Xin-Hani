@@ -1,9 +1,11 @@
 package com.sg.garderie.controller;
 
+import com.sg.garderie.model.ActivitiesClassId;
 import com.sg.garderie.model.ClassActivities;
 import com.sg.garderie.service.GarderieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,11 +21,13 @@ public class ClassActivitiesController {
     @PostMapping("/class/activities")
     @CrossOrigin
     @ResponseStatus(HttpStatus.CREATED)
-    public void addClassActivities(@RequestParam int classId, @RequestParam String activitiesIds) {
-        int[] ids = Arrays.stream(activitiesIds.split(",")).mapToInt(id -> Integer.valueOf(id)).toArray() ;
-
+    public ResponseEntity addClassActivities(@RequestParam int classId, @RequestParam String activitiesIds) {
+        int[] ids = null;
+        if (activitiesIds != null && !activitiesIds.equals("")) {
+            ids = Arrays.stream(activitiesIds.split(",")).mapToInt(id -> Integer.valueOf(id)).toArray();
+        }
         service.addClassActivities(classId, ids);
-
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/class/activities/{classId}")
@@ -36,6 +40,12 @@ public class ClassActivitiesController {
     @CrossOrigin
     public List<ClassActivities> getAllClassActivities() {
         return service.getAllClassesActivities();
+    }
+
+    @GetMapping("/activity/class/{classId}")
+    @CrossOrigin
+    public List<ActivitiesClassId> getAllClassActivitiesDisplay(@PathVariable int classId) {
+        return service.getAllActivitiesClassDisplay(classId);
     }
 
     @DeleteMapping("/class/activities/{classId}")

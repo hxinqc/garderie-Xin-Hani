@@ -1,5 +1,7 @@
 package com.sg.garderie.dao;
 
+import com.sg.garderie.model.Activities;
+import com.sg.garderie.model.ActivitiesClassId;
 import com.sg.garderie.model.ClassActivities;
 import com.sg.garderie.model.ClassEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +26,15 @@ public class ClassActivitiesDaoImpl implements ClassActivitiesDao {
     @Override
     @Transactional
     public void addClassActivities(int classId, int[] ids) {
-        final String INSERT_CLASS = "INSERT INTO ClassActivities(classId, activityId) "
-                + "VALUES(?,?)";
-        int length = ids.length;
-        IntStream.range(0, length)
-                .forEach(index -> jdbc.update(INSERT_CLASS,
-                        classId, ids[index]));
-
+        deleteClassActivitiesByClassId(classId);
+        if (ids != null && ids.length > 0) {
+            final String INSERT_CLASS = "INSERT INTO ClassActivities(classId, activityId) "
+                    + "VALUES(?,?)";
+            int length = ids.length;
+            IntStream.range(0, length)
+                    .forEach(index -> jdbc.update(INSERT_CLASS,
+                            classId, ids[index]));
+        }
     }
 
     @Override
@@ -54,6 +58,20 @@ public class ClassActivitiesDaoImpl implements ClassActivitiesDao {
     }
 
     @Override
+    public List<ActivitiesClassId> getAllActivitiesClassDisplay(int classId) {
+        try {
+            final String SELECT_ACTIVITIES_BY_ID = "SELECT activities.*, classActivities.classId " +
+                    "FROM activities LEFT JOIN classActivities " +
+                    "ON activities.id = classActivities.activityId " +
+                    "WHERE classActivities.classId = ? or classActivities.classId is null " +
+                    "ORDER BY activityDate desc";
+            return jdbc.query(SELECT_ACTIVITIES_BY_ID, new ActivitiesDisplayMapper(), classId);
+        } catch (DataAccessException ex) {
+            return null;
+        }
+    }
+
+    @Override
     public void deleteClassActivitiesByClassId(int classId) {
         final String DELETE_CLASS_ACTIVITIES = "DELETE FROM ClassActivities  "
                 + " WHERE classId=?";
@@ -68,6 +86,22 @@ public class ClassActivitiesDaoImpl implements ClassActivitiesDao {
             classActivities.setActivityId(rs.getInt("activityId"));
 
             return classActivities;
+        }
+    }
+
+    public static final class ActivitiesDisplayMapper implements RowMapper<ActivitiesClassId> {
+        @Override
+        public ActivitiesClassId mapRow(ResultSet rs, int index) throws SQLException {
+            ActivitiesClassId activitiesClassId = new ActivitiesClassId();
+            activitiesClassId.setId(rs.getInt("id"));
+            activitiesClassId.setName(rs.getString("name"));
+            activitiesClassId.setActivityDate(rs.getTimestamp("activityDate").toLocalDateTime().toLocalDate());
+            activitiesClassId.setDescription(rs.getString("description"));
+            activitiesClassId.setPicPath(rs.getString("picPath"));
+            if (rs.getObject("classId") != null)
+                activitiesClassId.setClassId(rs.getInt("classId"));
+
+            return activitiesClassId;
         }
     }
 }
