@@ -27,7 +27,7 @@ It is possible to retrieve news from the database, edit and also display it on t
 
 A page called Enrolment has been provided for the end-user, which allows registration on the available dates, and after registration, this information will be stored in the database.
 
-On another page named Enrolled, the admin can retrieve them from the database, review, edit, or remove each registered record, and change the registration status to four modes ACCEPTED, REFUSED, WAITING, and INITIATE.
+On another page named Enrolled, the admin can retrieve them from the database, review, edit, or remove each registered record, and change the registration status to ACCEPTED, REFUSED, WAITING, and INITIATE.
 
 
 The second phase of this project, which is currently being implemented and will be added soon, including:
