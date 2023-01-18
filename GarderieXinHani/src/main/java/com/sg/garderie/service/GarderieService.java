@@ -93,6 +93,7 @@ public interface GarderieService {
     List<Teacher> getClassTeachersByClassId(int classId);
 
     List<ClassTeacher> getAllClassesTeachers();
+    List<TeacherClassId> getAllClassesTeachersDisplay(int classId);
 
     void deleteClassTeachersByClassId(int classId);
 
