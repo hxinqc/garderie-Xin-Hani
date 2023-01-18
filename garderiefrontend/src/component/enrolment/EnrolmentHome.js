@@ -123,7 +123,7 @@ const EnrolementHome = () => {
                     className="btn btn-primary mx-2"
                     to={`/child/AddChild/${enrolement.id}`}
                   >
-                    Add Enroled Chiled
+                    Add Enroled Child
                   </Link>
                   <button
                     className="btn btn-danger mx-2"
