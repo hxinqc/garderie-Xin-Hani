@@ -70,6 +70,12 @@ function ClassHome() {
                     View
                   </Link>
                   <Link
+                    className="btn btn-primary mx-2"
+                    to={`/classes/teachers/${eachClass.id}`}
+                  >
+                    Assign Teachers
+                  </Link>
+                  <Link
                     className="btn btn-outline-primary mx-2"
                     to={`/classes/editClass/${eachClass.id}`}
                   >

@@ -437,6 +437,12 @@ public class GarderieServiceImpl implements GarderieService {
     }
 
     @Override
+    public List<TeacherClassId> getAllClassesTeachersDisplay(int classId) {
+
+        return classTeachersDao.getAllClassesTeachersDisplay(classId);
+    }
+
+    @Override
     public void deleteClassTeachersByClassId(int classId) {
         classTeachersDao.deleteClassTeachersByClassId(classId);
     }
