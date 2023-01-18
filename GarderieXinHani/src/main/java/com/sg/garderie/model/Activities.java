@@ -3,7 +3,6 @@ package com.sg.garderie.model;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Data
 public class Activities {
