@@ -4,18 +4,16 @@
 import React from "react";
 import styled, { StyledComponent } from "styled-components";
 
-const ShowActivities = (getActivity) => {
-  //console.log(getMeal.data)
+const ShowActivities = (activity) => {
+  console.log(activity.data);
+  var BASE_URL = "http://localhost:8080";
   return (
-    <div className="card">
-      <img src={getActivity.data.picPath} />
+    <div className="card" key={activity.data.id}>
+      <img src={BASE_URL + activity.data.picPath} />
       <div className="info">
-        <h2>{getActivity.data.name}</h2>
-        <h2>{getActivity.data.activityDate}Activity Date</h2>
-      </div>
-      <div className="recipe">
-        <h2>Description</h2>
-        <p>{getActivity.data.description}</p>
+        <h2>{activity.data.name}</h2>
+        <h2>{activity.data.activityDate}</h2>
+        <p>{activity.data.description}</p>
       </div>
     </div>
   );

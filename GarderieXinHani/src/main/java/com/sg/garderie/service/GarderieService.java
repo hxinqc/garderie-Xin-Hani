@@ -64,6 +64,7 @@ public interface GarderieService {
     Activities getActivitiesById(int id) throws ActivitiesException;
     List<Activities> getActivitiesByDate(LocalDate issueDate);
     List<Activities> getAllActivities();
+    List<ActivitiesClassId> getAllActivitiesClassDisplay(int classId);
     void editActivities(Activities activities) throws ActivitiesException;
     void deleteActivitiesById(int id) throws ActivitiesException;
     void addClassActivities(int classId, int[] activitiesIds);
@@ -93,6 +94,7 @@ public interface GarderieService {
     List<Teacher> getClassTeachersByClassId(int classId);
 
     List<ClassTeacher> getAllClassesTeachers();
+    List<TeacherClassId> getAllClassesTeachersDisplay(int classId);
 
     void deleteClassTeachersByClassId(int classId);
 
