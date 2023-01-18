@@ -90,6 +90,7 @@ const EnrolementHome = () => {
             <Button type="submit">Submit</Button>
           </Buttonsdiv>
           {/* </UpSection> */}
+
         </Form>
       </FormDiv>
       <div className="py-4">
@@ -159,7 +160,6 @@ const Title = styled.div`
   font-size: 19px;
 `;
 
-
 const UpSection = styled.div`
 display: flex;
 margin-right: 500px;
@@ -168,6 +168,7 @@ margin-right: 500px;
 const FormDiv = styled.div``;
 
 const Form = styled.form`
+
  height: 20px;
   width: 600px;
    border-radius: 2px; 
@@ -180,7 +181,7 @@ const Form = styled.form`
   border: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 1); 
   `;
-   
+
 
 const Buttonsdiv = styled.div`
   display: flex;
@@ -196,7 +197,6 @@ const SelectDiv = styled.div`
   margin-right: 7px;
   margin-top: -10px;
   width:auto;
-
 `;
 
 const Button = styled.button`

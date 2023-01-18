@@ -60,10 +60,11 @@ export default function News() {
         console.log(lastStatus);
         if (lastStatus === 201) {
           localStorage.setItem('data', JSON.stringify(data.data));
-          // history('/confirmed');
           console.log(data.data);
           setMessage('News added.');
           resetForm();
+        } else {
+          setMessage(data.message);
         }
       })
       .catch(err => {
@@ -81,7 +82,7 @@ export default function News() {
         </Label>
         <br />
         <div style={{ width: "300px" }}>
-          IssueDate:<DateSelect selectedDate={issueDate}
+          IssueDate:<DateSelect required selectedDate={issueDate}
             setselectedDate={date => { setIssueDate(date); setMessage(date.toISOString()) }}
             value={issueDate != null ? issueDate : ''} />
         </div>
