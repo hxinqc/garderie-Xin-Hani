@@ -9,6 +9,7 @@ function DateSelect({ selectedDate, setselectedDate }) {
   return (
     <Mydiv>
       <Datepicker
+      placeholderText={'Select Date'} 
         selected={selectedDate}
         onChange={(date) => {
           setselectedDate(date);
