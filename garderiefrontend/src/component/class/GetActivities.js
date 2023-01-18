@@ -15,11 +15,11 @@ function GetActivities() {
 
   const searchActivity = (evt) => {
     if (evt.key === "Enter") {
-      fetch(`http://localhost:8080//class/activities/${search}`)
+      fetch(`http://localhost:8080/activity/class/${search}`)
         .then((res) => res.json())
         .then((data) => {
-          //console.log(data.meals)
-          setActivity(data.Activities);
+          console.log(data)
+          setActivity(data);
         });
     }
   };
@@ -29,7 +29,7 @@ function GetActivities() {
       <div className="heading"></div>
 
       <div className="searchBox">
-        <i class="fas fa-search"></i>
+        <i className="fas fa-search"></i>
         <input
           type="search"
           className="search-bar"
