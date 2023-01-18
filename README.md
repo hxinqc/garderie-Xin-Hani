@@ -4,16 +4,16 @@ Kindergarten comprehensive registration full-stack portal
 
 To run this project cd into garderiefrontend and run npm start in the frontend, and the client and server must run together.
 
-The backend is implemented by:
+### The backend is implemented by:
 Java, Spring Boot, IntelliJ IDEA, Database Connectivity (JDBC), SQL (DDL, DML), RESTful WebServices, MySQL, Postman API, Lucidchart
 
-And for the Frontend we used: 
+### For the Frontend we used: 
 React.js, JavaScript, HTML, CSS
 
 This project has been implemented with an agile approach and based on the MVC design pattern.
 
 
-Functionality:
+## Functionality
 
 In this project, all information related to teachers, children, classes, foods, and the activities of each class, admin, and children's registration information is stored in the database.
 
@@ -30,7 +30,7 @@ A page called Enrolment has been provided for the end-user, which allows registr
 On another page named Enrolled, the admin can retrieve them from the database, review, edit, or remove each registered record, and change the registration status to ACCEPTED, REFUSED, WAITING, and INITIATE.
 
 
-The second phase of this project, which is currently being implemented and will be added soon, including:
+### The second phase of this project, which is currently being implemented and will be added soon, including:
 The possibility of login, authentication, and providing access levels for admin, end-user, and teachers
 Validation
 password Encryption 
