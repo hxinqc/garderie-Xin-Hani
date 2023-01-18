@@ -65,12 +65,14 @@ const EnrolementHome = () => {
   return (
     <div className="container">
       <FormDiv>
+      <Title> Select Enroled Status to See Ralated Childs</Title>
+
         <Form
           onSubmit={(ev) => {
             btnConfirm(ev);
           }}
         >
-          <UpSection>
+          {/* <UpSection> */}
           <SelectDiv>
             <Select
               className="basic-single"
@@ -87,7 +89,8 @@ const EnrolementHome = () => {
           <Buttonsdiv>
             <Button type="submit">Submit</Button>
           </Buttonsdiv>
-          </UpSection>
+          {/* </UpSection> */}
+
         </Form>
       </FormDiv>
       <div className="py-4">
@@ -121,7 +124,7 @@ const EnrolementHome = () => {
                     className="btn btn-primary mx-2"
                     to={`/child/AddChild/${enrolement.id}`}
                   >
-                    Add Enroled Chiled
+                    Add Enroled Child
                   </Link>
                   <button
                     className="btn btn-danger mx-2"
@@ -147,6 +150,15 @@ const EnrolementHome = () => {
 
 export default EnrolementHome;
 
+const Title = styled.div`
+  position: absolute;
+  color: white;
+  margin-top: 20px;
+  margin-left: 100px;
+  z-index: 5;
+  font-weight:300px;
+  font-size: 19px;
+`;
 
 const UpSection = styled.div`
 display: flex;
@@ -156,50 +168,55 @@ margin-right: 500px;
 const FormDiv = styled.div``;
 
 const Form = styled.form`
-/* height: 20px;
+
+ height: 20px;
   width: 600px;
-   border-radius: 10px; 
+   border-radius: 2px; 
   display: flex;
   flex-direction: column;
   align-items: center;
   background: rgba(0, 0, 22, 0.8);
   padding: 60px;
-  margin: 15px;
+  margin-top: 5px;
   border: none;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 1); */
-`;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 1); 
+  `;
+
 
 const Buttonsdiv = styled.div`
   display: flex;
   /* align-items:center; */
   margin-left: 20px;
-  margin-right: 50px;
+  margin-right: 10px;
   margin-top: -12px;
 `;
 
 const SelectDiv = styled.div`
   padding: 5px 13px;
-  margin-left: -5px;
+  margin-left: -205px;
   margin-right: 7px;
-  margin-top: 5px;
+  margin-top: -10px;
+  width:auto;
 `;
 
 const Button = styled.button`
   position: relative;
   align-items: center;
-  margin-bottom: 20px;
-  display: block;
-  margin: 0 auto;
-  width: 80px;
+  /* margin-bottom: 60px; */
+  /* display: block;
+  margin: 0 auto; */
+  width: 125px;
+  height: 38px;
   background-color: #f9c000;
   color: #333;
   border: none;
   cursor: pointer;
   align-items: center;
-  padding: 3px;
+  padding: 6px;
   font-weight: 400;
-  margin-top: 25px;
-  font-size: 15px;
+  margin-top: -30px;
+  margin-left:150px;
+  font-size: 16px;
   border-radius: 5px;
   box-shadow: 0 0 4px #f7dd00;
   transition: box-shadow 0.5s ease;
