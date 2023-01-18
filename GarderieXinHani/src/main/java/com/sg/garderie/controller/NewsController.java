@@ -9,10 +9,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin
 @RestController
@@ -24,7 +29,7 @@ public class NewsController {
     @PostMapping("/news")
     @ResponseStatus(HttpStatus.CREATED)
     @CrossOrigin
-    public News addNews(@RequestParam("fileName") MultipartFile multipartFile, HttpServletRequest request) throws IOException {
+    public News addNews(@RequestParam("fileName") MultipartFile multipartFile, HttpServletRequest request) throws Exception {
         News news = new News();
         news.setName(request.getParameter("name"));
         String issueDate = request.getParameter("issueDate");
@@ -35,6 +40,11 @@ public class NewsController {
         String filePath = service.saveFile(fileName, bytes);
         news.setPicPath(filePath);
 
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        Set<ConstraintViolation<News>> violations = validator.validate(news);
+        if (!violations.isEmpty()) {
+            throw new ConstraintViolationException(violations);
+        }
         service.addNews(news);
 
         return news;
@@ -80,6 +90,11 @@ public class NewsController {
         String filePath = service.saveFile(fileName, bytes);
         news.setPicPath(filePath);
 
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        Set<ConstraintViolation<News>> violations = validator.validate(news);
+        if (!violations.isEmpty()) {
+            throw new ConstraintViolationException(violations);
+        }
         service.editNews(news);
 
         return news;
