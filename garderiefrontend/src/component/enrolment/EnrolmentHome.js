@@ -65,7 +65,7 @@ const EnrolementHome = () => {
   return (
     <div className="container">
       <FormDiv>
-      <Title> Select Enroled Status to See Ralated Childs</Title>
+      <Title> Select Enrolled Status to See Ralated Childs</Title>
 
         <Form
           onSubmit={(ev) => {
@@ -123,7 +123,7 @@ const EnrolementHome = () => {
                     className="btn btn-primary mx-2"
                     to={`/child/AddChild/${enrolement.id}`}
                   >
-                    Add Enroled Child
+                    Add Enrolled Child
                   </Link>
                   <button
                     className="btn btn-danger mx-2"
