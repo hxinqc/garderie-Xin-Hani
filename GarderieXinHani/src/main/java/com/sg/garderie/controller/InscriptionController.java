@@ -50,7 +50,7 @@ public class InscriptionController {
 
     @PostMapping("/inscription/{id}/{status}")
     @CrossOrigin
-    public void updateInscriptionStatus(@PathVariable int id, @PathVariable String status){
+    public void updateInscriptionStatus(@PathVariable int id, @PathVariable INSCRIPTION_STATUS status){
         service.updateInscriptionStatus(id, status);
 
     }

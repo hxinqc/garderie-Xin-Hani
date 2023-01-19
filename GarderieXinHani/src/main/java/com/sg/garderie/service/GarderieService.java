@@ -24,7 +24,7 @@ public interface GarderieService {
     List<Inscription> getInscriptionByStatus(INSCRIPTION_STATUS status);
     List<Inscription> getAllInscription();
     void editInscription(Inscription inscription);
-    void updateInscriptionStatus(Integer id, String status);
+    void updateInscriptionStatus(Integer id, INSCRIPTION_STATUS status);
 
     Admin addAdmin(Admin admin);
 
