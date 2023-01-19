@@ -158,7 +158,7 @@ public class GarderieServiceImpl implements GarderieService {
     }
 
     @Override
-    public void updateInscriptionStatus(Integer id, String status) {
+    public void updateInscriptionStatus(Integer id, INSCRIPTION_STATUS status) {
         inscriptionDao.updateStatus(id, status);
     }
 
@@ -245,7 +245,7 @@ public class GarderieServiceImpl implements GarderieService {
         ChildRoster childRoster1;
         childRoster1 = childRosterDao.addChildRoster(childRoster);
         if (childRoster.getInscriptionId() != null) {
-            inscriptionDao.updateStatus(childRoster.getInscriptionId(), INSCRIPTION_STATUS.ACCEPTED.name());
+            inscriptionDao.updateStatus(childRoster.getInscriptionId(), INSCRIPTION_STATUS.ACCEPTED);
         }
         return childRoster1;
     }

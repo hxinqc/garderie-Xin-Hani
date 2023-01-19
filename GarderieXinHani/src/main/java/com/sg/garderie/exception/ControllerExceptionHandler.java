@@ -10,7 +10,6 @@ import org.springframework.web.context.request.WebRequest;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 @ControllerAdvice
-//@RestController
 public class ControllerExceptionHandler {
 
     private static final String CONSTRAINT_MESSAGE = "Could not save your data. "
