@@ -50,6 +50,12 @@ public class ClassTeacherController {
         return service.getAllClassesTeachersDisplay(classId);
     }
 
+    @GetMapping("/allTeachers/class/{classId}")
+    @CrossOrigin
+    public List<TeacherClassId> getTeachersForClass(@PathVariable int classId) {
+        return service.getTeachersForClass(classId);
+    }
+
     @DeleteMapping("/class/teachers/{classId}")
     @CrossOrigin
     @ResponseStatus(HttpStatus.OK)

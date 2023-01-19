@@ -7,14 +7,13 @@ export default function ViewTeacher() {
   const [lastName, setLastName] = useState(null);
   const [isActive, setIsActive] = useState();
   const [message, setMessage] = useState(null);
-  var lastStatus;
   const { teacherId } = useParams();
 
   const retrieveData = () => {
     fetch(`http://localhost:8080/teacher/${teacherId}`)
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setFirstName(data.firstName);
         setLastName(data.lastName);
 
@@ -25,7 +24,8 @@ export default function ViewTeacher() {
         }
       })
       .catch((err) => {
-        console.log("we have a problem " + err.message);
+        // console.log("we have a problem " + err.message);
+        setMessage("we have a problem " + err.message);
       });
   };
 
