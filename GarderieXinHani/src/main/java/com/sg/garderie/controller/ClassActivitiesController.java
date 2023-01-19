@@ -48,6 +48,12 @@ public class ClassActivitiesController {
         return service.getAllActivitiesClassDisplay(classId);
     }
 
+    @GetMapping("/allActivities/class/{classId}")
+    @CrossOrigin
+    public List<ActivitiesClassId> getActivitiesForClass(@PathVariable int classId) {
+        return service.getActivitiesForClass(classId);
+    }
+
     @DeleteMapping("/class/activities/{classId}")
     @CrossOrigin
     @ResponseStatus(HttpStatus.OK)

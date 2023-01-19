@@ -11,7 +11,9 @@ public interface ClassTeachersDao {
     List<Teacher> getClassTeachersByClassId(int classId);
 
     List<ClassTeacher> getAllClassesTeachers();
+    List<ClassTeacher> getAllClassesTeachersByClassId(int classId);
     List<TeacherClassId> getAllClassesTeachersDisplay(int classId);
+    List<TeacherClassId> getTeachersForClass(int classId);
 
     void deleteClassTeachersByClassId(int classId);
 
