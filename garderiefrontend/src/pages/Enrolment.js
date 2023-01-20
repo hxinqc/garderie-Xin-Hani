@@ -44,7 +44,7 @@ function Enrolment() {
         lastName: lastName,
         phone: phone,
         address: address,
-        openPlace: openPlace,
+        openPlace: openPlace
       }),
       headers: {
         "Content-Type": "application/json",

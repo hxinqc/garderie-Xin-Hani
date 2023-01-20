@@ -2,15 +2,14 @@
 // getActivity is coming from ShowActivities component and contains all the fields
 
 import React from "react";
-import styled, { StyledComponent } from "styled-components";
+// import styled, { StyledComponent } from "styled-components";
 
 const ShowActivities = (activity) => {
-  console.log(activity.data);
   var BASE_URL = "http://localhost:8080";
   return (
-    <div className="card" key={activity.data.id}>
-      <img src={BASE_URL + activity.data.picPath} />
-      <div className="info">
+    <div className="card">
+      <div className="info"  key={activity.data.id}>
+        <img src={BASE_URL + activity.data.picPath} />
         <h2>{activity.data.name}</h2>
         <h2>{activity.data.activityDate}</h2>
         <p>{activity.data.description}</p>

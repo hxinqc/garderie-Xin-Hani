@@ -1,10 +1,12 @@
 package com.sg.garderie.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class TeacherClassId {
-    private int ID;
+    private int id;
     private String firstName;
     private String lastName;
     private boolean isActive;
@@ -16,6 +18,13 @@ public class TeacherClassId {
 
     public void setIsActive(boolean active) {
         isActive = active;
+    }
+
+    public TeacherClassId(Teacher teacher) {
+        this.id = teacher.getID();
+        this.firstName = teacher.getFirstName();
+        this.lastName = teacher.getLastName();
+        this.isActive = teacher.getIsActive();
     }
 
 }

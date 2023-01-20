@@ -38,7 +38,7 @@ export default function ClassTeachers() {
     }, []);
 
     const loadTeachers = async () => {
-        await fetch(`http://localhost:8080/teachers/class/${id}`)
+        await fetch(`http://localhost:8080/allTeachers/class/${id}`)
             .then((resp) => resp.json())
             .then((data) => {
                 setTeachers(data);

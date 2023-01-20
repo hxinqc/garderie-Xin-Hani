@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -157,7 +158,7 @@ public class GarderieServiceImpl implements GarderieService {
     }
 
     @Override
-    public void updateInscriptionStatus(Integer id, String status) {
+    public void updateInscriptionStatus(Integer id, INSCRIPTION_STATUS status) {
         inscriptionDao.updateStatus(id, status);
     }
 
@@ -244,7 +245,7 @@ public class GarderieServiceImpl implements GarderieService {
         ChildRoster childRoster1;
         childRoster1 = childRosterDao.addChildRoster(childRoster);
         if (childRoster.getInscriptionId() != null) {
-            inscriptionDao.updateStatus(childRoster.getInscriptionId(), INSCRIPTION_STATUS.ACCEPTED.name());
+            inscriptionDao.updateStatus(childRoster.getInscriptionId(), INSCRIPTION_STATUS.ACCEPTED);
         }
         return childRoster1;
     }
@@ -313,8 +314,27 @@ public class GarderieServiceImpl implements GarderieService {
         List<ActivitiesClassId> list = classActivitiesDao.getAllActivitiesClassDisplay(classId);
         if (list != null)
             list.stream().forEach(activities -> activities.setPicPath("/download/" +
-                activities.getPicPath().replaceFirst(FILE_BASE_PATH, "")));
+                    activities.getPicPath().replaceFirst(FILE_BASE_PATH, "")));
         return list;
+    }
+
+    @Override
+    public List<ActivitiesClassId> getActivitiesForClass(int classId) {
+        List<ClassActivities> classActivities = classActivitiesDao.getClassActivitiesByClassId(classId);
+
+        List<Activities> list = activitiesDao.getAllActivities();
+        ActivitiesClassId activitiesClassId;
+        List<ActivitiesClassId> returnList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            activitiesClassId = new ActivitiesClassId(list.get(i));
+            activitiesClassId.setPicPath("/download/" +
+                    activitiesClassId.getPicPath().replaceFirst(FILE_BASE_PATH, ""));
+            if (classActivities != null && classActivities.contains(new ClassActivities(classId, activitiesClassId.getId())))
+                activitiesClassId.setClassId(classId);
+            returnList.add(activitiesClassId);
+
+        }
+        return returnList;
     }
 
     @Override
@@ -449,6 +469,23 @@ public class GarderieServiceImpl implements GarderieService {
     public List<TeacherClassId> getAllClassesTeachersDisplay(int classId) {
 
         return classTeachersDao.getAllClassesTeachersDisplay(classId);
+    }
+
+    @Override
+    public List<TeacherClassId> getTeachersForClass(int classId) {
+        List<ClassTeacher> classTeachers = classTeachersDao.getAllClassesTeachersByClassId(classId);
+
+        List<Teacher> list = teacherDao.getAll();
+        TeacherClassId teacherClassId;
+        List<TeacherClassId> returnList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            teacherClassId = new TeacherClassId(list.get(i));
+            if (classTeachers != null && classTeachers.contains(new ClassTeacher(classId, teacherClassId.getId())))
+                teacherClassId.setClassId(classId);
+            returnList.add(teacherClassId);
+
+        }
+        return returnList;
     }
 
     @Override

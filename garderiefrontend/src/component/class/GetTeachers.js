@@ -5,7 +5,7 @@
 
 import React from "react";
 import { useState } from "react";
-import styled, { StyledComponent } from "styled-components";
+// import styled, { StyledComponent } from "styled-components";
 import ShowTeachers from "./ShowTeachers";
 
 // search = classId  we will get from user in main search page
@@ -16,12 +16,9 @@ function GetTeachers() {
 
   const searchTeacher = (evt) => {
     if (evt.key === "Enter") {
-      // console.log(`http://localhost:8080/class/teachers/${search}`);
       fetch(`http://localhost:8080/class/teachers/${search}`)
         .then((res) => res.json())
         .then((data) => {
-          //console.log(data.meals)
-          console.log(data);
           setTeacher(data);
         });
     }
@@ -49,7 +46,7 @@ function GetTeachers() {
           // by map, I'm sending each of these in to ShowTeachers component that
           //will show differnt feilds of Food like photo, Name,... in predefined structure
 
-          MyTeacher == null ? (
+          (MyTeacher == null || MyTeacher.length === 0) ? (
             <p>Not Found</p>
           ) : (
             MyTeacher.map((res) => {

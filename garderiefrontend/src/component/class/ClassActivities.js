@@ -37,7 +37,7 @@ export default function ClassActivities() {
     }, []);
 
     const loadActivities = async () => {
-        await fetch(`http://localhost:8080/activity/class/${id}`)
+        await fetch(`http://localhost:8080/allActivities/class/${id}`)
             .then((resp) => resp.json())
             .then((data) => {
                 setActivities(data);
