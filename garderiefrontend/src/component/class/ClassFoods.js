@@ -34,10 +34,10 @@ function ClassFoods() {
 
 
     useEffect(() => {
-        loadActivities();
+        loadFoods();
     }, []);
 
-    const loadActivities = async () => {
+    const loadFoods = async () => {
         await fetch(`http://localhost:8080/allFoods/class/${id}`)
             .then((resp) => resp.json())
             .then((data) => {
@@ -95,7 +95,7 @@ function ClassFoods() {
 
     return (
         <>
-            <Title> Class - Teachers</Title>
+            <Title> Class - Foods</Title>
             {/* <FormDiv> */}
             <Form
                 onSubmit={(ev) => {

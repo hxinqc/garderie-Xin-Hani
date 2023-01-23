@@ -1,6 +1,8 @@
 package com.sg.garderie.controller;
 
+import com.sg.garderie.model.ActivitiesClassId;
 import com.sg.garderie.model.ClassFood;
+import com.sg.garderie.model.FoodsClassId;
 import com.sg.garderie.service.GarderieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,10 +31,11 @@ public class ClassFoodController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-
-
-
-
+    @GetMapping("/allFoods/class/{classId}")
+    @CrossOrigin
+    public List<FoodsClassId> getFoodsForClass(@PathVariable int classId) {
+        return service.getFoodsForClass(classId);
+    }
 
 
     @GetMapping("/class/foods/{classId}")
