@@ -20,7 +20,7 @@ public class ClassFoodController {
      @PostMapping("/class/foods")
     @CrossOrigin
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity addClassActivities(@RequestParam int classId, @RequestParam String foodsIds) {
+    public ResponseEntity addClassFoods(@RequestParam int classId, @RequestParam String foodsIds) {
         int[] ids = null;
         if (foodsIds != null && !foodsIds.equals("")) {
             ids = Arrays.stream(foodsIds.split(",")).mapToInt(id -> Integer.valueOf(id)).toArray();
