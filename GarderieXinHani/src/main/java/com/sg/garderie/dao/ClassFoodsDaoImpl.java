@@ -1,6 +1,8 @@
 package com.sg.garderie.dao;
 
+import com.sg.garderie.model.ActivitiesClassId;
 import com.sg.garderie.model.ClassFood;
+import com.sg.garderie.model.FoodsClassId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -57,6 +59,19 @@ public class ClassFoodsDaoImpl implements ClassFoodsDao {
         jdbc.update(DELETE_CLASS_Foods, classId);
 
     }
+// for display ClassFoodsId
+    @Override
+    public List<FoodsClassId> getAllFoodsClassDisplay(int classId) {
+        try {
+            final String SELECT_Foods_BY_ID = "SELECT Foods.*, classFoods.classId " +
+                    "FROM Foods LEFT JOIN classFoods " +
+                    "ON Foods.id = classFoods.FoodId " +
+                    "WHERE classFoods.classId = ? or classFoods.classId is null " +
+                    "ORDER BY offerDate desc";
+            return jdbc.query(SELECT_Foods_BY_ID, new ClassFoodsDaoImpl.FoodsDisplayMapper(), classId);
+        } catch (DataAccessException ex) {
+            return null;
+        }    }
 
     public static final class ClassFoodsMapper implements RowMapper<ClassFood> {
         @Override
@@ -68,4 +83,22 @@ public class ClassFoodsDaoImpl implements ClassFoodsDao {
             return classFood;
         }
     }
+
+
+    public static final class FoodsDisplayMapper implements RowMapper<FoodsClassId> {
+        @Override
+        public FoodsClassId mapRow(ResultSet rs, int index) throws SQLException {
+            FoodsClassId foodsClassId = new FoodsClassId();
+            foodsClassId.setId(rs.getInt("id"));
+            foodsClassId.setName(rs.getString("name"));
+            foodsClassId.setOfferDate(rs.getTimestamp("offerDate").toLocalDateTime().toLocalDate());
+            foodsClassId.setDescription(rs.getString("description"));
+            foodsClassId.setPicPath(rs.getString("picPath"));
+            if (rs.getObject("classId") != null)
+                foodsClassId.setClassId(rs.getInt("classId"));
+
+            return foodsClassId;
+        }
+    }
+
 }

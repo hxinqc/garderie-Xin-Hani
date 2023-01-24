@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
-import "./classTeachers.css";
+// import "./classFoods.css";
 
-export default function ClassActivities() {
-    const [activities, setActivities] = useState(null);
+
+function ClassFoods() {
+    const [foods, setFoods] = useState(null);
     const [checkedState, setCheckedState] = useState();
-    const [activityIds, setActivityIds] = useState("");
+    const [foodIds, setFoodIds] = useState("");
     const [message, setMessage] = useState(null);
     var lastStatus;
 
@@ -21,38 +22,38 @@ export default function ClassActivities() {
         const allIds = updatedCheckedState.reduce(
             (ids, currentState, index) => {
                 if (currentState === true) {
-                    return ids + activities[index].id + ",";
+                    return ids + foods[index].id + ",";
                 }
                 return ids;
             },
             ""
         );
 
-        setActivityIds(allIds);
+        setFoodIds(allIds);
     };
 
 
     useEffect(() => {
-        loadActivities();
+        loadFoods();
     }, []);
 
-    const loadActivities = async () => {
-        await fetch(`http://localhost:8080/allActivities/class/${id}`)
+    const loadFoods = async () => {
+        await fetch(`http://localhost:8080/allFoods/class/${id}`)
             .then((resp) => resp.json())
             .then((data) => {
-                setActivities(data);
+                setFoods(data);
                 var classStatus = new Array(data.length);
                 var ids = "";
-                data.forEach((activity, index) => {
-                    if (activity.classId != null) {
+                data.forEach((food, index) => {
+                    if (food.classId != null) {
                         classStatus[index] = true;
-                        ids += activity.id + ",";
+                        ids += food.id + ",";
                     } else {
                         classStatus[index] = false;
                     }
                 });
                 setCheckedState(classStatus);
-                setActivityIds(ids);
+                setFoodIds(ids);
             })
             .catch(err => {
                 console.log("we have a problem " + err.message);
@@ -61,18 +62,18 @@ export default function ClassActivities() {
 
     const btnConfirm = (ev) => {
         ev.preventDefault();
-        var ids = activityIds;
+        var ids = foodIds;
         if (ids == null) {
             ids = "";
         } else if (ids.length > 0) {
-            ids = ids.substr(0, ids.length - 1);
+            ids = ids.substring(0, ids.length - 1);
         }
 
-        fetch(`http://localhost:8080/class/activities?classId=${id}&activitiesIds=${ids}`, {
+        fetch(`http://localhost:8080/class/foods?classId=${id}&afoodsIds=${ids}`, {
             method: "POST",
             body: JSON.stringify({
                 classId: id,
-                activitiesIds: ids
+                foodsIds: ids
             }),
             headers: {
                 "Content-Type": "application/json",
@@ -84,7 +85,7 @@ export default function ClassActivities() {
             })
             .then((data) => {
                 if (lastStatus === 204) {
-                    setMessage("Class Activities are successfully modified.");
+                    setMessage("Class Foods are successfully modified.");
                 }
             })
             .catch((err) => {
@@ -94,43 +95,42 @@ export default function ClassActivities() {
 
     return (
         <>
-            <Title> Class - Activities</Title>
-            {/* <FormDiv> */}
+        <Wrapper>
+            <Title> Assign Foods for selected class</Title>
+            <FormDiv>
             <Form
                 onSubmit={(ev) => {
                     btnConfirm(ev);
                 }}
             >
                 <div className="App">
-                    <ul className="list">
-                        {activities != null && activities.map((activity, index) => {
+                    <Myul className="list">
+                        {foods != null && foods.map((food, index) => {
                             return (
-                                <div className="row" key={index}>
-                                    <div className="cell">
+                                <Listdiv  key={index}>
                                         <li>
-                                            <div className="list-item">
-                                                <div className="left-section">
-                                                    <input
+                                            <Itemdiv >
+                                                    <Input
                                                         type="checkbox"
                                                         id={`custom-checkbox-${index}`}
-                                                        name={activity.id}
-                                                        value={activity.id}
+                                                        name={food.id}
+                                                        value={food.id}
                                                         checked={checkedState != null && checkedState[index]}
                                                         onChange={() => handleOnChange(index)}
                                                     />
-                                                    <label htmlFor={`custom-checkbox-${index}`}>{activity.name}</label>
-                                                </div>
-                                            </div>
+                                                    <Label htmlFor={`custom-checkbox-${index}`}>{food.name}</Label>
+
+                                        <Label htmlFor={`custom-checkbox-${index}`}>{food.offerDate}</Label>
+                                            </Itemdiv>
+
+                                           
                                         </li>
-                                    </div>
-                                    <div className="cell">
-                                        <label htmlFor={`custom-checkbox-${index}`}>{activity.activityDate}</label>
-                                    </div>
-                                </div>
+                                  
+                                </Listdiv>
                             );
                         })}
 
-                    </ul>
+                    </Myul>
 
                     <br />
                     <Buttonsdiv>
@@ -143,24 +143,42 @@ export default function ClassActivities() {
                     <MessageLabel> {message} </MessageLabel>
                 </div>
             </Form>
-            {/* </FormDiv> */}
+            </FormDiv>
+            </Wrapper>
         </>
     );
 }
 
+
+const Itemdiv = styled.div`
+display:flex;
+align-items: center;
+
+
+`;
+
+const Myul = styled.ul`
+
+`;
+
+const Listdiv = styled.div`
+display: flex;
+margin-left: -200px;
+`;
+
 const Title = styled.div`
   position: absolute;
   color: white;
-  margin-top: -250px;
-  margin-left: -140px;
-  z-index: 5;
+  font-weight: 400;
+  font-size: 20px;
+  margin-top: 35px;
+  margin-left: 520px;
+  z-index: 45;
 `;
 
 const Wrapper = styled.div`
   height: calc(100vh - 60px);
   z-index: -1;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-position: center;
@@ -172,11 +190,14 @@ const Wrapper = styled.div`
   left: 50%;
 `;
 
-const FormDiv = styled.div``;
+const FormDiv = styled.div`
+  margin-left: 400px;
+  margin-bottom: 15px;
+`;
 
 const Form = styled.form`
-  height: 1000px;
-  width: 800px;
+  height: 500px;
+  width: 500px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -190,7 +211,8 @@ const Form = styled.form`
 const Label = styled.label`
   align-items: center;
   color: white;
-  display: block;
+  display: flex;
+  width: 180px;
 `;
 
 const MessageLabel = styled.label`
@@ -234,14 +256,16 @@ const Input = styled.input`
   background-color: white;
   display: flex;
   justify-content: right;
-  width: 230px;
+  width: 80px;
   margin-right: 24px;
 `;
 
 const Buttonsdiv = styled.div`
   display: flex;
-  /* align-items:center; */
+  align-items:center;
   margin-left: 20px;
   margin-right: 50px;
-  margin-top: 10px;
+  margin-top: 200px;
 `;
+
+export default ClassFoods

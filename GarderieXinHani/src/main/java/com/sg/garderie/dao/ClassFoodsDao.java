@@ -1,6 +1,7 @@
 package com.sg.garderie.dao;
 
 import com.sg.garderie.model.ClassFood;
+import com.sg.garderie.model.FoodsClassId;
 
 import java.util.List;
 
@@ -11,4 +12,5 @@ public interface ClassFoodsDao  {
     List<ClassFood> getAllClassesFoods();
     void deleteClassFoodsByClassId(int classId);
 
+    List<FoodsClassId> getAllFoodsClassDisplay(int classId);
 }

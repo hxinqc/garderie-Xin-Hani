@@ -78,6 +78,14 @@ function ClassHome() {
                   >
                     Activities
                   </Link>
+
+                  <Link
+                    className="btn btn-outline-primary mx-2"
+                    to={`/classes/foods/${eachClass.id}`}
+                  >
+                    Foods
+                  </Link>
+
                   <Link
                     className="btn btn-outline-primary mx-2"
                     to={`/classes/editClass/${eachClass.id}`}

@@ -450,6 +450,37 @@ public class GarderieServiceImpl implements GarderieService {
 
     }
 
+
+
+    @Override
+    public List<FoodsClassId> getAllFoodsClassDisplay(int classId) {
+        List<FoodsClassId> list = classFoodsDao.getAllFoodsClassDisplay(classId);
+        if (list != null)
+            list.stream().forEach(foods -> foods.setPicPath("/download/" +
+                    foods.getPicPath().replaceFirst(FILE_BASE_PATH, "")));
+        return list;
+    }
+
+    @Override
+    public List<FoodsClassId> getFoodsForClass(int classId) {
+        List<ClassFood> classFoods = classFoodsDao.getClassFoodsByClassId(classId);
+
+        List<Food> list = foodDao.getAllFood();
+        FoodsClassId foodsClassId;
+        List<FoodsClassId> returnList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            foodsClassId = new FoodsClassId(list.get(i));
+            foodsClassId.setPicPath("/download/" +
+                    foodsClassId.getPicPath().replaceFirst(FILE_BASE_PATH, ""));
+            if (classFoods != null && classFoods.contains(new ClassActivities(classId, foodsClassId.getId())))
+                foodsClassId.setClassId(classId);
+            returnList.add(foodsClassId);
+
+        }
+        return returnList;
+    }
+
+
     @Override
     public void addClassTeachers(int classId, int[] ids) {
         classTeachersDao.addClassTeachers(classId,ids);

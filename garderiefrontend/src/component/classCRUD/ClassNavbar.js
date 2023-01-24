@@ -17,7 +17,7 @@ function ClassNavbar() {
             Class Info
           </Link>
         </LabelDiv>
-        <button
+        <MyButton
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
@@ -27,7 +27,7 @@ function ClassNavbar() {
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
-        </button>
+        </MyButton>
 
         <Link className="btn btn-outline-light" to="/Classes/addClass">
           Add Class
@@ -54,8 +54,8 @@ z-index: 100;
 const MyButton = styled.div`
 display: flex;
 color: white;
-margin-left: 230px;
-margin-top: 30px;
+margin-left: 300px;
+margin-top: 10px;
 align-items: center;
 justify-content: center;
 `;
@@ -63,7 +63,7 @@ justify-content: center;
 
 const NavDiv = styled.div`
 display: flex;
-width: 450px;
+width: 790px;
 height: 50px;
 align-items:center;
 /* margin-left: 410px;  */
