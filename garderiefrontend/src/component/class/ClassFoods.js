@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
-import "./classFoods.css";
+// import "./classFoods.css";
 
 
 function ClassFoods() {
@@ -95,23 +95,22 @@ function ClassFoods() {
 
     return (
         <>
-            <Title> Class - Foods</Title>
-            {/* <FormDiv> */}
+        <Wrapper>
+            <Title> Assign Foods for selected class</Title>
+            <FormDiv>
             <Form
                 onSubmit={(ev) => {
                     btnConfirm(ev);
                 }}
             >
                 <div className="App">
-                    <ul className="list">
+                    <Myul className="list">
                         {foods != null && foods.map((food, index) => {
                             return (
-                                <div className="row" key={index}>
-                                    <div className="cell">
+                                <Listdiv  key={index}>
                                         <li>
-                                            <div className="list-item">
-                                                <div className="left-section">
-                                                    <input
+                                            <Itemdiv >
+                                                    <Input
                                                         type="checkbox"
                                                         id={`custom-checkbox-${index}`}
                                                         name={food.id}
@@ -119,19 +118,19 @@ function ClassFoods() {
                                                         checked={checkedState != null && checkedState[index]}
                                                         onChange={() => handleOnChange(index)}
                                                     />
-                                                    <label htmlFor={`custom-checkbox-${index}`}>{food.name}</label>
-                                                </div>
-                                            </div>
+                                                    <Label htmlFor={`custom-checkbox-${index}`}>{food.name}</Label>
+
+                                        <Label htmlFor={`custom-checkbox-${index}`}>{food.offerDate}</Label>
+                                            </Itemdiv>
+
+                                           
                                         </li>
-                                    </div>
-                                    <div className="cell">
-                                        <label htmlFor={`custom-checkbox-${index}`}>{food.offerDate}</label>
-                                    </div>
-                                </div>
+                                  
+                                </Listdiv>
                             );
                         })}
 
-                    </ul>
+                    </Myul>
 
                     <br />
                     <Buttonsdiv>
@@ -144,25 +143,42 @@ function ClassFoods() {
                     <MessageLabel> {message} </MessageLabel>
                 </div>
             </Form>
-            {/* </FormDiv> */}
+            </FormDiv>
+            </Wrapper>
         </>
     );
 }
 
 
+const Itemdiv = styled.div`
+display:flex;
+align-items: center;
+
+
+`;
+
+const Myul = styled.ul`
+
+`;
+
+const Listdiv = styled.div`
+display: flex;
+margin-left: -200px;
+`;
+
 const Title = styled.div`
   position: absolute;
   color: white;
-  margin-top: -250px;
-  margin-left: -140px;
-  z-index: 5;
+  font-weight: 400;
+  font-size: 20px;
+  margin-top: 35px;
+  margin-left: 520px;
+  z-index: 45;
 `;
 
 const Wrapper = styled.div`
   height: calc(100vh - 60px);
   z-index: -1;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-position: center;
@@ -174,11 +190,14 @@ const Wrapper = styled.div`
   left: 50%;
 `;
 
-const FormDiv = styled.div``;
+const FormDiv = styled.div`
+  margin-left: 400px;
+  margin-bottom: 15px;
+`;
 
 const Form = styled.form`
-  height: 1000px;
-  width: 800px;
+  height: 500px;
+  width: 500px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -192,7 +211,8 @@ const Form = styled.form`
 const Label = styled.label`
   align-items: center;
   color: white;
-  display: block;
+  display: flex;
+  width: 180px;
 `;
 
 const MessageLabel = styled.label`
@@ -236,16 +256,16 @@ const Input = styled.input`
   background-color: white;
   display: flex;
   justify-content: right;
-  width: 230px;
+  width: 80px;
   margin-right: 24px;
 `;
 
 const Buttonsdiv = styled.div`
   display: flex;
-  /* align-items:center; */
+  align-items:center;
   margin-left: 20px;
   margin-right: 50px;
-  margin-top: 10px;
+  margin-top: 200px;
 `;
 
 export default ClassFoods
