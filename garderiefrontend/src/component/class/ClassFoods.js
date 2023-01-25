@@ -1,169 +1,167 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
-// import "./classFoods.css";
-
 
 function ClassFoods() {
-    const [foods, setFoods] = useState(null);
-    const [checkedState, setCheckedState] = useState();
-    const [foodIds, setFoodIds] = useState("");
-    const [message, setMessage] = useState(null);
-    var lastStatus;
+  const [foods, setFoods] = useState(null);
+  const [checkedState, setCheckedState] = useState();
+  const [foodIds, setFoodIds] = useState("");
+  const [message, setMessage] = useState(null);
+  var lastStatus;
 
-    const { id } = useParams();
+  const { id } = useParams();
 
-    const handleOnChange = (position) => {
-        const updatedCheckedState = checkedState.map((item, index) =>
-            index === position ? !item : item
-        );
-        setCheckedState(updatedCheckedState);
-
-        const allIds = updatedCheckedState.reduce(
-            (ids, currentState, index) => {
-                if (currentState === true) {
-                    return ids + foods[index].id + ",";
-                }
-                return ids;
-            },
-            ""
-        );
-
-        setFoodIds(allIds);
-    };
-
-
-    useEffect(() => {
-        loadFoods();
-    }, []);
-
-    const loadFoods = async () => {
-        await fetch(`http://localhost:8080/allFoods/class/${id}`)
-            .then((resp) => resp.json())
-            .then((data) => {
-                setFoods(data);
-                var classStatus = new Array(data.length);
-                var ids = "";
-                data.forEach((food, index) => {
-                    if (food.classId != null) {
-                        classStatus[index] = true;
-                        ids += food.id + ",";
-                    } else {
-                        classStatus[index] = false;
-                    }
-                });
-                setCheckedState(classStatus);
-                setFoodIds(ids);
-            })
-            .catch(err => {
-                console.log("we have a problem " + err.message);
-            });
-    };
-
-    const btnConfirm = (ev) => {
-        ev.preventDefault();
-        var ids = foodIds;
-        if (ids == null) {
-            ids = "";
-        } else if (ids.length > 0) {
-            ids = ids.substring(0, ids.length - 1);
-        }
-
-        fetch(`http://localhost:8080/class/foods?classId=${id}&afoodsIds=${ids}`, {
-            method: "POST",
-            body: JSON.stringify({
-                classId: id,
-                foodsIds: ids
-            }),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-            .then((res) => {
-                lastStatus = res.status;
-                return res;
-            })
-            .then((data) => {
-                if (lastStatus === 204) {
-                    setMessage("Class Foods are successfully modified.");
-                }
-            })
-            .catch((err) => {
-                setMessage("we have a problem " + err.message);
-            });
-    };
-
-    return (
-        <>
-        <Wrapper>
-            <Title> Assign Foods for selected class</Title>
-            <FormDiv>
-            <Form
-                onSubmit={(ev) => {
-                    btnConfirm(ev);
-                }}
-            >
-                <div className="App">
-                    <Myul className="list">
-                        {foods != null && foods.map((food, index) => {
-                            return (
-                                <Listdiv  key={index}>
-                                        <li>
-                                            <Itemdiv >
-                                                    <Input
-                                                        type="checkbox"
-                                                        id={`custom-checkbox-${index}`}
-                                                        name={food.id}
-                                                        value={food.id}
-                                                        checked={checkedState != null && checkedState[index]}
-                                                        onChange={() => handleOnChange(index)}
-                                                    />
-                                                    <Label htmlFor={`custom-checkbox-${index}`}>{food.name}</Label>
-
-                                        <Label htmlFor={`custom-checkbox-${index}`}>{food.offerDate}</Label>
-                                            </Itemdiv>
-
-                                           
-                                        </li>
-                                  
-                                </Listdiv>
-                            );
-                        })}
-
-                    </Myul>
-
-                    <br />
-                    <Buttonsdiv>
-                        <Button type="submit">Submit</Button>
-
-                        <Link to="/Classes" style={{ textDecoration: "none" }}>
-                            <Button type="button"> Back </Button>
-                        </Link>
-                    </Buttonsdiv>
-                    <MessageLabel> {message} </MessageLabel>
-                </div>
-            </Form>
-            </FormDiv>
-            </Wrapper>
-        </>
+  const handleOnChange = (position) => {
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
     );
+    setCheckedState(updatedCheckedState);
+
+    const allIds = updatedCheckedState.reduce((ids, currentState, index) => {
+      if (currentState === true) {
+        return ids + foods[index].id + ",";
+      }
+      return ids;
+    }, "");
+
+    setFoodIds(allIds);
+  };
+
+  useEffect(() => {
+    loadFoods();
+  }, []);
+
+  const loadFoods = async () => {
+    await fetch(`http://localhost:8080/allFoods/class/${id}`)
+      .then((resp) => resp.json())
+      .then((data) => {
+        setFoods(data);
+        var classStatus = new Array(data.length);
+        var ids = "";
+        data.forEach((food, index) => {
+          if (food.classId != null) {
+            classStatus[index] = true;
+            ids += food.id + ",";
+          } else {
+            classStatus[index] = false;
+          }
+        });
+        setCheckedState(classStatus);
+        setFoodIds(ids);
+      })
+      .catch((err) => {
+        console.log("we have a problem " + err.message);
+      });
+  };
+
+  const btnConfirm = (ev) => {
+    ev.preventDefault();
+    var ids = foodIds;
+    if (ids == null) {
+      ids = "";
+    } else if (ids.length > 0) {
+      ids = ids.substring(0, ids.length - 1);
+    }
+
+    fetch(`http://localhost:8080/class/foods?classId=${id}&afoodsIds=${ids}`, {
+      method: "POST",
+      body: JSON.stringify({
+        classId: id,
+        foodsIds: ids,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        lastStatus = res.status;
+        return res;
+      })
+      .then((data) => {
+        if (lastStatus === 204) {
+          setMessage("Class Foods are successfully modified.");
+        }
+      })
+      .catch((err) => {
+        setMessage("we have a problem " + err.message);
+      });
+  };
+
+  return (
+    <>
+      <Wrapper>
+        <Title> Assign Foods For Selected Class</Title>
+        <FormDiv>
+          <Form
+            onSubmit={(ev) => {
+              btnConfirm(ev);
+            }}
+          >
+            <div className="App">
+              <Myul className="list">
+                {foods != null &&
+                  foods.map((food, index) => {
+                    return (
+                      <Listdiv key={index}>
+                        <li>
+                          <Itemdiv>
+                            <Input
+                              type="checkbox"
+                              id={`custom-checkbox-${index}`}
+                              name={food.id}
+                              value={food.id}
+                              checked={
+                                checkedState != null && checkedState[index]
+                              }
+                              onChange={() => handleOnChange(index)}
+                            />
+                            <Label htmlFor={`custom-checkbox-${index}`}>
+                              {food.name}
+                            </Label>
+
+                            <Label htmlFor={`custom-checkbox-${index}`}>
+                              {food.offerDate}
+                            </Label>
+                          </Itemdiv>
+                        </li>
+                      </Listdiv>
+                    );
+                  })}
+              </Myul>
+
+              <br />
+              <Buttonsdiv>
+                <Button type="submit">Submit</Button>
+
+                <Link to="/Classes" style={{ textDecoration: "none" }}>
+                  <Button type="button"> Back </Button>
+                </Link>
+              </Buttonsdiv>
+              <MessageLabel> {message} </MessageLabel>
+            </div>
+          </Form>
+        </FormDiv>
+      </Wrapper>
+    </>
+  );
 }
 
-
 const Itemdiv = styled.div`
-display:flex;
-align-items: center;
-
-
+border-top: 1px solid #ccc;
+  width: 300px;
+  margin-top: 20px;
+  margin-left:-60px;
+  display: flex;
+  align-items: center;
 `;
 
 const Myul = styled.ul`
-
+  list-style-type: none;
 `;
 
 const Listdiv = styled.div`
-display: flex;
-margin-left: -200px;
+  display: flex;
+  margin-left: 30px;
 `;
 
 const Title = styled.div`
@@ -172,8 +170,9 @@ const Title = styled.div`
   font-weight: 400;
   font-size: 20px;
   margin-top: 35px;
-  margin-left: 520px;
+  margin-left: 510px;
   z-index: 45;
+  letter-spacing: 1px;
 `;
 
 const Wrapper = styled.div`
@@ -213,6 +212,7 @@ const Label = styled.label`
   color: white;
   display: flex;
   width: 180px;
+  letter-spacing: 1px;
 `;
 
 const MessageLabel = styled.label`
@@ -262,10 +262,10 @@ const Input = styled.input`
 
 const Buttonsdiv = styled.div`
   display: flex;
-  align-items:center;
-  margin-left: 20px;
+  align-items: center;
+  margin-left: 50px;
   margin-right: 50px;
-  margin-top: 200px;
+  margin-top: 220px;
 `;
 
-export default ClassFoods
+export default ClassFoods;
