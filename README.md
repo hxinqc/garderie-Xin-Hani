@@ -8,10 +8,9 @@
 
 ![1-food](https://user-images.githubusercontent.com/91044380/214454511-bfe2323b-7f7a-4205-8f20-c72883c3241d.jpg)
 
-![1-teacher](https://user-images.githubusercontent.com/91044380/214454465-94d139c2-3894-45a8-8756-a128630dded4.jpg)
+![1-teacher](https://user-images.githubusercontent.com/91044380/214483852-0adc1d6e-6c19-4569-a898-80de23fa52a3.jpg)
 
 ![AddClass](https://user-images.githubusercontent.com/91044380/213355486-59d6a94c-2da5-4397-9ec7-c3e71ceef700.jpg)
-
 
 ![2](https://user-images.githubusercontent.com/91044380/213355663-9a547f92-29bf-4114-b731-ddc7ded09adb.jpg)
 
@@ -23,7 +22,7 @@
 
 ![5](https://user-images.githubusercontent.com/91044380/213355783-c22f3752-0a1a-4cce-81e5-a00db469b96d.jpg)
 
-![6](https://user-images.githubusercontent.com/91044380/213355814-7c0cad0b-e8ac-4b86-ab37-aa9e0d9733a5.jpg)
+![6](https://user-images.githubusercontent.com/91044380/214483961-21e06118-3c8e-4e49-8428-f95172510474.jpg)
 
 ![add-activity](https://user-images.githubusercontent.com/91044380/214455101-9122a30b-9c24-4f0d-a5f6-2eb5602b01d3.jpg)
 
