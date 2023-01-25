@@ -65,7 +65,7 @@ const EnrolementHome = () => {
   return (
     <div className="container">
       <FormDiv>
-      <Title> Select Enrolled Status to See Ralated Childs</Title>
+      <Title> Select Enrolled Status to See Ralated Children</Title>
 
         <Form
           onSubmit={(ev) => {
