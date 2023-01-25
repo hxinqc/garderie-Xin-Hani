@@ -4,7 +4,11 @@
 
 ![Home](https://user-images.githubusercontent.com/91044380/213355435-7dbc8344-32d2-4d07-b186-a938811ad880.jpg)
 
-![1](https://user-images.githubusercontent.com/91044380/213355613-5dee18b6-f118-449f-b8e8-f772c16a3c1e.jpg)
+![1](https://user-images.githubusercontent.com/91044380/214454329-9d492757-9964-4913-80ec-489efffbf4eb.jpg)
+
+![1-food](https://user-images.githubusercontent.com/91044380/214454511-bfe2323b-7f7a-4205-8f20-c72883c3241d.jpg)
+
+![1-teacher](https://user-images.githubusercontent.com/91044380/214454465-94d139c2-3894-45a8-8756-a128630dded4.jpg)
 
 ![AddClass](https://user-images.githubusercontent.com/91044380/213355486-59d6a94c-2da5-4397-9ec7-c3e71ceef700.jpg)
 
@@ -15,11 +19,15 @@
 
 ![4](https://user-images.githubusercontent.com/91044380/213355752-7508e4d5-b58d-4ed8-8e51-c9218b179911.jpg)
 
+![search](https://user-images.githubusercontent.com/91044380/214456220-71d9b6f0-8529-41c2-ad2e-6daecad04bcc.jpg)
+
 ![5](https://user-images.githubusercontent.com/91044380/213355783-c22f3752-0a1a-4cce-81e5-a00db469b96d.jpg)
 
 ![6](https://user-images.githubusercontent.com/91044380/213355814-7c0cad0b-e8ac-4b86-ab37-aa9e0d9733a5.jpg)
 
-![7](https://user-images.githubusercontent.com/91044380/213355842-a1779f42-7ec9-48ab-9828-906d456b3424.jpg)
+![add-activity](https://user-images.githubusercontent.com/91044380/214455101-9122a30b-9c24-4f0d-a5f6-2eb5602b01d3.jpg)
+
+![Edit-food](https://user-images.githubusercontent.com/91044380/214455506-3616d460-35e7-414d-8db4-cee6ca3aeff8.jpg)
 
 
 To run this project cd into garderiefrontend and run npm start in the frontend, and the client and server must run together.
