@@ -472,7 +472,7 @@ public class GarderieServiceImpl implements GarderieService {
             foodsClassId = new FoodsClassId(list.get(i));
             foodsClassId.setPicPath("/download/" +
                     foodsClassId.getPicPath().replaceFirst(FILE_BASE_PATH, ""));
-            if (classFoods != null && classFoods.contains(new ClassActivities(classId, foodsClassId.getId())))
+            if (classFoods != null && classFoods.contains(new ClassFood(classId, foodsClassId.getId())))
                 foodsClassId.setClassId(classId);
             returnList.add(foodsClassId);
 
