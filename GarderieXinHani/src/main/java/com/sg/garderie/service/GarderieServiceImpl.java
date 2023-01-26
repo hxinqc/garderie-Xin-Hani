@@ -1,5 +1,6 @@
 package com.sg.garderie.service;
 
+import com.fasterxml.uuid.Generators;
 import com.sg.garderie.dao.*;
 import com.sg.garderie.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +70,7 @@ public class GarderieServiceImpl implements GarderieService {
     @Override
     public String saveFile(String fileName, byte[] bytes) throws IOException {
         String fileType = fileName.substring(fileName.lastIndexOf("."));
-        UUID uuid = UUID.randomUUID();
+        UUID uuid = Generators.timeBasedGenerator().generate();
         Path path = Paths.get(FILE_BASE_PATH + uuid + fileType);
         Files.write(path, bytes);
         String filePath = path.toString();
