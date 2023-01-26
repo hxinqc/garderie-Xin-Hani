@@ -56,7 +56,11 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.13</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.fasterxml.uuid</groupId>
+            <artifactId>java-uuid-generator</artifactId>
+            <version>4.0.1</version>
+        </dependency>
         <!-- Spring Boot Dev Tools -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
