@@ -1,5 +1,6 @@
 package com.sg.garderie.service;
 
+import com.fasterxml.uuid.Generators;
 import com.sg.garderie.dao.*;
 import com.sg.garderie.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -68,7 +70,7 @@ public class GarderieServiceImpl implements GarderieService {
     @Override
     public String saveFile(String fileName, byte[] bytes) throws IOException {
         String fileType = fileName.substring(fileName.lastIndexOf("."));
-        UUID uuid = UUID.randomUUID();
+        UUID uuid = Generators.timeBasedGenerator().generate();
         Path path = Paths.get(FILE_BASE_PATH + uuid + fileType);
         Files.write(path, bytes);
         String filePath = path.toString();
@@ -157,7 +159,7 @@ public class GarderieServiceImpl implements GarderieService {
     }
 
     @Override
-    public void updateInscriptionStatus(Integer id, String status) {
+    public void updateInscriptionStatus(Integer id, INSCRIPTION_STATUS status) {
         inscriptionDao.updateStatus(id, status);
     }
 
@@ -244,7 +246,7 @@ public class GarderieServiceImpl implements GarderieService {
         ChildRoster childRoster1;
         childRoster1 = childRosterDao.addChildRoster(childRoster);
         if (childRoster.getInscriptionId() != null) {
-            inscriptionDao.updateStatus(childRoster.getInscriptionId(), INSCRIPTION_STATUS.ACCEPTED.name());
+            inscriptionDao.updateStatus(childRoster.getInscriptionId(), INSCRIPTION_STATUS.ACCEPTED);
         }
         return childRoster1;
     }
@@ -313,8 +315,27 @@ public class GarderieServiceImpl implements GarderieService {
         List<ActivitiesClassId> list = classActivitiesDao.getAllActivitiesClassDisplay(classId);
         if (list != null)
             list.stream().forEach(activities -> activities.setPicPath("/download/" +
-                activities.getPicPath().replaceFirst(FILE_BASE_PATH, "")));
+                    activities.getPicPath().replaceFirst(FILE_BASE_PATH, "")));
         return list;
+    }
+
+    @Override
+    public List<ActivitiesClassId> getActivitiesForClass(int classId) {
+        List<ClassActivities> classActivities = classActivitiesDao.getClassActivitiesByClassId(classId);
+
+        List<Activities> list = activitiesDao.getAllActivities();
+        ActivitiesClassId activitiesClassId;
+        List<ActivitiesClassId> returnList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            activitiesClassId = new ActivitiesClassId(list.get(i));
+            activitiesClassId.setPicPath("/download/" +
+                    activitiesClassId.getPicPath().replaceFirst(FILE_BASE_PATH, ""));
+            if (classActivities != null && classActivities.contains(new ClassActivities(classId, activitiesClassId.getId())))
+                activitiesClassId.setClassId(classId);
+            returnList.add(activitiesClassId);
+
+        }
+        return returnList;
     }
 
     @Override
@@ -430,6 +451,37 @@ public class GarderieServiceImpl implements GarderieService {
 
     }
 
+
+
+    @Override
+    public List<FoodsClassId> getAllFoodsClassDisplay(int classId) {
+        List<FoodsClassId> list = classFoodsDao.getAllFoodsClassDisplay(classId);
+        if (list != null)
+            list.stream().forEach(foods -> foods.setPicPath("/download/" +
+                    foods.getPicPath().replaceFirst(FILE_BASE_PATH, "")));
+        return list;
+    }
+
+    @Override
+    public List<FoodsClassId> getFoodsForClass(int classId) {
+        List<ClassFood> classFoods = classFoodsDao.getClassFoodsByClassId(classId);
+
+        List<Food> list = foodDao.getAllFood();
+        FoodsClassId foodsClassId;
+        List<FoodsClassId> returnList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            foodsClassId = new FoodsClassId(list.get(i));
+            foodsClassId.setPicPath("/download/" +
+                    foodsClassId.getPicPath().replaceFirst(FILE_BASE_PATH, ""));
+            if (classFoods != null && classFoods.contains(new ClassFood(classId, foodsClassId.getId())))
+                foodsClassId.setClassId(classId);
+            returnList.add(foodsClassId);
+
+        }
+        return returnList;
+    }
+
+
     @Override
     public void addClassTeachers(int classId, int[] ids) {
         classTeachersDao.addClassTeachers(classId,ids);
@@ -449,6 +501,23 @@ public class GarderieServiceImpl implements GarderieService {
     public List<TeacherClassId> getAllClassesTeachersDisplay(int classId) {
 
         return classTeachersDao.getAllClassesTeachersDisplay(classId);
+    }
+
+    @Override
+    public List<TeacherClassId> getTeachersForClass(int classId) {
+        List<ClassTeacher> classTeachers = classTeachersDao.getAllClassesTeachersByClassId(classId);
+
+        List<Teacher> list = teacherDao.getAll();
+        TeacherClassId teacherClassId;
+        List<TeacherClassId> returnList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            teacherClassId = new TeacherClassId(list.get(i));
+            if (classTeachers != null && classTeachers.contains(new ClassTeacher(classId, teacherClassId.getId())))
+                teacherClassId.setClassId(classId);
+            returnList.add(teacherClassId);
+
+        }
+        return returnList;
     }
 
     @Override

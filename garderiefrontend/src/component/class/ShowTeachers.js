@@ -3,10 +3,9 @@
 // getTeacher is coming from ShowTeacher component and contains all the fields
 
 import React from "react";
-import styled, { StyledComponent } from "styled-components";
+// import styled, { StyledComponent } from "styled-components";
 
 const ShowTeachers = (getTeacher) => {
-  console.log("myTeacher", getTeacher.data)
   return (
     <div className="card" key={getTeacher.data.id} >
       <div className="info" >

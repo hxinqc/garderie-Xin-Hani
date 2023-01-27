@@ -43,6 +43,7 @@ import EditClass from "./classCRUD/EditClass";
 import ViewClass from "./classCRUD/ViewClass";
 import ClassTeachers from "./class/ClassTeachers";
 import ClassActivities from "./class/ClassActivities";
+import ClassFoods from "./class/ClassFoods";
 
 function App() {
   return (
@@ -59,6 +60,8 @@ function App() {
         <Route path="/Classes/viewClass/:id" element={<ViewClass />} />
         <Route path="/Classes/teachers/:id" element={<ClassTeachers />} />
         <Route path="/Classes/activities/:id" element={<ClassActivities />} />
+        <Route path="/Classes/foods/:id" element={<ClassFoods />} />
+
 
         <Route path="/Children" element={<Children />} />
         <Route path="/Child/addChild/:inscriptionId" element={<AddChild />} />

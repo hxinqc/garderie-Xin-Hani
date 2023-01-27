@@ -12,6 +12,6 @@ public interface InscriptionDao {
     List<Inscription> getInscriptionByStatus(INSCRIPTION_STATUS status);
     List<Inscription> getAllInscription();
     void editInscription(Inscription inscription);
-    void updateStatus(Integer id, String status);
+    void updateStatus(Integer id, INSCRIPTION_STATUS status);
 
 }

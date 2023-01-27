@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 
-export default function ClassTeachers() {
-  const [teachers, setTeachers] = useState(null);
+function ClassFoods() {
+  const [foods, setFoods] = useState(null);
   const [checkedState, setCheckedState] = useState();
-  const [teacherIds, setTeacherIds] = useState("");
+  const [foodIds, setFoodIds] = useState("");
   const [message, setMessage] = useState(null);
   var lastStatus;
 
@@ -19,35 +19,35 @@ export default function ClassTeachers() {
 
     const allIds = updatedCheckedState.reduce((ids, currentState, index) => {
       if (currentState === true) {
-        return ids + teachers[index].id + ",";
+        return ids + foods[index].id + ",";
       }
       return ids;
     }, "");
 
-    setTeacherIds(allIds);
+    setFoodIds(allIds);
   };
 
   useEffect(() => {
-    loadTeachers();
+    loadFoods();
   }, []);
 
-  const loadTeachers = async () => {
-    await fetch(`http://localhost:8080/allTeachers/class/${id}`)
+  const loadFoods = async () => {
+    await fetch(`http://localhost:8080/allFoods/class/${id}`)
       .then((resp) => resp.json())
       .then((data) => {
-        setTeachers(data);
+        setFoods(data);
         var classStatus = new Array(data.length);
         var ids = "";
-        data.forEach((teacher, index) => {
-          if (teacher.classId != null) {
+        data.forEach((food, index) => {
+          if (food.classId != null) {
             classStatus[index] = true;
-            ids += teacher.id + ",";
+            ids += food.id + ",";
           } else {
             classStatus[index] = false;
           }
         });
         setCheckedState(classStatus);
-        setTeacherIds(ids);
+        setFoodIds(ids);
       })
       .catch((err) => {
         console.log("we have a problem " + err.message);
@@ -56,33 +56,30 @@ export default function ClassTeachers() {
 
   const btnConfirm = (ev) => {
     ev.preventDefault();
-    var ids = teacherIds;
+    var ids = foodIds;
     if (ids == null) {
       ids = "";
     } else if (ids.length > 0) {
-      ids = ids.substr(0, ids.length - 1);
+      ids = ids.substring(0, ids.length - 1);
     }
 
-    fetch(
-      `http://localhost:8080/class/teachers?classId=${id}&teachersIds=${ids}`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          classId: id,
-          teachersIds: ids,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    fetch(`http://localhost:8080/class/foods?classId=${id}&afoodsIds=${ids}`, {
+      method: "POST",
+      body: JSON.stringify({
+        classId: id,
+        foodsIds: ids,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => {
         lastStatus = res.status;
         return res;
       })
       .then((data) => {
         if (lastStatus === 204) {
-          setMessage("Class Teachers are successfully modified.");
+          setMessage("Class Foods are successfully modified.");
         }
       })
       .catch((err) => {
@@ -93,7 +90,7 @@ export default function ClassTeachers() {
   return (
     <>
       <Wrapper>
-        <Title> Assign Teachers For Selected Class </Title>
+        <Title> Assign Foods For Selected Class</Title>
         <FormDiv>
           <Form
             onSubmit={(ev) => {
@@ -102,8 +99,8 @@ export default function ClassTeachers() {
           >
             <div className="App">
               <Myul className="list">
-                {teachers != null &&
-                  teachers.map((teacher, index) => {
+                {foods != null &&
+                  foods.map((food, index) => {
                     return (
                       <Listdiv key={index}>
                         <li>
@@ -111,15 +108,19 @@ export default function ClassTeachers() {
                             <Input
                               type="checkbox"
                               id={`custom-checkbox-${index}`}
-                              name={teacher.id}
-                              value={teacher.id}
+                              name={food.id}
+                              value={food.id}
                               checked={
                                 checkedState != null && checkedState[index]
                               }
                               onChange={() => handleOnChange(index)}
                             />
                             <Label htmlFor={`custom-checkbox-${index}`}>
-                              {teacher.firstName + " " + teacher.lastName}
+                              {food.name}
+                            </Label>
+
+                            <Label htmlFor={`custom-checkbox-${index}`}>
+                              {food.offerDate}
                             </Label>
                           </Itemdiv>
                         </li>
@@ -146,8 +147,10 @@ export default function ClassTeachers() {
 }
 
 const Itemdiv = styled.div`
-  border-top: 1px solid #ccc;
+border-top: 1px solid #ccc;
   width: 300px;
+  margin-top: 20px;
+  margin-left:-60px;
   display: flex;
   align-items: center;
 `;
@@ -158,8 +161,7 @@ const Myul = styled.ul`
 
 const Listdiv = styled.div`
   display: flex;
-  margin-top: 20px;
-  margin-left: -30px;
+  margin-left: 30px;
 `;
 
 const Title = styled.div`
@@ -263,5 +265,7 @@ const Buttonsdiv = styled.div`
   align-items: center;
   margin-left: 50px;
   margin-right: 50px;
-  margin-top: 180px;
+  margin-top: 220px;
 `;
+
+export default ClassFoods;
