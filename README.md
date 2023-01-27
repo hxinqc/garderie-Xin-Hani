@@ -32,7 +32,8 @@
 To run this project cd into garderiefrontend and run npm start in the frontend, and the client and server must run together.
 
 ### The backend is implemented by:
-Java, Spring Boot, Database Connectivity (JDBC), SQL (DDL, DML), RESTful WebServices, MySQL
+
+Java, Spring Boot, IntelliJ IDEA, Database Connectivity (JDBC), SQL (DDL, DML), RESTful WebServices, MySQL, Postman API, Lucidchart
 
 ### For the Frontend we used: 
 React.js, JavaScript, HTML, CSS
