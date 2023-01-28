@@ -49,6 +49,28 @@ function Topbar() {
           </LiDiv>
         </NavigationList>
       </TopCenter>
+
+      <TopRight>
+{/* 
+<NavigationList>
+
+   <LeftLiDiv>
+   {user ? <NavigationLink to="/profile">{user.split('@')[0]}</NavigationLink> : <NavigationLink to="/Register"> Register</NavigationLink>}
+   </LeftLiDiv>
+
+   <LeftLiDiv>
+   {user ?  <NavigationLink to="/logout">Logout</NavigationLink> :<NavigationLink to="/Login">Login</NavigationLink>}
+   </LeftLiDiv>
+
+</NavigationList> */}
+ 
+ 
+
+
+</TopRight>
+
+
+
     </Wrapper>
   );
 }
