@@ -55,7 +55,7 @@ function Topbar() {
 <NavigationList>
 
    <LeftLiDiv>
-   {user ? <NavigationLink to="/profile">{user.split('@')[0]}</NavigationLink> : <NavigationLink to="/Register"> Register</NavigationLink>}
+   {user ? <NavigationLink to="/profile">{user.split('@')[0]}</NavigationLink> : <NavigationLink to="/Signup"> Signup</NavigationLink>}
    </LeftLiDiv>
 
    <LeftLiDiv>

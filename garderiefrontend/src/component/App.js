@@ -44,7 +44,7 @@ import ViewClass from "./classCRUD/ViewClass";
 import ClassTeachers from "./class/ClassTeachers";
 import ClassActivities from "./class/ClassActivities";
 import ClassFoods from "./class/ClassFoods";
-import Register from "../pages/Register";
+import Signup from "../pages/Signup";
 import Login from "../pages/Login";
 import Logout from "../pages/Logout";
 
@@ -98,7 +98,7 @@ function App() {
 
         <Route path="/search" element={<Search />} />
 
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
 
