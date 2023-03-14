@@ -27,6 +27,7 @@ public class ClassFoodController {
         if (foodsIds != null && !foodsIds.equals("")) {
             ids = Arrays.stream(foodsIds.split(",")).mapToInt(id -> Integer.valueOf(id)).toArray();
         }
+        service.deleteClassFoodsByClassId(classId);
         service.addClassFoods(classId, ids);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }

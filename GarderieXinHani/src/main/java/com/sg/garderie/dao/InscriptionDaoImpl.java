@@ -21,8 +21,8 @@ public class InscriptionDaoImpl implements InscriptionDao {
     @Override
     @Transactional
     public Inscription addInscription(Inscription inscription) {
-        final String INSERT_INSCRIPTION = "INSERT INTO inscription(FirstName, LastName, Phone, "
-                +"Address, InscriptionDate, OpenPlace, Status) "
+        final String INSERT_INSCRIPTION = "INSERT INTO inscription(firstName, lastName, phone, "
+                +"address, inscriptionDate, openPlace, status) "
                 + "VALUES(?,?,?,?,?,?,?)";
         jdbc.update(INSERT_INSCRIPTION,
                 inscription.getFirstName(), inscription.getLastName(), inscription.getPhone(),
@@ -66,8 +66,8 @@ public class InscriptionDaoImpl implements InscriptionDao {
 
     @Override
     public void editInscription(Inscription inscription) {
-        final String UPDATE_INSCRIPTION = "UPDATE inscription SET FirstName=?, LastName=?, Phone=?, "
-                + "Address=?, InscriptionDate=?, OpenPlace=?, Status=? WHERE id=?";
+        final String UPDATE_INSCRIPTION = "UPDATE inscription SET firstName=?, lastName=?, phone=?, "
+                + "address=?, inscriptionDate=?, openPlace=?, status=? WHERE id=?";
         jdbc.update(UPDATE_INSCRIPTION,
                 inscription.getFirstName(), inscription.getLastName(), inscription.getPhone(),
                 inscription.getAddress(), inscription.getInscriptionDate(), inscription.getOpenPlace(),
@@ -76,7 +76,7 @@ public class InscriptionDaoImpl implements InscriptionDao {
 
     @Override
     public void updateStatus(Integer id, INSCRIPTION_STATUS status) {
-        final String UPDATE_INSCRIPTION = "UPDATE inscription SET Status=? WHERE id=?";
+        final String UPDATE_INSCRIPTION = "UPDATE inscription SET status=? WHERE id=?";
         jdbc.update(UPDATE_INSCRIPTION, status.name(), id);
     }
 

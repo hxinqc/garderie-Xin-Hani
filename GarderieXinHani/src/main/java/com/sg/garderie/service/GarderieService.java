@@ -5,6 +5,7 @@ import com.sg.garderie.dao.FoodsException;
 import com.sg.garderie.dao.NewsException;
 import com.sg.garderie.model.*;
 
+import java.util.Date;
 import java.util.List;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -14,7 +15,7 @@ public interface GarderieService {
     News addNews(News news);
     String saveFile(String fileName, byte[] bytes) throws IOException;
     News getNewsById(int id) throws NewsException;
-    List<News> getNewsByDate(LocalDate date);
+    List<News> getNewsByDate(String date);
     List<News> getLatestNews();
     List<News> getAllNews();
     void editNews(News news) throws NewsException;

@@ -37,7 +37,7 @@ public class FoodDaoImpl implements FoodDao{
             ld = LocalDate.now();
         }
 
-        final String sql = "INSERT INTO Foods(Name, offerDate, description, picPath) VALUES(?,?,?,?);";
+        final String sql = "INSERT INTO Foods(name, offerDate, description, picPath) VALUES(?,?,?,?);";
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 
         LocalDate finalLd = ld;
@@ -60,7 +60,7 @@ public class FoodDaoImpl implements FoodDao{
 
     @Override
     public List<Food> getAllFood() {
-        final String sql = "SELECT ID, Name, offerDate, Description, picPath FROM Foods;";
+        final String sql = "SELECT id, name, offerDate, description, picPath FROM Foods;";
         return jdbcTemplate.query(sql, new FoodDaoImpl.FoodMapper());
     }
 
@@ -69,8 +69,8 @@ public class FoodDaoImpl implements FoodDao{
     public List<Food> getAllFoodsByDateClassId(int classId, LocalDate offerDate) {
         try {
             final String SELECT_FOODS_FOR_Class = "SELECT F.* FROM Foods F "
-            + "JOIN ClassFood CF ON F.ID=CF.foodId "
-            + "JOIN Class C ON C.ID=CF.ClassId WHERE C.ID=? AND F.offerDate=?";
+            + "JOIN ClassFood CF ON F.id=CF.foodId "
+            + "JOIN class C ON C.id=CF.classId WHERE C.id=? AND F.offerDate=?";
 
             return jdbc.query(SELECT_FOODS_FOR_Class, new FoodDaoImpl.FoodMapper(), classId, offerDate);
         } catch (DataAccessException ex) {
@@ -95,10 +95,10 @@ public class FoodDaoImpl implements FoodDao{
 
     @Override
     public boolean updateFoodInfo(Food food) {
-        final String sql = "UPDATE foods SET "
-                + "Name = ?, "
+        final String sql = "UPDATE Foods SET "
+                + "name = ?, "
                 + "offerDate = ?, "
-                + "Description = ? "
+                + "description = ? "
                 + "WHERE id = ?;";
 
         return jdbcTemplate.update(sql,
@@ -113,8 +113,8 @@ public class FoodDaoImpl implements FoodDao{
         @Override
         public Food mapRow(ResultSet rs, int index) throws SQLException {
             Food food = new Food();
-            food.setID(rs.getInt("ID"));
-            food.setName(rs.getString("Name"));
+            food.setID(rs.getInt("id"));
+            food.setName(rs.getString("name"));
             food.setDescription(rs.getString("description"));
             food.setPicPath(rs.getString("picPath"));
             food.setOfferDate(LocalDate.from(rs.getTimestamp("offerDate").toLocalDateTime()));

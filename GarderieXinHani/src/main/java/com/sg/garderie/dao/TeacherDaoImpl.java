@@ -27,7 +27,7 @@ public class TeacherDaoImpl implements TeacherDao{
 
     @Override
     public Teacher add(Teacher teacher) {
-        final String sql = "INSERT INTO Teacher(firstName, lastName, IsActive) VALUES(?,?,?);";
+        final String sql = "INSERT INTO Teacher(firstName, lastName, isActive) VALUES(?,?,?);";
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 
         jdbcTemplate.update((Connection conn) -> {
@@ -52,13 +52,13 @@ public class TeacherDaoImpl implements TeacherDao{
 
     @Override
     public List<Teacher> getAll() {
-        final String sql = "SELECT ID, FirstName, LastName, IsActive FROM Teacher;";
+        final String sql = "SELECT id, firstName, lastName, isActive FROM Teacher;";
         return jdbcTemplate.query(sql, new TeacherDaoImpl.TeacherMapper());     }
 
     @Override
     public Teacher findTeacherById(int id) {
-        final String sql = "SELECT ID, FirstName, LastName, IsActive "
-                + "FROM Teacher WHERE ID = ?;";
+        final String sql = "SELECT id, firstName, lastName, isActive "
+                + "FROM Teacher WHERE id = ?;";
 
         return jdbcTemplate.queryForObject(sql, new TeacherDaoImpl.TeacherMapper(), id);    }
 
@@ -72,7 +72,7 @@ public class TeacherDaoImpl implements TeacherDao{
     @Override
     @Transactional
     public boolean updateTeacherInfo(Teacher teacher) {
-        final String sql = "UPDATE teacher SET "
+        final String sql = "UPDATE Teacher SET "
                 + "firstName = ?, "
                 + "lastName = ?, "
                 + "isActive = ? "
@@ -91,10 +91,10 @@ public class TeacherDaoImpl implements TeacherDao{
         @Override
         public Teacher mapRow(ResultSet rs, int index) throws SQLException {
             Teacher teacher = new Teacher();
-            teacher.setID(rs.getInt("ID"));
-            teacher.setFirstName(rs.getString("FirstName"));
-            teacher.setLastName(rs.getString("LastName"));
-            teacher.setIsActive(rs.getBoolean("IsActive"));
+            teacher.setID(rs.getInt("id"));
+            teacher.setFirstName(rs.getString("firstName"));
+            teacher.setLastName(rs.getString("lastName"));
+            teacher.setIsActive(rs.getBoolean("isActive"));
             return teacher;
         }
     }

@@ -36,6 +36,7 @@ function ClassFoods() {
       .then((resp) => resp.json())
       .then((data) => {
         setFoods(data);
+        console.log(data);
         var classStatus = new Array(data.length);
         var ids = "";
         data.forEach((food, index) => {
@@ -63,7 +64,7 @@ function ClassFoods() {
       ids = ids.substring(0, ids.length - 1);
     }
 
-    fetch(`http://localhost:8080/class/foods?classId=${id}&afoodsIds=${ids}`, {
+    fetch(`http://localhost:8080/class/foods?classId=${id}&foodsIds=${ids}`, {
       method: "POST",
       body: JSON.stringify({
         classId: id,

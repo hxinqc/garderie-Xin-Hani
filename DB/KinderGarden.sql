@@ -3,99 +3,99 @@ CREATE DATABASE kinderGardenDB;
 
 USE `kinderGardenDB` ;
 CREATE TABLE `Teacher` (
-  `ID` INT NOT NULL AUTO_INCREMENT,
-  `FirstName` varchar(20) not null,
-  `LastName` varchar(20) not null,
-  `IsActive` boolean default true,
-  PRIMARY KEY (`ID`)
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `firstName` varchar(20) not null,
+  `lastName` varchar(20) not null,
+  `isActive` boolean default true,
+  PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `ClassTeacher` (
-  `ClassId` int,
-  `TeacherId` int,
-  PRIMARY KEY (`ClassId`, `TeacherId`),
-  FOREIGN KEY (`TeacherId`) REFERENCES `Teacher`(`ID`)
+  `classId` int,
+  `teacherId` int,
+  PRIMARY KEY (`classId`, `teacherId`),
+  FOREIGN KEY (`teacherId`) REFERENCES `Teacher`(`id`)
 );
 
-CREATE TABLE `Inscription` (
-  `ID` INT NOT NULL AUTO_INCREMENT,
-  `FirstName` varchar(20) not null,
-  `LastName` varchar(20) not null,
-  `Phone` varchar(20) not null,
-  `Address` varchar(100) not null,
-  `InscriptionDate` datetime not null,
-  `OpenPlace` int,
-  `Status` varchar(10),
-  PRIMARY KEY (`ID`)
+CREATE TABLE `inscription` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `firstName` varchar(20) not null,
+  `lastName` varchar(20) not null,
+  `phone` varchar(20) not null,
+  `address` varchar(100) not null,
+  `inscriptionDate` datetime not null,
+  `openPlace` int,
+  `status` varchar(10),
+  PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Class` (
-  `ID` INT NOT NULL AUTO_INCREMENT,
-  `Name` varchar(20) not null,
-  `OpenDate` datetime not null,
-  PRIMARY KEY (`ID`)
+CREATE TABLE `class` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) not null,
+  `openDate` datetime not null,
+  PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `ChildRoster` (
-  `ID` INT NOT NULL AUTO_INCREMENT,
-  `ClassId` int,
-  `FirstName` varchar(20) not null,
-  `LastName` varchar(20) not null,
-  `InscriptionId` int,
-  PRIMARY KEY (`ID`),
-  FOREIGN KEY (`InscriptionId`) REFERENCES `Inscription`(`ID`),
-  FOREIGN KEY (`ClassId`) REFERENCES `Class`(`ID`)
+CREATE TABLE `childRoster` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `classId` int,
+  `firstName` varchar(20) not null,
+  `lastName` varchar(20) not null,
+  `inscriptionId` int,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`inscriptionId`) REFERENCES `inscription`(`id`),
+  FOREIGN KEY (`classId`) REFERENCES `class`(`id`)
 );
 
 CREATE TABLE `News` (
-  `ID` INT NOT NULL AUTO_INCREMENT,
-  `Name` varchar(100) not null,
-  `IssueDate` datetime not null,
-  `PicPath` varchar(100),
-  `Content` MEDIUMTEXT,
-  PRIMARY KEY (`ID`)
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) not null,
+  `issueDate` datetime not null,
+  `picPath` varchar(100),
+  `content` MEDIUMTEXT,
+  PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `Admin` (
-  `ID` INT NOT NULL AUTO_INCREMENT,
-  `Name` varchar(20) not null,
-  `Password` varchar(20) not null,
-  `Description` varchar(50),
-  `IsActive` boolean default true,
-  PRIMARY KEY (`ID`)
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) not null,
+  `password` varchar(20) not null,
+  `description` varchar(50),
+  `isActive` boolean default true,
+  PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `Foods` (
-  `ID` INT NOT NULL AUTO_INCREMENT,
-  `Name` varchar(20) not null,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) not null,
   `offerDate` datetime not null,
-  `PicPath` varchar(100),
-  `Description` varchar(500),
-  PRIMARY KEY (`ID`)
+  `picPath` varchar(100),
+  `description` varchar(500),
+  PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Activities` (
-  `ID` INT NOT NULL AUTO_INCREMENT,
-  `Name` varchar(20) not null,
+CREATE TABLE `activities` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) not null,
   `activityDate` datetime not null,
-  `PicPath` varchar(100),
-  `Description` varchar(500),
-  PRIMARY KEY (`ID`)
+  `picPath` varchar(100),
+  `description` varchar(500),
+  PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `ClassActivities` (
-  `ClassId` int,
-  `ActivityId` int,
-  PRIMARY KEY (`ClassId`, `ActivityId`),
-  FOREIGN KEY (`ClassId`) REFERENCES `Class`(`ID`),
-  FOREIGN KEY (`ActivityId`) REFERENCES `Activities`(`ID`)
+  `classId` int,
+  `activityId` int,
+  PRIMARY KEY (`classId`, `activityId`),
+  FOREIGN KEY (`classId`) REFERENCES `class`(`id`),
+  FOREIGN KEY (`activityId`) REFERENCES `activities`(`id`)
 );
 
 CREATE TABLE `ClassFood` (
-  `ClassId` int,
-  `FoodId` int,
-  PRIMARY KEY (`ClassId`, `FoodId`),
-  FOREIGN KEY (`ClassId`) REFERENCES `Class`(`ID`),
-  FOREIGN KEY (`FoodId`) REFERENCES `Foods`(`ID`)
+  `classId` int,
+  `foodId` int,
+  PRIMARY KEY (`classId`, `foodId`),
+  FOREIGN KEY (`classId`) REFERENCES `class`(`id`),
+  FOREIGN KEY (`foodId`) REFERENCES `Foods`(`id`)
 );
 

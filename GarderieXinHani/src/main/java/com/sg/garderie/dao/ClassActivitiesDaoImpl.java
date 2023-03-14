@@ -61,9 +61,9 @@ public class ClassActivitiesDaoImpl implements ClassActivitiesDao {
     public List<ActivitiesClassId> getAllActivitiesClassDisplay(int classId) {
         try {
             final String SELECT_ACTIVITIES_BY_ID = "SELECT activities.*, classActivities.classId " +
-                    "FROM activities LEFT JOIN classActivities " +
-                    "ON activities.id = classActivities.activityId " +
-                    "WHERE classActivities.classId = ? or classActivities.classId is null " +
+                    "FROM activities LEFT JOIN ClassActivities " +
+                    "ON activities.id = ClassActivities.activityId " +
+                    "WHERE ClassActivities.classId = ? or ClassActivities.classId is null " +
                     "ORDER BY activityDate desc";
             return jdbc.query(SELECT_ACTIVITIES_BY_ID, new ActivitiesDisplayMapper(), classId);
         } catch (DataAccessException ex) {

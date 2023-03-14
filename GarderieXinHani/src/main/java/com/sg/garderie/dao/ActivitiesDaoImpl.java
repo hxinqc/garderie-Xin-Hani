@@ -24,7 +24,7 @@ public class ActivitiesDaoImpl implements ActivitiesDao {
         if (ld == null) {
             throw new ActivitiesException("Activity Date is needed.");
         }
-        final String INSERT_ACTIVITIES = "INSERT INTO activities(name, activityDate, PicPath, Description) "
+        final String INSERT_ACTIVITIES = "INSERT INTO activities(name, activityDate, picPath, description) "
                 + "VALUES(?,?,?,?)";
         jdbc.update(INSERT_ACTIVITIES,
                 activities.getName(), ld, activities.getPicPath(), activities.getDescription());
@@ -70,7 +70,7 @@ public class ActivitiesDaoImpl implements ActivitiesDao {
         if (ld == null) {
             throw new ActivitiesException("Activity Date is needed.");
         }
-        final String INSERT_ACTIVITIES = "UPDATE activities SET name=?, activityDate=?, PicPath=?, Description=? "
+        final String INSERT_ACTIVITIES = "UPDATE activities SET name=?, activityDate=?, picPath=?, description=? "
                 + " WHERE id=?";
         jdbc.update(INSERT_ACTIVITIES,
                 activities.getName(), ld, activities.getPicPath(), activities.getDescription(), activities.getId());
