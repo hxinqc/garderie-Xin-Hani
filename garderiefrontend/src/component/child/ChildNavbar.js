@@ -7,7 +7,7 @@ const ChildNavbar = () => {
     <NavDiv className="container">
       <MyButton>
         <Link className="navbar-brand" to="/Children">
-          Children Information
+          Children Info
         </Link>
       </MyButton>
       <button
@@ -54,9 +54,12 @@ const LabelDiv = styled.div`
 const MyButton = styled.div`
   display: flex;
   color: white;
-  margin-left: 300px;
+  margin-right: 150px;
+  margin-left: 210px;
   margin-top: 30px;
   align-items: center;
   justify-content: center;
+  font-size: 20px;
+
 `;
 export default ChildNavbar;

@@ -185,7 +185,7 @@ const Title = styled.div`
   margin-top: -320px;
   margin-left: -120px;
   z-index: 5;
-  font-size: 18px;
+  font-size: 20px;
 `;
 
 const Wrapper = styled.div`

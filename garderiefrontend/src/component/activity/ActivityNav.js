@@ -59,9 +59,9 @@ margin-bottom: -20px;
 `;
 
 const LabelDiv = styled.div`
-color: red;
-margin-left: 100px;
-font-size: 16px;
+color: white;
+margin-left: 60px;
+font-size: 20px;
 font-weight: 300;
 z-index: 100;
 margin-top: 10px;

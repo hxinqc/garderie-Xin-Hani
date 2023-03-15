@@ -172,9 +172,11 @@ margin-bottom:-20px;
 const Title = styled.div`
   position: absolute;
   color: white;
-  margin-top: -400px;
+  margin-top: -410px;
   margin-left: -100px;
   z-index: 5;
+  font-size: 20px;
+
 `;
 
 const Wrapper = styled.div`
