@@ -14,7 +14,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -61,6 +63,8 @@ public class GarderieServiceImpl implements GarderieService {
 
     @Override
     public News addNews(News news) {
+        //local date + atStartOfDay() + default time zone + toInstant() = Date
+        Date date = Date.from(news.getIssueDate().atStartOfDay(ZoneId.of("UTC")).toInstant());
         newsDao.addNews(news);
         String fileName = news.getPicPath().replaceFirst(FILE_BASE_PATH, "");
         news.setPicPath("/download/" + fileName);
@@ -88,8 +92,10 @@ public class GarderieServiceImpl implements GarderieService {
     }
 
     @Override
-    public List<News> getNewsByDate(LocalDate date) {
+    public List<News> getNewsByDate(String date) {
+        System.out.println(date);
         List<News> list = newsDao.getNewsByDate(date);
+        System.out.println(list.size());
         list.stream().forEach(news -> news.setPicPath("/download/" +
                 news.getPicPath().replaceFirst(FILE_BASE_PATH, "")));
         return list;
@@ -464,19 +470,11 @@ public class GarderieServiceImpl implements GarderieService {
 
     @Override
     public List<FoodsClassId> getFoodsForClass(int classId) {
-        List<ClassFood> classFoods = classFoodsDao.getClassFoodsByClassId(classId);
+        List<FoodsClassId> returnList = classFoodsDao.getAllFoodsClassDisplay(classId);
 
-        List<Food> list = foodDao.getAllFood();
-        FoodsClassId foodsClassId;
-        List<FoodsClassId> returnList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            foodsClassId = new FoodsClassId(list.get(i));
-            foodsClassId.setPicPath("/download/" +
-                    foodsClassId.getPicPath().replaceFirst(FILE_BASE_PATH, ""));
-            if (classFoods != null && classFoods.contains(new ClassFood(classId, foodsClassId.getId())))
-                foodsClassId.setClassId(classId);
-            returnList.add(foodsClassId);
-
+        for(FoodsClassId food : returnList) {
+            food.setPicPath("/download/" +
+                    food.getPicPath().replaceFirst(FILE_BASE_PATH, ""));
         }
         return returnList;
     }

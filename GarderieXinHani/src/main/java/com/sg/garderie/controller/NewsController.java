@@ -4,6 +4,7 @@ import com.sg.garderie.dao.NewsException;
 import com.sg.garderie.model.News;
 import com.sg.garderie.service.GarderieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +17,7 @@ import javax.validation.Validator;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -58,7 +60,7 @@ public class NewsController {
 
     @GetMapping("/news/date/{date}")
     @CrossOrigin
-    public List<News> getNewsByDate(@PathVariable LocalDate date) {
+    public List<News> getNewsByDate(@PathVariable String date) {
         return service.getNewsByDate(date);
     }
 

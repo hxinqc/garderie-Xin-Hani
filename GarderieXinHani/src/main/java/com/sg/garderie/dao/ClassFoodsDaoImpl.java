@@ -63,11 +63,12 @@ public class ClassFoodsDaoImpl implements ClassFoodsDao {
     @Override
     public List<FoodsClassId> getAllFoodsClassDisplay(int classId) {
         try {
-            final String SELECT_Foods_BY_ID = "SELECT Foods.*, classFoods.classId " +
-                    "FROM Foods LEFT JOIN classFoods " +
-                    "ON Foods.id = classFoods.FoodId " +
-                    "WHERE classFoods.classId = ? or classFoods.classId is null " +
+            final String SELECT_Foods_BY_ID = "SELECT Foods.*, ClassFood.classId " +
+                    "FROM Foods LEFT JOIN ClassFood " +
+                    "ON Foods.id = ClassFood.foodId " +
+                    "WHERE ClassFood.classId = ? or ClassFood.classId is null " +
                     "ORDER BY offerDate desc";
+
             return jdbc.query(SELECT_Foods_BY_ID, new ClassFoodsDaoImpl.FoodsDisplayMapper(), classId);
         } catch (DataAccessException ex) {
             return null;

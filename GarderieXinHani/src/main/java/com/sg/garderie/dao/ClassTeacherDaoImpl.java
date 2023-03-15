@@ -38,8 +38,8 @@ public class ClassTeacherDaoImpl implements ClassTeachersDao{
     @Override
     public List<Teacher> getClassTeachersByClassId(int classId) {
        try {
-           final String SELECT_CLASS_BY_ID = "SELECT teacher.* FROM ClassTeacher JOIN teacher "
-           + "ON ClassTeacher.teacherId = teacher.id WHERE classId = ?";
+           final String SELECT_CLASS_BY_ID = "SELECT Teacher.* FROM ClassTeacher JOIN Teacher "
+           + "ON ClassTeacher.teacherId = Teacher.id WHERE classId = ?";
 
            return jdbc.query(SELECT_CLASS_BY_ID, new TeacherDaoImpl.TeacherMapper(), classId);
        } catch (DataAccessException ex) {
@@ -70,8 +70,8 @@ public class ClassTeacherDaoImpl implements ClassTeachersDao{
     @Override
     public List<TeacherClassId> getAllClassesTeachersDisplay(int classId) {
         try {
-            final String SELECT_CLASS_Teachers_BY_ID = "SELECT teacher.*, ClassTeacher.classId " +
-                    "FROM teacher LEFT JOIN ClassTeacher ON teacher.id = ClassTeacher.teacherId " +
+            final String SELECT_CLASS_Teachers_BY_ID = "SELECT Teacher.*, ClassTeacher.classId " +
+                    "FROM Teacher LEFT JOIN ClassTeacher ON Teacher.id = ClassTeacher.teacherId " +
                     "WHERE ClassTeacher.classId = ? or ClassTeacher.classId is null; ";
             return jdbc.query(SELECT_CLASS_Teachers_BY_ID, new TeacherClassIdMapper(), classId);
         } catch (DataAccessException ex) {
@@ -82,8 +82,8 @@ public class ClassTeacherDaoImpl implements ClassTeachersDao{
     @Override
     public List<TeacherClassId> getTeachersForClass(int classId) {
         try {
-            final String SELECT_CLASS_Teachers_BY_ID = "SELECT teacher.*, ClassTeacher.classId " +
-                    "FROM teacher LEFT JOIN ClassTeacher ON teacher.id = ClassTeacher.teacherId " +
+            final String SELECT_CLASS_Teachers_BY_ID = "SELECT Teacher.*, ClassTeacher.classId " +
+                    "FROM Teacher LEFT JOIN ClassTeacher ON Teacher.id = ClassTeacher.teacherId " +
                     "WHERE ClassTeacher.classId = ? or ClassTeacher.classId is null; ";
             return jdbc.query(SELECT_CLASS_Teachers_BY_ID, new TeacherClassIdMapper(), classId);
         } catch (DataAccessException ex) {
@@ -115,10 +115,10 @@ public class ClassTeacherDaoImpl implements ClassTeachersDao{
         @Override
         public TeacherClassId mapRow(ResultSet rs, int index) throws SQLException {
             TeacherClassId teacherClassId = new TeacherClassId();
-            teacherClassId.setId(rs.getInt("ID"));
-            teacherClassId.setFirstName(rs.getString("FirstName"));
-            teacherClassId.setLastName(rs.getString("LastName"));
-            teacherClassId.setIsActive(rs.getBoolean("IsActive"));
+            teacherClassId.setId(rs.getInt("id"));
+            teacherClassId.setFirstName(rs.getString("firstName"));
+            teacherClassId.setLastName(rs.getString("lastName"));
+            teacherClassId.setIsActive(rs.getBoolean("isActive"));
             if (rs.getObject("classId") != null)
                 teacherClassId.setClassId(rs.getInt("classId"));
             return teacherClassId;
