@@ -1,0 +1,19 @@
+pipeline {
+  agent any
+  
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'SparseCheckoutPaths', sparseCheckoutPaths: [[$class: 'SparseCheckoutPath', path: 'GarderieXinHani/*']]]]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'hxinqc', url: 'https://github.com/hxinqc/garderie-Xin-Hani.git']]])
+      }
+    }
+    
+    stage('Build') {
+      steps {
+        dir('GarderieXinHani') {
+          sh 'mvn clean install'
+        }
+      }
+    }
+  }
+}
