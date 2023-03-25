@@ -127,7 +127,7 @@ const Title = styled.div`
   position: absolute;
   color: white;
   margin-top: -300px;
-  margin-left: -100px;
+  margin-left: -80px;
   z-index: 5;
   font-size: 22px;
 `;

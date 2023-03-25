@@ -149,7 +149,7 @@ const IDiv = styled.div`
 const NavigationLink = styled(NavLink)`
   position: relative;
   text-decoration: none;
-  padding: 0 10px;
+  padding: 100 100px;
   color: #57d7fc;
   &.active {
     color: #fe4660;
@@ -161,7 +161,7 @@ const NavigationLink = styled(NavLink)`
     left: 0;
     right: 0;
     bottom: -5px;
-    width: 50%;
+    width: 90%;
     margin: auto;
     height: 3px;
     transform: scaleX(0);

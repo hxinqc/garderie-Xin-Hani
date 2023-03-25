@@ -223,7 +223,7 @@ const MessageLabel = styled.label`
   display: block;
   font-weight: 400;
   color: white;
-  margin-top: 20px;
+  margin-top: -5px;
   margin-left: 14px;
 `;
 const Button = styled.button`
@@ -266,7 +266,7 @@ const Buttonsdiv = styled.div`
   align-items: center;
   margin-left: 50px;
   margin-right: 50px;
-  margin-top: 220px;
+  margin-top: 120px;
 `;
 
 export default ClassFoods;

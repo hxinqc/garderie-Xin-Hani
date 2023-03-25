@@ -41,7 +41,7 @@ function FoodNav() {
     
     const NavDiv = styled.div`
 display: flex;
-width: 550px;
+width: 590px;
 height: 50px;
 align-items: center;
 // margin-left: 410px;
@@ -55,12 +55,12 @@ margin-bottom: -20px;
 `;
 
 const LabelDiv = styled.div`
-color: red;
-margin-left: 60px;
-font-size: 16px;
-font-weight: 300;
+color: white;
+margin-left: 50px;
+font-size: 20px;
+font-weight: 400;
 z-index: 100;
-margin-top: 1px;
+margin-top: 4px;
 
 `;
 

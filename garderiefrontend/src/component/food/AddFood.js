@@ -179,6 +179,7 @@ const Title = styled.div`
   margin-top: -420px;
   margin-left: -120px;
   z-index: 5;
+  font-size: 20px;
 `;
 
 const Wrapper = styled.div`
