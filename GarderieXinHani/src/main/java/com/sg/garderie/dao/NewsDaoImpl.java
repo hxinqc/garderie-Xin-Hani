@@ -1,9 +1,9 @@
 package com.sg.garderie.dao;
 
 import com.sg.garderie.model.News;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cglib.core.Local;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -12,9 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,6 +20,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 @Repository
+@RequiredArgsConstructor
 public class NewsDaoImpl implements NewsDao {
 
     @Autowired
@@ -57,7 +56,7 @@ public class NewsDaoImpl implements NewsDao {
     public News getNewsById(int id) {
         try {
             final String SELECT_NEWS_BY_ID = "SELECT * FROM News WHERE id = ?";
-            return jdbc.queryForObject(SELECT_NEWS_BY_ID, new NewsMapper(), id);
+            return jdbc.queryForObject(SELECT_NEWS_BY_ID, new NewsMapper(TIMEZONE, TIMEZONE_DB), id);
         } catch (DataAccessException ex) {
             return null;
         }
@@ -67,7 +66,7 @@ public class NewsDaoImpl implements NewsDao {
     public List<News> getNewsByDate(String issueDate) {
         try {
             final String SELECT_NEWS_BY_ID = "SELECT * FROM News WHERE issueDate = ?";
-            return jdbc.query(SELECT_NEWS_BY_ID, new NewsMapper(), issueDate);
+            return jdbc.query(SELECT_NEWS_BY_ID, new NewsMapper(TIMEZONE, TIMEZONE_DB), issueDate);
         } catch (DataAccessException ex) {
             return null;
         }
@@ -78,7 +77,7 @@ public class NewsDaoImpl implements NewsDao {
         try {
             final String SELECT_NEWS_BY_ID = "SELECT * FROM News ORDER BY issueDate DESC limit " +
                     count;
-            return jdbc.query(SELECT_NEWS_BY_ID, new NewsMapper());
+            return jdbc.query(SELECT_NEWS_BY_ID, new NewsMapper(TIMEZONE, TIMEZONE_DB));
         } catch (DataAccessException ex) {
             return null;
         }
@@ -88,7 +87,7 @@ public class NewsDaoImpl implements NewsDao {
     public List<News> getAllNews() {
         try {
             final String SELECT_NEWS_BY_ID = "SELECT * FROM News ";
-            return jdbc.query(SELECT_NEWS_BY_ID, new NewsMapper());
+            return jdbc.query(SELECT_NEWS_BY_ID, new NewsMapper(TIMEZONE, TIMEZONE_DB));
         } catch (DataAccessException ex) {
             return null;
         }
@@ -110,7 +109,15 @@ public class NewsDaoImpl implements NewsDao {
         jdbc.update(DELETE_NEWS, id);
     }
 
+    @RequiredArgsConstructor
     public static final class NewsMapper implements RowMapper<News> {
+
+        private String TIMEZONE;
+        private String TIMEZONE_DB;
+        NewsMapper(String local, String db) {
+            this.TIMEZONE = local;
+            this.TIMEZONE_DB = db;
+        }
 
         @Override
         public News mapRow(ResultSet rs, int index) throws SQLException {
@@ -119,10 +126,9 @@ public class NewsDaoImpl implements NewsDao {
             news.setName(rs.getString("name"));
 
             java.util.Calendar cal = Calendar.getInstance();
-            cal.setTimeZone(TimeZone.getTimeZone("UTC"));
-            java.sql.Timestamp ts = rs.getTimestamp("issueDate");
-            cal.setTime(ts);
-            news.setIssueDate(LocalDate.ofInstant(cal.toInstant(), ZoneId.of("UTC")));
+            cal.setTimeZone(TimeZone.getTimeZone(TIMEZONE_DB));
+            news.setIssueDate(rs.getTimestamp("issueDate", cal)
+                    .toLocalDateTime().atZone(ZoneId.of(TIMEZONE)).toLocalDate());
 
             news.setContent(rs.getString("content"));
             news.setPicPath(rs.getString("picPath"));

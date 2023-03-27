@@ -11,10 +11,44 @@ pipeline {
                           userRemoteConfigs: [[credentialsId: 'hxinqc', url: 'https://github.com/hxinqc/garderie-Xin-Hani.git']]])
             }
         }
+        
+        stage('Copy Properties') {
+            steps {
+                script {
+                    def SOURCESDIR = "${WORKSPACE}/GarderieXinHani/src/main/resources/".replaceAll("\\\\", "/")
+                    def TESTDIR = "${WORKSPACE}/GarderieXinHani/src/test/resources/".replaceAll("\\\\", "/")
+
+                    bat "echo 'My variable is ${SOURCESDIR}'"
+                    dir('C:/jenkins/production') {                    
+                        bat 'copy application.properties "' + SOURCESDIR +'"'
+                    }
+                    dir('C:/jenkins/test') {                    
+                        bat 'copy application.properties "' + TESTDIR + '"'
+                    }
+                }
+
+            }
+        }
+
         stage('Build') {
             steps {
                 dir('GarderieXinHani') {
-                    sh 'mvn clean install'
+                    bat 'mvn clean package --settings=Jenkins/settings.xml'
+                }
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                dir('GarderieXinHani') {
+                    bat 'mvn test --settings=Jenkins/settings.xml'
+                }
+            }
+        }
+        stage('Install') {
+            steps {
+                dir('GarderieXinHani') {
+                    bat 'mvn clean install --settings=Jenkins/settings.xml'
                 }
             }
         }
